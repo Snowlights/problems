@@ -127,5 +127,5 @@ func shortestSequence(rolls []int, k int) int {
 		}
 	}
 
-	return r+1
+	return r + 1
 }

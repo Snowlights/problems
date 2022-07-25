@@ -1,5 +1,4 @@
-package problems
+package main
 
 func main() {
-
 }

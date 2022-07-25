@@ -75,7 +75,7 @@ func Constructor(foods, cuisines []string, ratings []int) FoodRatings {
 
 func (r FoodRatings) ChangeRating(f string, newRating int) {
 	t := r.ct[r.fc[f]]
-	t.Remove(pair{r.fr[f], f}) // 移除旧数据
+	t.Remove(pair{r.fr[f], f})     // 移除旧数据
 	t.Put(pair{newRating, f}, nil) // 添加新数据
 	r.fr[f] = newRating
 }
@@ -83,7 +83,6 @@ func (r FoodRatings) ChangeRating(f string, newRating int) {
 func (r FoodRatings) HighestRated(cuisine string) string {
 	return r.ct[cuisine].Left().Key.(pair).f
 }
-
 
 // 4
 func countExcellentPairs(nums []int, k int) (ans int64) {
