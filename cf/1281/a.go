@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-func CF1291B(in io.Reader, out io.Writer) {
+func CF1281B(in io.Reader, out io.Writer) {
 
 	r := bufio.NewReader(in)
 	w := bufio.NewWriter(out)
