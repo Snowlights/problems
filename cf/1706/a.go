@@ -74,3 +74,58 @@ func CF1706B(in io.Reader, out io.Writer) {
 		fmt.Fprintln(w)
 	}
 }
+
+func CF1706C(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	cal := func(arr []int64, i int64) int64 {
+		return max(0, max(arr[i-1], arr[i+1])-arr[i]+1)
+	}
+
+	var T int64
+	fmt.Fscan(r, &T)
+	for ; T > 0; T-- {
+		var n int64
+		fmt.Fscan(r, &n)
+		arr := make([]int64, n)
+		for i := int64(0); i < n; i++ {
+			fmt.Fscan(r, &arr[i])
+		}
+
+		if n&1 == 1 {
+			ans := int64(0)
+			for i := int64(1); i < n; i += 2 {
+				ans += cal(arr, i)
+			}
+			fmt.Fprintln(w, ans)
+			continue
+		}
+
+		ans := int64(0)
+		for i := int64(2); i < n; i += 2 {
+			ans += cal(arr, i)
+		}
+		res := ans
+		for i := int64(1); i < n-1; i += 2 {
+			ans += cal(arr, i) - cal(arr, i+1)
+			res = min(res, ans)
+		}
+		fmt.Fprintln(w, res)
+	}
+}
+
+func min(a, b int64) int64 {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int64) int64 {
+	if a < b {
+		return b
+	}
+	return a
+}
