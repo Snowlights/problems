@@ -107,3 +107,46 @@ func CF1705C(in io.Reader, out io.Writer) {
 
 	}
 }
+
+func CF1705D(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var T int64
+	fmt.Fscan(r, &T)
+	for ; T > 0; T-- {
+		var n int64
+		fmt.Fscan(r, &n)
+		a, b := make([]byte, n), make([]byte, n)
+		fmt.Fscan(r, &a, &b)
+
+		if a[0] != b[0] || a[n-1] != b[n-1] {
+			fmt.Fprintln(w, "-1")
+			continue
+		}
+		num, ans := int64(0), int64(0)
+		for i := int64(1); i < n; i++ {
+			if a[i] != a[i-1] {
+				num++
+			}
+			if b[i] != b[i-1] {
+				num--
+			}
+			ans += abs(num)
+		}
+		if num != 0 {
+			fmt.Fprintln(w, "-1")
+		} else {
+			fmt.Fprintln(w, ans)
+		}
+
+	}
+}
+
+func abs(a int64) int64 {
+	if a < 0 {
+		return -a
+	}
+	return a
+}

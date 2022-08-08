@@ -4,7 +4,39 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"strings"
 )
+
+func CF1281A(in io.Reader, out io.Writer) {
+
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	const (
+		po       = "po"
+		FILIPINO = "FILIPINO"
+		desu     = "desu"
+		masu     = "masu"
+		JAPANESE = "JAPANESE"
+		mnida    = "mnida"
+		KOREAN   = "KOREAN"
+	)
+
+	var T int64
+	for fmt.Fscan(r, &T); T > 0; T-- {
+		var s string
+		fmt.Fscan(r, &s)
+		if strings.HasSuffix(s, po) {
+			fmt.Fprintln(w, FILIPINO)
+		} else if strings.HasSuffix(s, desu) || strings.HasSuffix(s, masu) {
+			fmt.Fprintln(w, JAPANESE)
+		} else if strings.HasSuffix(s, mnida) {
+			fmt.Fprintln(w, KOREAN)
+		}
+	}
+
+}
 
 func CF1281B(in io.Reader, out io.Writer) {
 
@@ -44,6 +76,32 @@ func CF1281B(in io.Reader, out io.Writer) {
 		} else {
 			fmt.Fprintln(w, "---")
 		}
+	}
+
+}
+
+func CF1281C(in io.Reader, out io.Writer) {
+
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	mod := int64(1e9 + 7)
+	var T int64
+	for fmt.Fscan(r, &T); T > 0; T-- {
+		var x int64
+		var s []byte
+		fmt.Fscan(r, &x, &s)
+		sLen := int64(len(s))
+		for i := int64(0); i < x; i++ {
+			for j := int64(0); j < int64(s[i]-'1'); j++ {
+				for k := i + 1; int64(len(s)) < x && k < int64(sLen); k++ {
+					s = append(s, s[k])
+				}
+			}
+			sLen = (sLen + (sLen-(i+1)+mod)*int64((s[i]-'1'))) % mod
+		}
+		fmt.Fprintln(w, sLen)
 	}
 
 }
