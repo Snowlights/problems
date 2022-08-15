@@ -1,9 +1,106 @@
 package _800_1900
 
 import (
+	"container/heap"
 	"math"
 	"sort"
 )
+
+// 1880
+func isSumEqual(firstWord, secondWord, targetWord string) bool {
+	return str2int(firstWord)+str2int(secondWord) == str2int(targetWord)
+}
+
+func str2int(s string) (x int) {
+	for _, b := range s {
+		x = x*10 + int(b-'a')
+	}
+	return
+}
+
+// 1881
+func maxValue(n string, x int) string {
+	b := []byte(n)
+	if n[0] == '-' {
+		for i, v := range n {
+			if i == 0 {
+				continue
+			}
+			if x < int(v-'0') {
+				return string(append(b[:i], append([]byte{byte(x + '0')}, b[i:]...)...))
+			}
+		}
+		return n + string(rune(x+'0'))
+	} else {
+		for i, v := range n {
+			if x > int(v-'0') {
+				return string(append(b[:i], append([]byte{byte(x + '0')}, b[i:]...)...))
+			}
+		}
+		return n + string(rune(x+'0'))
+	}
+}
+
+// 1882
+type Server struct {
+	weight int
+	index  int
+}
+
+//服务器队列
+type server []Server
+
+func (s server) Len() int      { return len(s) }
+func (s server) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s server) Less(i, j int) bool {
+	return s[i].weight < s[j].weight || s[i].weight == s[j].weight && s[i].index < s[j].index
+}
+func (s *server) Push(val interface{}) { *s = append(*s, val.(Server)) }
+func (s *server) Pop() interface{}     { ret := (*s)[len(*s)-1]; *s = (*s)[:len(*s)-1]; return ret }
+
+//执行队列
+type Exec struct {
+	endTime int
+	server  Server
+}
+
+type ExecQ []Exec
+
+func (e ExecQ) Len() int      { return len(e) }
+func (e ExecQ) Swap(i, j int) { e[i], e[j] = e[j], e[i] }
+func (e ExecQ) Less(i, j int) bool {
+	return e[i].endTime < e[j].endTime || e[i].endTime == e[j].endTime && e[i].server.weight < e[j].server.weight || e[i].endTime == e[j].endTime && e[i].server.weight == e[j].server.weight && e[i].server.index < e[j].server.index
+}
+func (e *ExecQ) Push(val interface{}) { *e = append(*e, val.(Exec)) }
+func (e *ExecQ) Pop() interface{}     { ret := (*e)[len(*e)-1]; *e = (*e)[:len(*e)-1]; return ret }
+
+func assignTasks(servers []int, tasks []int) []int {
+	m := len(tasks)
+	ans := make([]int, m)
+	s := server(nil)
+	execQ := ExecQ(nil)
+	for i, v := range servers {
+		elem := Server{weight: v, index: i}
+		heap.Push(&s, elem)
+	}
+
+	for i, v := range tasks {
+		for len(execQ) > 0 && execQ[0].endTime <= i {
+			toe := heap.Pop(&execQ).(Exec)
+			heap.Push(&s, toe.server)
+		}
+		if len(s) != 0 {
+			tos := heap.Pop(&s).(Server)
+			ans[i] = tos.index
+			heap.Push(&execQ, Exec{endTime: i + v, server: tos})
+		} else {
+			toe := heap.Pop(&execQ).(Exec)
+			ans[i] = toe.server.index
+			heap.Push(&execQ, Exec{endTime: toe.endTime + v, server: toe.server})
+		}
+	}
+	return ans
+}
 
 // 1884
 func minSkips(dist []int, speed, hoursBefore int) (ans int) {
