@@ -115,8 +115,7 @@ func abs(a int) int {
 	return a
 }
 
-// 4
-
+// 4 找到每个元素为最小值的左右边界
 func validSubarraySize(nums []int, threshold int) int {
 
 	l, r := make([]int, len(nums)), make([]int, len(nums))

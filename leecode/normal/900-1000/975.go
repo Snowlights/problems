@@ -1,0 +1,104 @@
+package _00_1000
+
+import "sort"
+
+// 977
+func sortedSquares(nums []int) []int {
+
+	ans := make([]int, 0, len(nums))
+	for _, v := range nums {
+		ans = append(ans, v*v)
+	}
+	sort.Ints(ans)
+	return ans
+}
+
+// 989
+func addToArrayForm(num []int, k int) (ans []int) {
+	for i := len(num) - 1; i >= 0; i-- {
+		sum := num[i] + k%10
+		k /= 10
+		if sum >= 10 {
+			k++
+			sum -= 10
+		}
+		ans = append(ans, sum)
+	}
+	for ; k > 0; k /= 10 {
+		ans = append(ans, k%10)
+	}
+	reserve(ans)
+	return
+}
+
+func reserve(num []int) []int {
+	s, e := 0, len(num)-1
+	for s < e {
+		num[s], num[e] = num[e], num[s]
+		s++
+		e--
+	}
+	return num
+}
+
+// 994
+func orangesRotting(grid [][]int) int {
+	m, n := len(grid), len(grid[0])
+	q, ans := make([][]int, 0), 0
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] == 2 {
+				q = append(q, []int{i, j})
+			}
+		}
+	}
+	dir := [][]int{{0, -1}, {0, 1}, {1, 0}, {-1, 0}}
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			x, y := v[0], v[1]
+			for _, d := range dir {
+				xx, yy := x+d[0], y+d[1]
+				if 0 <= xx && xx < m && 0 <= yy && yy < n && grid[xx][yy] == 1 {
+					grid[xx][yy] = 2
+					q = append(q, []int{xx, yy})
+				}
+			}
+		}
+		if len(q) > 0 {
+			ans++
+		}
+	}
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] == 1 {
+				return -1
+			}
+		}
+	}
+	return ans
+}
+
+// 998
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
+	var parent *TreeNode
+	for cur := root; cur != nil; cur = cur.Right {
+		if val > cur.Val {
+			if parent == nil {
+				return &TreeNode{val, root, nil}
+			}
+			parent.Right = &TreeNode{val, cur, nil}
+			return root
+		}
+		parent = cur
+	}
+	parent.Right = &TreeNode{Val: val}
+	return root
+}

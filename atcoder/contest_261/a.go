@@ -131,3 +131,36 @@ func AtCoder261D(in io.Reader, out io.Writer) {
 	}
 	fmt.Fprintln(w, ans)
 }
+
+func AtCoder261E(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var n, c, t, a int
+	fmt.Fscan(r, &n, &c)
+	m := 1<<30 - 1
+	// s1初始化代表所有位全为1，  s0初始化表示所有位都为0
+	s1, s0 := 1<<30-1, 0
+	for i := int(0); i < n; i++ {
+		fmt.Fscan(r, &t, &a)
+		switch t {
+		case 1:
+			s1 &= a
+			s0 &= a
+
+		case 2:
+			s1 |= a
+			s0 |= a
+
+		case 3:
+			s1 ^= a
+			s0 ^= a
+		}
+		// 相比于变化之前，不变的1  ||  变化的0，  ===》 操作之后的值
+
+		c = (c & s1) | ((c ^ m) & s0)
+		fmt.Fprintln(w, c)
+	}
+
+}

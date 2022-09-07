@@ -20,7 +20,7 @@ func CF1060A(in io.Reader, out io.Writer) {
 		h[v]++
 	}
 
-	fmt.Fprintln(w, min(int(n/11), h['8']))
+	fmt.Fprintln(w, min(int64(n/11), int64(h['8'])))
 
 }
 func CF1060B(in io.Reader, out io.Writer) {
@@ -46,18 +46,18 @@ func CF1060C(in io.Reader, out io.Writer) {
 	w := bufio.NewWriter(out)
 	defer w.Flush()
 
-	var n, m, x, ans int
+	var n, m, x, ans int64
 
 	fmt.Fscan(r, &n, &m)
-	f := func(n int) []int {
-		mins := make([]int, n)
+	f := func(n int64) []int64 {
+		mins := make([]int64, n)
 		for i := range mins {
 			mins[i] = 1e9
 		}
-		a := make([]int, n)
+		a := make([]int64, n)
 		for i := range a {
 			fmt.Fscan(r, &a[i])
-			for j, s := i, 0; j >= 0; j-- {
+			for j, s := i, int64(0); j >= 0; j-- {
 				s += a[j]
 				mins[i-j] = min(mins[i-j], s)
 			}
@@ -69,15 +69,15 @@ func CF1060C(in io.Reader, out io.Writer) {
 
 	for i, v := range minA {
 		for j, w := range minB {
-			if (i+1)*(j+1) > ans && int64(v)*int64(w) <= int64(x) {
-				ans = (i + 1) * (j + 1)
+			if int64((i+1)*(j+1)) > ans && int64(v)*int64(w) <= int64(x) {
+				ans = int64((i + 1) * (j + 1))
 			}
 		}
 	}
 	fmt.Fprint(w, ans)
 }
 
-func min(a, b int) int {
+func min(a, b int64) int64 {
 	if a > b {
 		return b
 	}
