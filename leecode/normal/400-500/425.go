@@ -25,6 +25,36 @@ func levelOrder(root *Node) [][]int {
 	return ans
 }
 
+// 437
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func rootSum(root *TreeNode, targetSum int) (res int) {
+	if root == nil {
+		return
+	}
+	val := root.Val
+	if val == targetSum {
+		res++
+	}
+	res += rootSum(root.Left, targetSum-val)
+	res += rootSum(root.Right, targetSum-val)
+	return
+}
+
+func pathSum(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	res := rootSum(root, targetSum)
+	res += pathSum(root.Left, targetSum)
+	res += pathSum(root.Right, targetSum)
+	return res
+}
+
 // 438
 func findAnagrams(s string, p string) []int {
 	if len(p) > len(s) {
@@ -68,4 +98,57 @@ func arrangeCoins(n int) int {
 		i++
 		return (i+1)*i > 2*n
 	})
+}
+
+// 445
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+
+	s1, s2 := []int{}, []int{}
+	for l1 != nil {
+		s1 = append(s1, l1.Val)
+		l1 = l1.Next
+	}
+	for l2 != nil {
+		s2 = append(s2, l2.Val)
+		l2 = l2.Next
+	}
+	var head *ListNode
+	val, flag := 0, 0
+	for len(s1) > 0 || len(s2) > 0 {
+		a, b := 0, 0
+		if len(s1) > 0 {
+			a = s1[len(s1)-1]
+			s1 = s1[:len(s1)-1]
+		}
+		if len(s2) > 0 {
+			b = s2[len(s2)-1]
+			s2 = s2[:len(s2)-1]
+		}
+		val, flag = (a+b+flag)%10, (a+b+flag)/10
+		if head == nil {
+			head = &ListNode{
+				Val: val,
+			}
+		} else {
+			node := &ListNode{
+				Val:  val,
+				Next: head,
+			}
+			head = node
+		}
+	}
+	if flag > 0 {
+		node := &ListNode{
+			Val:  flag,
+			Next: head,
+		}
+		head = node
+	}
+
+	return head
 }

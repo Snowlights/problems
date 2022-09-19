@@ -2,6 +2,23 @@ package _00_900
 
 import "sort"
 
+// 875
+func minEatingSpeed(piles []int, h int) int {
+	return sort.Search(1e9, func(i int) bool {
+		tmp := 0
+		if i == 0 {
+			return false
+		}
+		for _, p := range piles {
+			tmp += p / i
+			if p%i > 0 {
+				tmp++
+			}
+		}
+		return tmp <= h
+	})
+}
+
 // 876
 type ListNode struct {
 	Val  int

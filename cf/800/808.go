@@ -51,24 +51,24 @@ func CF808C(in io.Reader, out io.Writer) {
 	_w := bufio.NewWriter(out)
 	defer _w.Flush()
 
-	var n, w int64
+	var n, w int
 	fmt.Fscan(_r, &n, &w)
-	arr := make([]int64, n)
-	total := int64(0)
+	arr := make([]int, n)
+	total := int(0)
 
 	type cup struct {
-		i   int64
-		cap int64
-		put int64
+		i   int
+		cap int
+		put int
 	}
-	cupList, cupMap := make([]*cup, 0, n), make(map[int64]*cup)
-	for i := int64(0); i < n; i++ {
+	cupList, cupMap := make([]*cup, 0, n), make(map[int]*cup)
+	for i := 0; i < n; i++ {
 		fmt.Fscan(_r, &arr[i])
-		v := int64(0)
+		v := 0
 		if arr[i]%2 == 1 {
-			v = int64(arr[i])/2 + 1
+			v = arr[i]/2 + 1
 		} else {
-			v = int64(arr[i]) / 2
+			v = arr[i] / 2
 		}
 		total += v
 		c := &cup{
@@ -92,7 +92,7 @@ func CF808C(in io.Reader, out io.Writer) {
 
 	left := w - total
 	for left > 0 {
-		for i := int64(0); i < n; i++ {
+		for i := 0; i < n; i++ {
 			l := min(left, cupList[i].cap-cupList[i].put)
 			left -= l
 			cupList[i].put += l
@@ -103,7 +103,7 @@ func CF808C(in io.Reader, out io.Writer) {
 	}
 
 	for _, v := range cupList {
-		res[v.i] = v.put
+		res[v.i] = int64(v.put)
 	}
 
 	for _, v := range res {
@@ -111,7 +111,7 @@ func CF808C(in io.Reader, out io.Writer) {
 	}
 }
 
-func min(a, b int64) int64 {
+func min(a, b int) int {
 	if a < b {
 		return a
 	}
@@ -184,43 +184,43 @@ func CF808E(in io.Reader, out io.Writer) {
 
 	one, two, three := weightToValues[weightOne], weightToValues[weightTwo], weightToValues[weightThree]
 
-	dp := make([][]int64, b+1)
-	dp[0] = make([]int64, 3)
+	dp := make([][]int, b+1)
+	dp[0] = make([]int, 3)
 	for i := 1; i <= b; i++ {
-		dp[i] = make([]int64, 3)
+		dp[i] = make([]int, 3)
 		dp[i][0] = math.MinInt64
-		if dp[i-1][1] < int64(len(one)) && dp[i-1][0]+int64(one[dp[i-1][1]]) > dp[i][0] {
-			dp[i][0] = dp[i-1][0] + int64(one[dp[i-1][1]])
+		if dp[i-1][1] < len(one) && dp[i-1][0]+one[dp[i-1][1]] > dp[i][0] {
+			dp[i][0] = dp[i-1][0] + one[dp[i-1][1]]
 			dp[i][1] = dp[i-1][1] + 1
 			dp[i][2] = dp[i-1][2]
 		}
-		if i > 1 && int64(len(one))-dp[i-2][1] >= 2 && dp[i-2][0]+int64(one[dp[i-2][1]]+one[dp[i-2][1]+1]) > dp[i][0] {
-			dp[i][0] = dp[i-2][0] + int64(one[dp[i-2][1]]) + int64(one[dp[i-2][1]+1])
+		if i > 1 && len(one)-dp[i-2][1] >= 2 && dp[i-2][0]+one[dp[i-2][1]]+one[dp[i-2][1]+1] > dp[i][0] {
+			dp[i][0] = dp[i-2][0] + one[dp[i-2][1]] + one[dp[i-2][1]+1]
 			dp[i][1] = dp[i-2][1] + 2
 			dp[i][2] = dp[i-2][2]
 		}
-		if i > 1 && dp[i-2][2] < int64(len(two)) && dp[i-2][0]+int64(two[dp[i-2][2]]) > dp[i][0] {
-			dp[i][0] = dp[i-2][0] + int64(two[dp[i-2][2]])
+		if i > 1 && dp[i-2][2] < len(two) && dp[i-2][0]+two[dp[i-2][2]] > dp[i][0] {
+			dp[i][0] = dp[i-2][0] + two[dp[i-2][2]]
 			dp[i][1] = dp[i-2][1]
 			dp[i][2] = dp[i-2][2] + 1
 		}
 	}
-	ans := int64(0)
+	ans := int(0)
 	for i := 2; i <= b; i++ {
 		dp[i][0] = max(dp[i][0], dp[i-1][0])
 	}
-	c := int64(0)
-	for i := int64(0); 3*i <= int64(b) && i <= int64(len(three)); i++ {
+	c := int(0)
+	for i := (0); 3*i <= (b) && i <= len(three); i++ {
 		if i > 0 {
-			c += int64(three[i-1])
+			c += three[i-1]
 		}
-		ans = max(ans, c+dp[int64(b)-3*i][0])
+		ans = max(ans, int(c+dp[b-3*i][0]))
 	}
 
 	fmt.Fprintln(w, ans)
 }
 
-func max(a, b int64) int64 {
+func max(a, b int) int {
 	if a < b {
 		return b
 	}

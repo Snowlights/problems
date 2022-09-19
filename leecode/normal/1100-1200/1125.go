@@ -69,3 +69,25 @@ func tribonacci(n int) int {
 		return c
 	}
 }
+
+// 1143
+func longestCommonSubsequence(t1, t2 string) int {
+
+	m, n := len(t1), len(t2)
+	dp := make([][]int, m+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+	// t1长度为i时，t2长度为j时候的最长长度
+	// 相等+1，不想等，之前的最长
+	for i, v := range t1 {
+		for j, vv := range t2 {
+			if v == vv {
+				dp[i+1][j+1] = dp[i][j] + 1
+			} else {
+				dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+			}
+		}
+	}
+	return dp[m][n]
+}

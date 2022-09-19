@@ -17,6 +17,36 @@ func twoSum(nums []int, target int) []int {
 	return nil
 }
 
+// 2
+func addTwoNumbers(l1, l2 *ListNode) (head *ListNode) {
+	var tail *ListNode
+	carry := 0
+	for l1 != nil || l2 != nil {
+		n1, n2 := 0, 0
+		if l1 != nil {
+			n1 = l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			n2 = l2.Val
+			l2 = l2.Next
+		}
+		sum := n1 + n2 + carry
+		sum, carry = sum%10, sum/10
+		if head == nil {
+			head = &ListNode{Val: sum}
+			tail = head
+		} else {
+			tail.Next = &ListNode{Val: sum}
+			tail = tail.Next
+		}
+	}
+	if carry > 0 {
+		tail.Next = &ListNode{Val: carry}
+	}
+	return
+}
+
 // 3
 func lengthOfLongestSubstring(s string) int {
 	start, end := 0, 0
@@ -116,6 +146,37 @@ func threeSum(nums []int) [][]int {
 	}
 
 	return res
+}
+
+// 16
+func threeSumClosest(nums []int, target int) int {
+	sort.Ints(nums)
+	res := nums[0] + nums[1] + nums[len(nums)-1]
+
+	for i := 0; i < len(nums)-2; i++ {
+		n1 := nums[i]
+		l, r := i+1, len(nums)-1
+		for l < r {
+			n2, n3 := nums[l], nums[r]
+			sum := n1 + n2 + n3
+			if sum > target {
+				r--
+			} else {
+				l++
+			}
+			if abs(sum-target) < abs(res-target) {
+				res = sum
+			}
+		}
+	}
+	return res
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
 }
 
 // 18
@@ -221,4 +282,25 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	}
 
 	return p.Next
+}
+
+// 22
+func generateParenthesis(n int) []string {
+	l, r := n, n
+	ans := make([]string, 0)
+	var bfs func(s string, l, r int)
+	bfs = func(s string, l, r int) {
+		if l == 0 && r == 0 {
+			ans = append(ans, s)
+		}
+		if l > 0 && r >= l {
+			bfs(s+"(", l-1, r)
+		}
+		if r > 0 && r >= l {
+			bfs(s+")", l, r-1)
+		}
+	}
+	bfs("(", l-1, r)
+
+	return ans
 }

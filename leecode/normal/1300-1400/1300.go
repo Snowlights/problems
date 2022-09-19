@@ -1,5 +1,10 @@
 package _300_1400
 
+import (
+	"bytes"
+	"strings"
+)
+
 // 1314
 func matrixBlockSum(mat [][]int, k int) [][]int {
 	m, n := len(mat), len(mat[0])
@@ -64,4 +69,27 @@ func makeConnected(n int, connections [][]int) (ans int) {
 		}
 	}
 	return ans - 1
+}
+
+// 1324
+func printVertically(s string) []string {
+	parts, ml := strings.Split(s, " "), 0
+	for i := 0; i < len(parts); i++ {
+		ml = max(ml, len(parts[i]))
+	}
+	ans := make([][]byte, ml)
+	for i := range ans {
+		ans[i] = bytes.Repeat([]byte(" "), len(parts))
+	}
+	for i := range parts {
+		for j := range parts[i] {
+			ans[j][i] = parts[i][j]
+		}
+	}
+
+	res := make([]string, 0)
+	for _, v := range ans {
+		res = append(res, strings.TrimRight(string(v), " "))
+	}
+	return res
 }

@@ -72,3 +72,48 @@ func min(a, b int) int {
 	}
 	return a
 }
+
+// 815
+func numBusesToDestination(routes [][]int, source int, target int) int {
+	if source == target {
+		return 0
+	}
+	nodeToRoute := make(map[int][]int)
+	for i, r := range routes {
+		for _, v := range r {
+			nodeToRoute[v] = append(nodeToRoute[v], i)
+		}
+	}
+
+	q := nodeToRoute[source]
+	tmp, vis := q, make(map[int]bool)
+	q = nil
+	for _, v := range tmp {
+		for _, vv := range routes[v] {
+			q = append(q, vv)
+		}
+		vis[v] = true
+	}
+	ans := 1
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			if v == target {
+				return ans
+			}
+			for _, route := range nodeToRoute[v] {
+				if vis[route] {
+					continue
+				}
+				vis[route] = true
+				for _, r := range routes[route] {
+					q = append(q, r)
+				}
+			}
+		}
+		ans++
+	}
+
+	return -1
+}

@@ -13,6 +13,31 @@ func maxDistance(x, y []int) (ans int) {
 	return
 }
 
+// 1870
+func minSpeedOnTime(dist []int, hour float64) int {
+	res := sort.Search(1e7+1, func(i int) bool {
+		if i == 0 {
+			return false
+		}
+		ans := 0.0
+		for j, v := range dist {
+			if j == len(dist)-1 {
+				ans += float64(v) / float64(i)
+				continue
+			}
+			ans += float64(v / i)
+			if v%i > 0 {
+				ans++
+			}
+		}
+		return ans <= hour
+	})
+	if res == 1e7+1 {
+		return -1
+	}
+	return res
+}
+
 // 1873
 // SELECT
 //    employee_id,

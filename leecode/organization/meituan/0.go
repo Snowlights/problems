@@ -90,13 +90,6 @@ func LCMeiTuan002(in io.Reader, out io.Writer) {
 	}
 }
 
-func max(a, b int) int {
-	if b > a {
-		return b
-	}
-	return a
-}
-
 func LCMeiTuan003(in io.Reader, out io.Writer) {
 	r := bufio.NewReader(in)
 	w := bufio.NewWriter(out)
@@ -362,5 +355,217 @@ func LCMeiTuan0010(in io.Reader, out io.Writer) {
 		res += m - r + 1
 	}
 	fmt.Fprintln(w, res)
+
+}
+
+func LCMeiTuan0011(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+	var a, b, c, d, e, f, g int
+	fmt.Fscan(r, &a, &b, &c, &d, &e, &f, &g)
+	var res int
+	var x int
+	for d > 0 && (a > 0 || b > 0 || c > 0) {
+		if a > 0 && e >= f && e >= g {
+			x = min(a, d)
+			res += e * x
+			a -= x
+			d -= x
+			e = -1
+		} else if b > 0 && f >= e && f >= g {
+			x = min(b, d)
+			res += f * x
+			b -= x
+			d -= x
+			f = -1
+		} else if c > 0 && g >= e && g >= f {
+			x = min(c, d)
+			res += g * x
+			c -= x
+			d -= x
+			g = -1
+		}
+	}
+	fmt.Println(res)
+}
+
+func LCMeiTuan0012(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var m, n, q, op, x, y int
+	fmt.Fscan(r, &m, &n)
+	bookstore := make(map[int]int)
+	locked := make([]bool, n+1)
+	tuan := make(map[int]bool)
+
+	for fmt.Fscan(r, &q); q > 0; q-- {
+		fmt.Fscan(r, &op)
+		switch op {
+		case 1:
+			fmt.Fscan(r, &x, &y)
+			if locked[y] || tuan[x] {
+				continue
+			}
+			v, ok := bookstore[x]
+			if ok && locked[v] {
+				continue
+			}
+			bookstore[x] = y
+
+		case 2:
+			fmt.Fscan(r, &y)
+			locked[y] = true
+		case 3:
+			fmt.Fscan(r, &y)
+			locked[y] = false
+		case 4:
+			fmt.Fscan(r, &x)
+			v, ok := bookstore[x]
+			if ok && !locked[v] {
+				delete(bookstore, x)
+				tuan[x] = true
+				fmt.Fprintln(w, v)
+			} else {
+				fmt.Fprintln(w, -1)
+			}
+
+		case 5:
+			fmt.Fscan(r, &x)
+			tuan[x] = false
+		}
+	}
+
+}
+
+func LCMeiTuan0013(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var n int
+	var s string
+	fmt.Fscan(r, &n, &s)
+	ans, tmp := 0, 0
+	for _, v := range s {
+		if v == 'E' {
+			tmp++
+			ans = max(ans, tmp)
+		} else {
+			tmp--
+			if tmp < 0 {
+				tmp = 0
+			}
+		}
+	}
+	fmt.Fprintln(w, ans)
+}
+
+func LCMeiTuan0014(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var x, y int
+	fmt.Fscan(r, &x, &y)
+	if x == y {
+		fmt.Fprintln(w, fmt.Sprintf("%s%s", strings.Repeat("A", x), strings.Repeat("B", y)))
+		return
+	}
+
+	n := x + y
+	nums1 := make([]int, n)
+	nums2 := make([]int, n)
+	for i := 0; i < n; i++ {
+		fmt.Fscan(r, &nums1[i])
+	}
+	copy(nums2, nums1)
+	sort.Ints(nums2)
+	m1 := "A"
+	m2 := "B"
+	var midNum int
+	if x > y {
+		midNum = nums2[x]
+		m1, m2 = m2, m1
+	} else {
+		midNum = nums2[y]
+	}
+	for _, num := range nums1 {
+		if num >= midNum {
+			fmt.Fprint(w, m1)
+		} else {
+			fmt.Fprint(w, m2)
+		}
+	}
+
+}
+
+func LCMeiTuan0015(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var n, m, xs, ys, xt, yt int
+	fmt.Fscan(r, &n, &m, &xs, &ys, &xt, &yt)
+	xs--
+	ys--
+	xt--
+	yt--
+	a, b, vis := make([][]int, n), make([][]int, n), make([][]bool, n)
+	for i := range a {
+		a[i] = make([]int, m)
+		b[i] = make([]int, m)
+		vis[i] = make([]bool, m)
+	}
+	for i := range a {
+		for j := range a[i] {
+			fmt.Fscan(r, &a[i][j])
+		}
+	}
+	for i := range b {
+		for j := range b[i] {
+			fmt.Fscan(r, &b[i][j])
+		}
+	}
+	q, time := [][]int{{xs, ys}}, 0
+	vis[xs][ys] = true
+	for len(q) > 0 {
+		tmp := q
+		for _, v := range tmp {
+			x, y := v[0], v[1]
+			if x == xt && y == yt {
+				fmt.Fprintln(w, time)
+				return
+			}
+
+			// 当时间处在 [k * a[i][j] + k * b[i][j], (k+1) * a[i][j] + k * b[i][j])时，
+			// 行人可以选择走到 i±1 行 j 列的路口。
+			if time%(a[x][y]+b[x][y]) < a[x][y] {
+				if x > 0 && !vis[x-1][y] {
+					vis[x-1][y] = true
+					q = append(q, []int{x - 1, y})
+				}
+				if x < n-1 && !vis[x+1][y] {
+					vis[x+1][y] = true
+					q = append(q, []int{x + 1, y})
+				}
+			}
+			// 当时间处在 [(k+1) * a[i][j] + k * b[i][j], (k+1) * a[i][j] + (k+1) * b[i][j])时，
+			// 行人可以选择走到 i 行 j±1 列的路口。
+			if time >= a[x][y] && (time-a[x][y])%(a[x][y]+b[x][y]) < b[x][y] {
+				if y > 0 && !vis[x][y-1] {
+					vis[x][y-1] = true
+					q = append(q, []int{x, y - 1})
+				}
+				if y < m-1 && !vis[x][y+1] {
+					vis[x][y+1] = true
+					q = append(q, []int{x, y + 1})
+				}
+			}
+		}
+		time++
+	}
 
 }

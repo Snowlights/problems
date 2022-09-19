@@ -19,6 +19,22 @@ func min(a, b int) int {
 	return a
 }
 
+// 154
+func findMin(nums []int) int {
+	low, high := 0, len(nums)-1
+	for low < high {
+		pivot := low + (high-low)/2
+		if nums[pivot] < nums[high] {
+			high = pivot
+		} else if nums[pivot] > nums[high] {
+			low = pivot + 1
+		} else {
+			high--
+		}
+	}
+	return nums[low]
+}
+
 // 167
 func twoSum(numbers []int, target int) []int {
 	start, end := 0, len(numbers)-1
@@ -36,6 +52,35 @@ func twoSum(numbers []int, target int) []int {
 	}
 
 	return nil
+}
+
+// 173
+type BSTIterator struct {
+	arr []int
+}
+
+func Constructor(root *TreeNode) (it BSTIterator) {
+	it.inorder(root)
+	return
+}
+
+func (it *BSTIterator) inorder(node *TreeNode) {
+	if node == nil {
+		return
+	}
+	it.inorder(node.Left)
+	it.arr = append(it.arr, node.Val)
+	it.inorder(node.Right)
+}
+
+func (it *BSTIterator) Next() int {
+	val := it.arr[0]
+	it.arr = it.arr[1:]
+	return val
+}
+
+func (it *BSTIterator) HasNext() bool {
+	return len(it.arr) > 0
 }
 
 // 174

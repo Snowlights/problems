@@ -1,5 +1,7 @@
 package _00_500
 
+import "strconv"
+
 // 409
 func longestPalindrome(s string) int {
 	h, ans, flag := make(map[byte]int), 0, false
@@ -34,6 +36,38 @@ func numberOfArithmeticSlices(nums []int) int {
 		ans += r - i - 2
 	}
 	return ans
+}
+
+// 415
+func addStrings(num1 string, num2 string) string {
+	ans, flag := []byte{}, 0
+	for len(num1) > 0 || len(num2) > 0 {
+		a, b := 0, 0
+		if len(num1) > 0 {
+			a = int(num1[len(num1)-1] - '0')
+			num1 = num1[:len(num1)-1]
+		}
+		if len(num2) > 0 {
+			b = int(num2[len(num2)-1] - '0')
+			num2 = num2[:len(num2)-1]
+		}
+		val := a + b + flag
+		flag = val / 10
+		val %= 10
+		ans = append(ans, []byte(strconv.Itoa(val))[0])
+	}
+	if flag == 1 {
+		ans = append(ans, '1')
+	}
+
+	s, e := 0, len(ans)-1
+	for s < e {
+		ans[s], ans[e] = ans[e], ans[s]
+		s++
+		e--
+	}
+
+	return string(ans)
 }
 
 // 416

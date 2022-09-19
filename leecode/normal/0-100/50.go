@@ -79,8 +79,38 @@ func merge56(intervals [][]int) [][]int {
 	return ans
 }
 
-// 62
+// 61
+func rotateRight(head *ListNode, k int) *ListNode {
+	if head == nil {
+		return head
+	}
+	ll := 0
+	cur := head
+	for cur != nil {
+		ll++
+		cur = cur.Next
+	}
+	k %= ll
+	if k == 0 {
+		return head
+	}
+	cur = head
+	k = ll - k - 1
+	for k > 0 {
+		cur = cur.Next
+		k--
+	}
+	next := cur.Next
+	cur.Next = nil
+	cur = next
+	for cur.Next != nil {
+		cur = cur.Next
+	}
+	cur.Next = head
+	return next
+}
 
+// 62
 func uniquePaths(m int, n int) int {
 
 	dp := make([][]int, m)
@@ -138,6 +168,29 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 	return dp[m-1][n-1]
 }
 
+// 64
+func minPathSum(grid [][]int) int {
+	m, n := len(grid), len(grid[0])
+	dp := make([][]int, m)
+	for i := range dp {
+		dp[i] = make([]int, n)
+	}
+	dp[0][0] = grid[0][0]
+	for i := 1; i < n; i++ {
+		dp[0][i] = dp[0][i-1] + grid[0][i]
+	}
+	for i := 1; i < m; i++ {
+		dp[i][0] = dp[i-1][0] + grid[i][0]
+	}
+
+	for i := 1; i < m; i++ {
+		for j := 1; j < n; j++ {
+			dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+		}
+	}
+	return dp[m-1][n-1]
+}
+
 // 67
 func addBinary(a string, b string) string {
 	res := ""
@@ -187,6 +240,39 @@ func climbStairs(n int) int {
 		f1, f2 = f2, f1+f2
 	}
 	return f2
+}
+
+// 72
+func minDistance(word1 string, word2 string) int {
+	dp := make([]int, len(word2)+1) //dp数组存放上一次dp的情况
+	for i := 1; i < len(word2)+1; i++ {
+		dp[i] = i //①:对第1行进行初始化,此时取word1前0个字母与word2前i个字母的编辑距离 即word2的长度
+	}
+	for i := 1; i < len(word1)+1; i++ {
+		leftUp := i - 1 //用于存储dp[i][j]左上点的数据(因为会被dp[i-1][j]覆盖掉)
+		dp[0] = i       //初始化每一行的首位元素 类似①的情况
+		for j := 1; j < len(word2)+1; j++ {
+			if word1[i-1] == word2[j-1] { //当此处字符相同 则通过替换的转移方式可以实现无替换转移,即不变
+				dp[j], leftUp = minV2(dp[j]+1, dp[j-1]+1, leftUp), dp[j]
+			} else {
+				dp[j], leftUp = minV2(dp[j]+1, dp[j-1]+1, leftUp+1), dp[j]
+			}
+		}
+	}
+	return dp[len(word2)]
+}
+
+func minV2(a, b, c int) (ret int) {
+	ret = a
+	if a > b {
+		ret = b
+		if b > c {
+			ret = c
+		}
+	} else if a > c {
+		ret = c
+	}
+	return
 }
 
 // 74

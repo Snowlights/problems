@@ -1,6 +1,9 @@
 package offer
 
-import "strings"
+import (
+	"math"
+	"strings"
+)
 
 // offer 04
 func findNumberIn2DArray(matrix [][]int, target int) bool {
@@ -121,6 +124,66 @@ func exist(board [][]byte, word string) bool {
 		}
 	}
 	return false
+}
+
+// offer 14-1
+func cuttingRope(n int) int {
+	// dp[i]: 标识长度为 i 的绳子剪断后能获取的最大乘积,dp[n]即为所求
+	dp := make([]int, n+1)
+
+	// 初始化
+	dp[1] = 1
+	dp[2] = 1
+
+	for i := 3; i <= n; i++ {
+		var maxLength int
+		for j := 1; j < i; j++ {
+			maxLength = max(maxLength, max(j*(i-j), j*dp[i-j]))
+		}
+		dp[i] = maxLength
+	}
+
+	return dp[n]
+}
+
+// offer 14-2
+func cuttingRope2(n int) int {
+	if n == 2 {
+		return 1
+	}
+	if n == 3 {
+		return 2
+	}
+	ans := 1
+	const mod = 1e9 + 7
+	threeTimes, one, two := 0, false, false
+	if n%3 == 0 {
+		threeTimes = n / 3
+	} else if n%3 == 1 {
+		threeTimes = n/3 - 1
+		one = true
+	} else {
+		threeTimes = n / 3
+		two = true
+	}
+
+	for threeTimes > 0 {
+		ans = ans * 3 % mod
+		threeTimes--
+	}
+	if one {
+		ans = ans * 4 % mod
+	}
+	if two {
+		ans = ans * 2 % mod
+	}
+
+	return ans
+}
+
+// offer 16
+func myPow(x float64, n int) float64 {
+	return math.Pow(x, float64(n))
 }
 
 // offer 18

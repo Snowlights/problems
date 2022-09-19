@@ -5,9 +5,65 @@ import (
 	"strings"
 )
 
+// 25
+func reverseKGroup(head *ListNode, k int) *ListNode {
+	hair := &ListNode{Next: head}
+	pre := hair
+
+	for head != nil {
+		tail := pre
+		for i := 0; i < k; i++ {
+			tail = tail.Next
+			if tail == nil {
+				return hair.Next
+			}
+		}
+		nex := tail.Next
+		head, tail = myReverse(head, tail)
+		pre.Next = head
+		tail.Next = nex
+		pre = tail
+		head = tail.Next
+	}
+	return hair.Next
+}
+
+func myReverse(head, tail *ListNode) (*ListNode, *ListNode) {
+	prev := tail.Next
+	p := head
+	for prev != tail {
+		nex := p.Next
+		p.Next = prev
+		prev = p
+		p = nex
+	}
+	return tail, head
+}
+
 // 28
 func strStr(haystack string, needle string) int {
 	return strings.Index(haystack, needle)
+}
+
+// 32
+func longestValidParentheses(s string) int {
+	stack := []int{-1}
+	ans := 0
+	for i, v := range s {
+		if v == '(' {
+			stack = append(stack, i)
+			continue
+		} else {
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				stack = append(stack, i)
+			} else {
+				ans = max(ans, i-stack[len(stack)-1])
+			}
+		}
+	}
+
+	return ans
 }
 
 // 34
@@ -43,6 +99,66 @@ func searchInsert(nums []int, target int) int {
 	}
 
 	return sort.Search(len(nums), func(i int) bool { return nums[i] > target })
+}
+
+// 39
+func combinationSum(candidates []int, target int) (ans [][]int) {
+	comb := []int{}
+	var dfs func(target, idx int)
+	dfs = func(target, idx int) {
+		if idx == len(candidates) {
+			return
+		}
+		if target == 0 {
+			ans = append(ans, append([]int(nil), comb...))
+			return
+		}
+		// 直接跳过
+		dfs(target, idx+1)
+		// 选择当前数
+		if target-candidates[idx] >= 0 {
+			comb = append(comb, candidates[idx])
+			dfs(target-candidates[idx], idx)
+			comb = comb[:len(comb)-1]
+		}
+	}
+	dfs(target, 0)
+	return
+}
+
+// 40
+func combinationSum2(candidates []int, target int) [][]int {
+	var res [][]int
+	var path []int
+	sum := 0
+	// 在求和问题中，要去重，先排序是常见的套路！
+	sort.Ints(candidates)
+	var backTrack func(int)
+	backTrack = func(start int) {
+		// 递归终止条件
+		if sum == target {
+			temp := make([]int, len(path))
+			copy(temp, path)
+			res = append(res, temp)
+			return
+		}
+		// 剪枝:sum+candidates[i]<=target
+		for i := start; i < len(candidates) && sum+candidates[i] <= target; i++ {
+			// 同一层去重
+			if i > start && candidates[i] == candidates[i-1] {
+				continue
+			}
+			sum += candidates[i]
+			path = append(path, candidates[i])
+			// 递归
+			backTrack(i + 1)
+			// 回溯
+			sum -= candidates[i]
+			path = path[:len(path)-1]
+		}
+	}
+	backTrack(0)
+	return res
 }
 
 // 42
@@ -141,6 +257,33 @@ func permute(nums []int) [][]int {
 	}
 	bfs([]int{})
 	return res
+}
+
+// 47
+func permuteUnique(nums []int) (ans [][]int) {
+	sort.Ints(nums)
+	n := len(nums)
+	perm := []int{}
+	vis := make([]bool, n)
+	var backtrack func(int)
+	backtrack = func(idx int) {
+		if idx == n {
+			ans = append(ans, append([]int(nil), perm...))
+			return
+		}
+		for i, v := range nums {
+			if vis[i] || i > 0 && !vis[i-1] && v == nums[i-1] {
+				continue
+			}
+			perm = append(perm, v)
+			vis[i] = true
+			backtrack(idx + 1)
+			vis[i] = false
+			perm = perm[:len(perm)-1]
+		}
+	}
+	backtrack(0)
+	return
 }
 
 // 48

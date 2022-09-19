@@ -50,27 +50,27 @@ func max(a, b int) int {
 	return a
 }
 
-//4
-func maximumRobots(chargeTimes []int, runningCosts []int, budget int64) int {
+// 4
+func maximumRobots(chargeTimes, runningCosts []int, budget int64) (ans int) {
+	sum, l := 0, 0
+	q := []int{}
 
-	left, ans, sum, q := 0, 0, 0, []int{}
-	for right, v := range chargeTimes {
-		for len(q) > 0 && chargeTimes[q[len(q)-1]] <= v {
+	for r, v := range chargeTimes {
+		for len(q) > 0 && v >= chargeTimes[q[len(q)-1]] {
 			q = q[:len(q)-1]
 		}
 
-		sum += runningCosts[right]
-		q = append(q, right)
+		q = append(q, r)
+		sum += runningCosts[r]
 
-		for len(q) > 0 && int64(chargeTimes[q[0]])+int64(right-left+1)*int64(sum) > budget {
-			if q[0] == left {
+		for len(q) > 0 && int64(chargeTimes[q[0]]+(r-l+1)*sum) > budget {
+			if l == q[0] {
 				q = q[1:]
 			}
-			sum -= runningCosts[left]
-			left++
+			sum -= runningCosts[l]
+			l++
 		}
-		ans = max(ans, right-left+1)
+		ans = max(ans, r-l+1)
 	}
-
-	return ans
+	return
 }

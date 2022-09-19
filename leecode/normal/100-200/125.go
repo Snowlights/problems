@@ -2,6 +2,7 @@ package _00_200
 
 import (
 	"math"
+	"sort"
 )
 
 // 127
@@ -223,4 +224,35 @@ func postorderTraversal(root *TreeNode) (res []int) {
 		}
 	}
 	return
+}
+
+// 138
+func sortList(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	h, ll := make(map[int]*ListNode), []*ListNode{}
+	var pre *ListNode
+	for head != nil {
+		h[head.Val] = head
+		ll = append(ll, head)
+		pre = head
+		head = head.Next
+		pre.Next = nil
+	}
+	sort.Slice(ll, func(i, j int) bool {
+		return ll[i].Val < ll[j].Val
+	})
+	newHead := &ListNode{
+		Val:  0,
+		Next: nil,
+	}
+	pre = newHead
+	for _, v := range ll {
+		pre.Next = v
+		pre = pre.Next
+	}
+
+	return newHead.Next
 }

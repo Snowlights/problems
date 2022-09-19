@@ -1,6 +1,25 @@
 package _00_400
 
-import "math"
+import (
+	"math"
+	"sort"
+)
+
+// 300
+func lengthOfLIS(nums []int) int {
+
+	//使得f按照升序排列
+	f := []int{}
+	for _, e := range nums {
+		//h := e
+		if i := sort.SearchInts(f, e); i < len(f) {
+			f[i] = e
+		} else {
+			f = append(f, e)
+		}
+	}
+	return len(f)
+}
 
 // 309
 func maxProfit(prices []int) int {
@@ -23,6 +42,46 @@ func max(x, y int) int {
 		return x
 	}
 	return y
+}
+
+// 310
+func findMinHeightTrees(n int, edges [][]int) []int {
+	if n == 1 {
+		return []int{0}
+	}
+
+	g := make([][]int, n)
+	deg := make([]int, n)
+	for _, e := range edges {
+		x, y := e[0], e[1]
+		g[x] = append(g[x], y)
+		g[y] = append(g[y], x)
+		deg[x]++
+		deg[y]++
+	}
+
+	q := []int{}
+	for i, d := range deg {
+		if d == 1 {
+			q = append(q, i)
+		}
+	}
+
+	remainNodes := n
+	for remainNodes > 2 {
+		remainNodes -= len(q)
+		tmp := q
+		q = nil
+		for _, x := range tmp {
+			for _, y := range g[x] {
+				deg[y]--
+				if deg[y] == 1 {
+					q = append(q, y)
+				}
+			}
+		}
+	}
+	return q
 }
 
 // 322

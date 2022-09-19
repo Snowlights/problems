@@ -10,6 +10,66 @@ func sortColors(nums []int) {
 	sort.Ints(nums)
 }
 
+// 76
+func minWindow(s string, t string) string {
+	sh, th := make(map[byte]int), make(map[byte]int)
+	for _, v := range t {
+		th[byte(v)]++
+	}
+	st, e, ans := 0, 0, ""
+	for e < len(s) {
+		for e < len(s) && !equals(th, sh) {
+			sh[s[e]]++
+			e++
+		}
+		if ans == "" && equals(th, sh) {
+			ans = s[st:e]
+		}
+		for st < e && equals(th, sh) {
+			if len(ans) > e-st || (len(ans) == e-st && ans > s[st:e]) {
+				ans = s[st:e]
+			}
+			sh[s[st]]--
+			st++
+		}
+	}
+	for st < e && equals(th, sh) {
+		if len(ans) > e-st || (len(ans) == e-st && ans > s[st:e]) {
+			ans = s[st:e]
+		}
+		sh[s[st]]--
+		st++
+	}
+	return ans
+}
+
+func equals(a, b map[byte]int) bool {
+	for k, v := range a {
+		if b[k] < v {
+			return false
+		}
+	}
+	return true
+}
+
+// 78
+func subsets(nums []int) (ans [][]int) {
+	set := []int{}
+	var dfs func(int)
+	dfs = func(cur int) {
+		if cur == len(nums) {
+			ans = append(ans, append([]int(nil), set...))
+			return
+		}
+		set = append(set, nums[cur])
+		dfs(cur + 1)
+		set = set[:len(set)-1]
+		dfs(cur + 1)
+	}
+	dfs(0)
+	return
+}
+
 // 79
 func exist(board [][]byte, word string) bool {
 
@@ -51,6 +111,54 @@ func exist(board [][]byte, word string) bool {
 	}
 
 	return false
+}
+
+// 81
+func search(nums []int, target int) bool {
+	l, r := 0, len(nums)-1
+	for l < r {
+		mid := (l + r) / 2
+		if nums[mid] == target {
+			return true
+		}
+		if nums[mid] > nums[r] {
+			l = mid + 1
+		} else {
+			r = mid
+		}
+	}
+
+	return false
+}
+
+// 82
+func deleteDuplicates82(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+
+	cur := head
+	pre := &ListNode{
+		Val:  0,
+		Next: nil,
+	}
+	newNode := pre
+	for cur != nil && cur.Next != nil {
+		found := false
+		for cur.Next != nil && cur.Val == cur.Next.Val {
+			found = true
+			cur.Next = cur.Next.Next
+		}
+		if found {
+			cur = cur.Next
+			continue
+		}
+		pre.Next = cur
+		pre = cur
+		cur = cur.Next
+	}
+	pre.Next = cur
+	return newNode.Next
 }
 
 // 83
@@ -96,6 +204,28 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 	for i, v := range ans {
 		nums1[i] = v
 	}
+}
+
+// 90
+func subsetsWithDup(nums []int) (ans [][]int) {
+	sort.Ints(nums)
+	t := []int{}
+	var dfs func(bool, int)
+	dfs = func(choosePre bool, cur int) {
+		if cur == len(nums) {
+			ans = append(ans, append([]int(nil), t...))
+			return
+		}
+		dfs(false, cur+1)
+		if !choosePre && cur > 0 && nums[cur-1] == nums[cur] {
+			return
+		}
+		t = append(t, nums[cur])
+		dfs(true, cur+1)
+		t = t[:len(t)-1]
+	}
+	dfs(false, 0)
+	return
 }
 
 // 91

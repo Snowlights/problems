@@ -125,6 +125,49 @@ func minSubArrayLen(target int, nums []int) int {
 	return ans
 }
 
+// 210
+func findOrder(n int, prerequisites [][]int) []int {
+	g, indegree := make(map[int][]int), make(map[int]int)
+	vis := make(map[int]bool)
+	ans := make([]int, 0)
+
+	for _, v := range prerequisites {
+		indegree[v[0]]++
+		g[v[0]] = append(g[v[0]], v[1])
+		g[v[1]] = append(g[v[1]], v[0])
+	}
+
+	q := []int{}
+	for i := 0; i < n; i++ {
+		if indegree[i] == 0 {
+			q = append(q, i)
+			vis[i] = true
+		}
+	}
+
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			ans = append(ans, v)
+			for _, vv := range g[v] {
+				if vis[vv] {
+					continue
+				}
+				if indegree[vv]--; indegree[vv] == 0 {
+					q = append(q, vv)
+					vis[vv] = true
+				}
+			}
+		}
+	}
+	if len(ans) != n {
+		return nil
+	}
+
+	return ans
+}
+
 // 213
 func _rob(nums []int) int {
 	first, second := nums[0], max(nums[0], nums[1])

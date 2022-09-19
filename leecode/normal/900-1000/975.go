@@ -13,6 +13,29 @@ func sortedSquares(nums []int) []int {
 	return ans
 }
 
+// 986
+func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
+	ans := make([][]int, 0)
+
+	for _, v := range firstList {
+		idx := sort.Search(len(secondList), func(i int) bool {
+			return secondList[i][0] >= v[0]
+		})
+		if idx == len(secondList) {
+			continue
+		}
+		base := []int{v[0], v[1]}
+		for idx < len(secondList) && secondList[idx][0] >= base[0] {
+			base[0] = max(base[0], secondList[idx][0])
+			base[1] = min(base[1], secondList[idx][1])
+			idx++
+		}
+		ans = append(ans, base)
+	}
+
+	return ans
+}
+
 // 989
 func addToArrayForm(num []int, k int) (ans []int) {
 	for i := len(num) - 1; i >= 0; i-- {

@@ -5,6 +5,20 @@ package _00_200
 //    select distinct(CustomerId) from Orders
 //)
 
+// 187
+func findRepeatedDnaSequences(s string) (ans []string) {
+	const L = 10
+	cnt := map[string]int{}
+	for i := 0; i <= len(s)-L; i++ {
+		sub := s[i : i+L]
+		cnt[sub]++
+		if cnt[sub] == 2 {
+			ans = append(ans, sub)
+		}
+	}
+	return
+}
+
 // 189
 func rotate(nums []int, k int) {
 	k = k % len(nums)
@@ -38,4 +52,28 @@ func max(a, b int) int {
 		return b
 	}
 	return a
+}
+
+// 199
+func rightSideView(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	ans := make([]int, 0)
+	q := []*TreeNode{root}
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			if v.Left != nil {
+				q = append(q, v.Left)
+			}
+			if v.Right != nil {
+				q = append(q, v.Right)
+			}
+		}
+		ans = append(ans, tmp[len(tmp)-1].Val)
+	}
+
+	return ans
 }
