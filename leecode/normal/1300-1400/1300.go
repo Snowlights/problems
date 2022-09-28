@@ -2,8 +2,38 @@ package _300_1400
 
 import (
 	"bytes"
+	"math"
+	"sort"
 	"strings"
 )
+
+// 1300
+func findBestValue(arr []int, target int) int {
+	sort.Ints(arr)
+	n := len(arr)
+	prefix := make([]int, n+1)
+	for i := 0; i < len(arr); i++ {
+		prefix[i+1] = prefix[i] + arr[i]
+	}
+	ans, tmp := 0, math.MaxInt32
+	for i := 0; i < 1e5; i++ {
+		idx := sort.SearchInts(arr, i)
+		val := prefix[idx] + (n-idx)*i
+		if diff := abs(target - val); tmp > diff {
+			tmp = diff
+			ans = i
+		}
+	}
+
+	return ans
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
 
 // 1314
 func matrixBlockSum(mat [][]int, k int) [][]int {

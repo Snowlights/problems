@@ -58,3 +58,44 @@ func findSmallestSetOfVertices(n int, edges [][]int) []int {
 	}
 	return ans
 }
+
+// 1574
+func findLengthOfShortestSubarray(arr []int) int {
+
+	n := len(arr)
+	if n <= 1 {
+		return 0
+	}
+
+	pre := 1
+	for i := 1; i < n && arr[i] >= arr[i-1]; i++ {
+		pre++
+	}
+	if pre == n {
+		return 0
+	}
+
+	suf := 1
+	for i := n - 1; i > 0 && arr[i] >= arr[i-1]; i-- {
+		suf++
+	}
+
+	min := n - pre
+	if n-suf < min {
+		min = n - suf
+	}
+
+	j := n - suf
+	for i := 0; i < pre; i++ {
+		for ; j < n; j++ {
+			if arr[j] >= arr[i] {
+				if j-i-1 < min {
+					min = j - i - 1
+				}
+				break
+			}
+		}
+	}
+
+	return min
+}

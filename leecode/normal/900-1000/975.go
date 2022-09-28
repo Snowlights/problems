@@ -13,6 +13,38 @@ func sortedSquares(nums []int) []int {
 	return ans
 }
 
+// 981
+type TimeMap struct {
+	h map[string][]*pair
+}
+
+type pair struct {
+	val       string
+	timestamp int
+}
+
+func Constructor() TimeMap {
+	return TimeMap{h: make(map[string][]*pair)}
+}
+
+func (this *TimeMap) Set(key string, value string, timestamp int) {
+
+	this.h[key] = append(this.h[key], &pair{
+		val:       value,
+		timestamp: timestamp,
+	})
+}
+
+func (this *TimeMap) Get(key string, timestamp int) string {
+	idx := sort.Search(len(this.h[key]), func(i int) bool {
+		return this.h[key][i].timestamp > timestamp
+	})
+	if 0 < idx && idx <= len(this.h[key]) {
+		return this.h[key][idx-1].val
+	}
+	return ""
+}
+
 // 986
 func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
 	ans := make([][]int, 0)

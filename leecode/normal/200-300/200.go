@@ -33,6 +33,16 @@ func numIslands(grid [][]byte) int {
 	return ans
 }
 
+// 201
+func rangeBitwiseAnd(m, n int) int {
+	t := 0
+	for ; m != n; t++ {
+		m >>= 1
+		n >>= 1
+	}
+	return n << t
+}
+
 // 202
 func isHappy(n int) bool {
 
@@ -102,6 +112,82 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	cur.Next = pre
 	return cur
+}
+
+// 207
+func canFinish(numCourses int, prerequisites [][]int) bool {
+	g, indegree := make(map[int][]int), make(map[int]int)
+	for _, v := range prerequisites {
+		g[v[1]] = append(g[v[1]], v[0])
+		indegree[v[0]]++
+	}
+
+	q, vis := []int{}, make(map[int]bool)
+	for i := 0; i < numCourses; i++ {
+		if indegree[i] == 0 {
+			q = append(q, i)
+			vis[i] = true
+		}
+	}
+
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+
+		for _, v := range tmp {
+			for _, vv := range g[v] {
+				if indegree[vv]--; indegree[vv] == 0 {
+					q = append(q, vv)
+					vis[vv] = true
+				}
+			}
+		}
+	}
+
+	return len(vis) == numCourses
+}
+
+// 208
+type Trie struct {
+	children [26]*Trie
+	isEnd    bool
+}
+
+func ConstructorTire() Trie {
+	return Trie{}
+}
+
+func (t *Trie) Insert(word string) {
+	node := t
+	for _, ch := range word {
+		ch -= 'a'
+		if node.children[ch] == nil {
+			node.children[ch] = &Trie{}
+		}
+		node = node.children[ch]
+	}
+	node.isEnd = true
+}
+
+func (t *Trie) SearchPrefix(prefix string) *Trie {
+	node := t
+	for _, ch := range prefix {
+		ch -= 'a'
+		if node.children[ch] == nil {
+			return nil
+		}
+		node = node.children[ch]
+	}
+	return node
+}
+
+func (t *Trie) Search(word string) bool {
+	node := t.SearchPrefix(word)
+	return node != nil && node.isEnd
+}
+
+func (t *Trie) StartsWith(prefix string) bool {
+	return t.SearchPrefix(prefix) != nil
 }
 
 // 209
@@ -193,6 +279,33 @@ func max(a, b int) int {
 		return b
 	}
 	return a
+}
+
+// 215
+
+func findKthLargest(nums []int, k int) int {
+
+	h := &hp2{}
+	for _, v := range nums {
+		if h.Len() == k && h.IntSlice[0] < v {
+			heap.Pop(h)
+			heap.Push(h, v)
+		}
+		if h.Len() < k {
+			heap.Push(h, v)
+		}
+	}
+	return h.IntSlice[0]
+}
+
+type hp2 struct{ sort.IntSlice }
+
+func (h *hp2) Push(v interface{}) { h.IntSlice = append(h.IntSlice, v.(int)) }
+func (h *hp2) Pop() interface{} {
+	a := h.IntSlice
+	v := a[len(a)-1]
+	h.IntSlice = a[:len(a)-1]
+	return v
 }
 
 // 217

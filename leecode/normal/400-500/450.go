@@ -1,6 +1,40 @@
 package _00_500
 
-import "math"
+import (
+	"fmt"
+	"math"
+	"sort"
+	"strings"
+)
+
+// 451
+func frequencySort(s string) string {
+	type pair struct {
+		i, count int
+	}
+	pairList, pairMap := make([]*pair, 0), map[int]*pair{}
+	for _, v := range s {
+		val := int(v - 'a')
+		m, ok := pairMap[val]
+		if !ok {
+			m = &pair{
+				i:     val,
+				count: 0,
+			}
+			pairList = append(pairList, m)
+			pairMap[val] = m
+		}
+		m.count++
+	}
+	sort.Slice(pairList, func(i int, j int) bool {
+		return pairList[i].count > pairList[j].count
+	})
+	ans := ""
+	for _, pair := range pairList {
+		ans += strings.Repeat(fmt.Sprintf("%s", string(rune(pair.i+'a'))), pair.count)
+	}
+	return ans
+}
 
 // 456
 func find132pattern(nums []int) bool {

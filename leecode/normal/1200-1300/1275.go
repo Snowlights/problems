@@ -34,3 +34,51 @@ func smallestDivisor(nums []int, threshold int) int {
 		return val <= threshold
 	})
 }
+
+// 1292
+func maxSideLength(mat [][]int, threshold int) int {
+
+	m, n := len(mat), len(mat[0])
+	pre := make([][]int, m+1)
+	for i := range pre {
+		pre[i] = make([]int, n+1)
+	}
+
+	for i, v := range mat {
+		for j, vv := range v {
+			pre[i+1][j+1] = pre[i+1][j] + pre[i][j+1] - pre[i][j] + vv
+		}
+	}
+
+	maxSideLengthHelper := func(mid int) bool {
+		for i := 1; i+mid-1 <= m; i++ {
+			for j := 1; j+mid-1 <= n; j++ {
+				diff := pre[i+mid-1][j+mid-1] - pre[i+mid-1][j-1] - pre[i-1][j+mid-1] + pre[i-1][j-1]
+				if diff <= threshold {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	maxlength := min(m, n)
+	l, r := 0, maxlength
+	for l < r {
+		mid := (l + r + 1) / 2
+		if maxSideLengthHelper(mid) {
+			l = mid
+		} else {
+			r = mid - 1
+		}
+	}
+
+	return l
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}

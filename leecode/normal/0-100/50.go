@@ -79,6 +79,23 @@ func merge56(intervals [][]int) [][]int {
 	return ans
 }
 
+// 57
+func insert(intervals [][]int, newInterval []int) [][]int {
+	intervals = append(intervals, newInterval)
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	for i := 0; i < len(intervals)-1; i++ {
+		if intervals[i][1] >= intervals[i+1][0] {
+			intervals[i][1] = max(intervals[i][1], intervals[i+1][1]) //赋值最大值
+			intervals = append(intervals[:i+1], intervals[i+2:]...)
+			i--
+		}
+	}
+	return intervals
+}
+
 // 61
 func rotateRight(head *ListNode, k int) *ListNode {
 	if head == nil {

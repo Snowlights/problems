@@ -13,6 +13,51 @@ func countNegatives(grid [][]int) int {
 	return ans
 }
 
+// 1361
+func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
+
+	g, indegree := make(map[int][]int), make(map[int]int)
+	for i, v := range leftChild {
+		g[i] = []int{v, rightChild[i]}
+		if v != -1 {
+			indegree[v]++
+		}
+		if rightChild[i] != -1 {
+			indegree[rightChild[i]]++
+		}
+	}
+
+	q, vis := []int{}, make(map[int]bool)
+	for i := 0; i < n; i++ {
+		if indegree[i] == 0 {
+			q = append(q, i)
+			vis[i] = true
+			continue
+		}
+		if indegree[i] > 1 {
+			return false
+		}
+	}
+	if len(q) != 1 {
+		return false
+	}
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			for _, vv := range g[v] {
+				if vv == -1 {
+					continue
+				}
+				q = append(q, vv)
+				vis[vv] = true
+			}
+		}
+	}
+
+	return len(vis) == n
+}
+
 // 1367
 type ListNode struct {
 	Val  int

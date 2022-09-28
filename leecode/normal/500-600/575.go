@@ -19,6 +19,26 @@ func findUnsortedSubarray(nums []int) int {
 	return right - left + 1
 }
 
+// 583
+func minDistance(word1, word2 string) int {
+	m, n := len(word1), len(word2)
+	dp := make([][]int, m+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+	for i, c1 := range word1 {
+		for j, c2 := range word2 {
+			if c1 == c2 {
+				dp[i+1][j+1] = dp[i][j] + 1
+			} else {
+				dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+			}
+		}
+	}
+	lcs := dp[m][n]
+	return m + n - lcs*2
+}
+
 // 584
 // select name from customer where referee_id != 2 or referee_id is null
 

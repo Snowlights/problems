@@ -97,3 +97,32 @@ func min(a, b int) int {
 	}
 	return a
 }
+
+// 1498
+func numSubseq(nums []int, target int) int {
+	sort.Ints(nums)
+	pow := map[int]int{0: 1}
+	n, mod := len(nums), int(1e9+7)
+	for i := 1; i < n; i++ {
+		pow[i] = (pow[i-1] * 2) % mod
+	}
+	ans := 0
+	for len(nums) > 0 {
+		val := nums[0]
+		nums = nums[1:]
+		idx := sort.Search(len(nums), func(i int) bool {
+			return nums[i] > target-val
+		})
+		if idx == 0 {
+			if val*2 <= target {
+				ans += pow[idx]
+				ans %= mod
+			}
+			continue
+		}
+		ans += pow[idx]
+		ans %= mod
+	}
+
+	return ans
+}

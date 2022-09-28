@@ -54,12 +54,70 @@ func levelOrder(root *TreeNode) [][]int {
 	return ans
 }
 
+// 103
+func zigzagLevelOrder(root *TreeNode) [][]int {
+	if root == nil {
+		return nil
+	}
+	ans := make([][]int, 0)
+	q, idx := []*TreeNode{root}, 0
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		res := make([]int, 0, len(tmp))
+		for _, v := range tmp {
+			if v.Left != nil {
+				q = append(q, v.Left)
+			}
+			if v.Right != nil {
+				q = append(q, v.Right)
+			}
+			res = append(res, v.Val)
+		}
+
+		if idx%2 == 1 {
+			s, e := 0, len(res)-1
+			for s < e {
+				res[s], res[e] = res[e], res[s]
+				s++
+				e--
+			}
+		}
+		ans = append(ans, res)
+		idx++
+	}
+
+	return ans
+}
+
 // 104
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
+}
+
+// 105
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+
+	root := &TreeNode{
+		Val: preorder[0],
+	}
+	inorderIdx := 0
+	for i, v := range inorder {
+		if v == root.Val {
+			inorderIdx = i
+			break
+		}
+	}
+
+	root.Left = buildTree(preorder[1:inorderIdx+1], inorder[:inorderIdx])
+	root.Right = buildTree(preorder[inorderIdx+1:], inorder[inorderIdx+1:])
+	return root
 }
 
 // 108
@@ -136,6 +194,37 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 		}
 	}
 	return false
+}
+
+// 113
+func pathSum(root *TreeNode, targetSum int) [][]int {
+
+	ans := [][]int{}
+	if root == nil {
+		return ans
+	}
+	var dfs func(node *TreeNode, path []int, sum int)
+	dfs = func(node *TreeNode, path []int, sum int) {
+		sum += node.Val
+		if node.Left == nil && node.Right == nil {
+			if sum == targetSum {
+				res := make([]int, len(path))
+				copy(res, path)
+				res = append(res, node.Val)
+				ans = append(ans, res)
+			}
+			return
+		}
+
+		if node.Left != nil {
+			dfs(node.Left, append(path, node.Val), sum)
+		}
+		if node.Right != nil {
+			dfs(node.Right, append(path, node.Val), sum)
+		}
+	}
+	dfs(root, []int{}, 0)
+	return ans
 }
 
 // 120

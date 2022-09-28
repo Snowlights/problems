@@ -78,6 +78,34 @@ func (rs *RandomizedSet) GetRandom() int {
 	return rs.nums[rand.Intn(len(rs.nums))]
 }
 
+// 384
+type Solution struct {
+	h             map[int]bool
+	original, arr []int
+}
+
+func Constructor384(nums []int) Solution {
+	h := make(map[int]bool)
+	for _, v := range nums {
+		h[v] = true
+	}
+	return Solution{h, nums, nums}
+}
+
+func (this *Solution) Reset() []int {
+	this.arr = this.original
+	return this.arr
+}
+
+func (this *Solution) Shuffle() []int {
+	val := make([]int, 0, len(this.original))
+	for v, _ := range this.h {
+		val = append(val, v)
+	}
+	this.arr = val
+	return this.arr
+}
+
 // 392
 func isSubsequence(s string, t string) bool {
 
