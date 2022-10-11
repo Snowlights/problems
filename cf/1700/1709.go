@@ -1,4 +1,4 @@
-package _709
+package _700
 
 import (
 	"bufio"
@@ -62,6 +62,41 @@ func CF1709B(in io.Reader, out io.Writer) {
 			fmt.Fprintln(w, prefix[end-1]-prefix[start-1])
 		} else {
 			fmt.Fprintln(w, sufFix[start-1]-sufFix[end-1])
+		}
+	}
+}
+
+func CF1709C(in io.Reader, out io.Writer) {
+	r := bufio.NewReader(in)
+	w := bufio.NewWriter(out)
+	defer w.Flush()
+
+	var n int
+	fmt.Fscan(r, &n)
+	for ; n > 0; n-- {
+		var s string
+		fmt.Fscan(in, &s)
+
+		num, p := 0, 0
+		for i := 0; i < n; i++ {
+			switch s[i] {
+			case '(':
+				num++
+			case ')':
+				num--
+			case '?':
+				p++
+			}
+			if num+p == 1 {
+				num = 1
+				p = 0
+			}
+		}
+
+		if num == p {
+			fmt.Fprintln(out, "YES")
+		} else {
+			fmt.Fprintln(out, "NO")
 		}
 	}
 }
