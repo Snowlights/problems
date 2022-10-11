@@ -1,6 +1,45 @@
 package _00_400
 
-import "math"
+import (
+	"math"
+	"sort"
+)
+
+// 327
+func countRangeSum(nums []int, lower int, upper int) int {
+	n := len(nums)
+
+	// 计算前缀和 preSum，以及后面统计时会用到的所有数字 allNums
+	allNums := make([]int, 1, 3*n+1)
+	preSum := make([]int, n+1)
+	for i, v := range nums {
+		preSum[i+1] = preSum[i] + v
+		allNums = append(allNums, preSum[i+1], preSum[i+1]-lower, preSum[i+1]-upper)
+	}
+
+	// 将 allNums 离散化
+	sort.Ints(allNums)
+	k := 1
+	kth := map[int]int{allNums[0]: k}
+	for i := 1; i <= 3*n; i++ {
+		if allNums[i] != allNums[i-1] {
+			k++
+			kth[allNums[i]] = k
+		}
+	}
+
+	// 遍历 preSum，利用树状数组计算每个前缀和对应的合法区间数
+	t := newFenwickTree(int64(k), nil)
+	t.add(int64(kth[0]), 1)
+	ans := 0
+	for _, sum := range preSum[1:] {
+		left, right := kth[sum-upper], kth[sum-lower]
+		ans += int(t.query(int64(left), int64(right)))
+		t.add(int64(kth[sum]), 1)
+	}
+	return ans
+
+}
 
 // 328
 
@@ -80,6 +119,27 @@ func increasingTriplet(nums []int) bool {
 		}
 	}
 	return false
+}
+
+// 337
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func rob(root *TreeNode) int {
+	var dfs func(root *TreeNode) []int
+	dfs = func(node *TreeNode) []int {
+		if node == nil {
+			return []int{0, 0}
+		}
+		l, r := dfs(node.Left), dfs(node.Right)
+		return []int{node.Val + l[1] + r[1], max(l[0], l[1]) + max(r[0], r[1])}
+	}
+
+	val := dfs(root)
+	return max(val[0], val[1])
 }
 
 // 343

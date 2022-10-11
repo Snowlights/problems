@@ -148,3 +148,57 @@ func decodeString(s string) string {
 
 	return ans
 }
+
+// 399
+func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
+	type pair struct {
+		to  string
+		val float64
+	}
+	g, h := make(map[string][]pair), make(map[string]bool)
+	for i, e := range equations {
+		g[e[0]] = append(g[e[0]], pair{to: e[1], val: values[i]})
+		g[e[1]] = append(g[e[1]], pair{to: e[0], val: 1 / values[i]})
+		h[e[0]], h[e[1]] = true, true
+	}
+
+	path, vis := []float64{}, make(map[string]bool)
+	var bfs func(from, to string, tmp []float64)
+	bfs = func(from, to string, tmp []float64) {
+		for _, v := range g[from] {
+			if v.to == to {
+				tmp = append(tmp, v.val)
+				path = make([]float64, len(tmp))
+				copy(path, tmp)
+				return
+			}
+			if !vis[v.to] {
+				vis[v.to] = true
+				bfs(v.to, to, append(tmp, v.val))
+				vis[v.to] = false
+			}
+		}
+	}
+
+	ans := make([]float64, 0)
+	for _, q := range queries {
+		from, to := q[0], q[1]
+		if !h[from] || !h[to] {
+			ans = append(ans, -1)
+			continue
+		}
+		path, vis = []float64{}, make(map[string]bool)
+		vis[from] = true
+		bfs(from, to, nil)
+		if len(path) == 0 {
+			ans = append(ans, -1)
+		} else {
+			val := 1.0
+			for _, v := range path {
+				val *= v
+			}
+			ans = append(ans, val)
+		}
+	}
+	return ans
+}

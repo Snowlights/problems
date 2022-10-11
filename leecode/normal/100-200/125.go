@@ -84,6 +84,41 @@ func equalWithOne(a, b map[byte]int) bool {
 	return false
 }
 
+// 131
+func partition(s string) [][]string {
+	ans := make([][]string, 0)
+
+	isPartition := func(s string) bool {
+		t, e := 0, len(s)-1
+		for t <= e {
+			if s[t] != s[e] {
+				return false
+			}
+			t++
+			e--
+		}
+		return true
+	}
+	var build func(s string, idx int, tmp []string)
+	build = func(s string, idx int, tmp []string) {
+		if idx == len(s) {
+			ans = append(ans, append([]string{}, tmp...))
+			return
+		}
+
+		for i := idx; i < len(s); i++ {
+			if isPartition(s[idx : i+1]) {
+				tmp = append(tmp, s[idx:i+1])
+				build(s, i+1, tmp)
+				tmp = tmp[:len(tmp)-1]
+			}
+		}
+	}
+	build(s, 0, []string{})
+
+	return ans
+}
+
 // 133
 type NodeN struct {
 	Val       int
@@ -116,6 +151,52 @@ type NodeN struct {
 //	}
 //	return cg(node)
 //}
+
+// 134
+func canCompleteCircuit(gas []int, cost []int) int {
+	n := len(gas)
+	for i := 0; i < len(gas); {
+		sum, tmp := gas[i], i
+		for {
+			sum -= cost[tmp%n]
+			if sum < 0 {
+				tmp++
+				i = tmp
+				break
+			}
+			tmp++
+			sum += gas[tmp%n]
+			if tmp%n == i {
+				return i
+			}
+		}
+	}
+
+	return -1
+}
+
+// 135
+func candy(ratings []int) (ans int) {
+	n := len(ratings)
+	left := make([]int, n)
+	for i, r := range ratings {
+		if i > 0 && r > ratings[i-1] {
+			left[i] = left[i-1] + 1
+		} else {
+			left[i] = 1
+		}
+	}
+	right := 0
+	for i := n - 1; i >= 0; i-- {
+		if i < n-1 && ratings[i] > ratings[i+1] {
+			right++
+		} else {
+			right = 1
+		}
+		ans += max(left[i], right)
+	}
+	return
+}
 
 // 138
 

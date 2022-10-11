@@ -5,6 +5,165 @@ import (
 	"strings"
 )
 
+// 678
+func checkValidString(s string) bool {
+
+	l, c := 0, 0
+	for _, v := range s {
+		switch v {
+		case '(':
+			l++
+		case ')':
+			if l > 0 {
+				l--
+				continue
+			}
+			if c > 0 {
+				c--
+			} else {
+				return false
+			}
+		case '*':
+			c++
+		}
+	}
+	if l > c {
+		return false
+	}
+
+	r, c := 0, 0
+	for i := len(s) - 1; i >= 0; i-- {
+		switch s[i] {
+		case ')':
+			r++
+		case '(':
+			if l > 0 {
+				r--
+				continue
+			}
+			if c > 0 {
+				c--
+			} else {
+				return false
+			}
+		case '*':
+			c++
+		}
+	}
+	if r > c {
+		return false
+	}
+	return true
+}
+
+// 680
+func validPalindrome(str string) bool {
+	s, e := 0, len(str)-1
+	for s < e {
+		if str[s] != str[e] {
+			break
+		}
+		s++
+		e--
+	}
+
+	isPartition := func(str string) bool {
+		s, e := 0, len(str)-1
+		for s <= e {
+			if str[s] != str[e] {
+				return false
+			}
+			s++
+			e--
+		}
+		return true
+	}
+
+	if s != e {
+		return isPartition(str[:s]+str[s+1:]) || isPartition(str[:e]+str[e+1:])
+	}
+	return true
+}
+
+// 684
+func findRedundantConnection(edges [][]int) []int {
+
+	indegree, g := make(map[int]int), make(map[int][]int)
+	h := make(map[int]bool)
+	for _, edge := range edges {
+		indegree[edge[0]]++
+		indegree[edge[1]]++
+		g[edge[0]] = append(g[edge[0]], edge[1])
+		g[edge[1]] = append(g[edge[1]], edge[0])
+		h[edge[0]] = true
+		h[edge[1]] = true
+	}
+
+	bfs := func(from, abandon int) int {
+		vis := make(map[int]bool)
+		q := []int{from}
+		for len(q) > 0 {
+			tmp := q
+			q = nil
+			for _, v := range tmp {
+				for _, to := range g[v] {
+					if v == from && to == abandon {
+						continue
+					}
+					if !vis[to] {
+						q = append(q, to)
+						vis[to] = true
+					}
+				}
+			}
+		}
+		return len(vis)
+	}
+
+	for i := len(edges) - 1; i >= 0; i-- {
+		v := edges[i]
+		if a, b := indegree[v[0]]-1, indegree[v[1]]-1; a == 0 || b == 0 {
+			continue
+		}
+		if bfs(v[0], v[1]) == len(h) {
+			return v
+		}
+	}
+
+	return nil
+}
+
+//func findRedundantConnection(edges [][]int) []int {
+//
+//	fa := make([]int, len(edges)+1)
+//	for i := range fa {
+//		fa[i] = i
+//	}
+//	var find func(int) int
+//	find = func(from int) int {
+//		if fa[from] != from {
+//			fa[from] = find(fa[from])
+//		}
+//		return fa[from]
+//	}
+//	union := func(from, to int) bool {
+//		f, t := find(from), find(to)
+//		if f == t {
+//			return true
+//		}
+//		fa[f] = t
+//		return false
+//	}
+//
+//	for _, e := range edges {
+//		if union(e[0], e[1]) {
+//			return e
+//		}
+//	}
+//
+//	return nil
+//}
+
 // 686
 func repeatedStringMatch(a string, b string) int {
 	m, n, exist := len(a), len(b), make([]bool, 26)

@@ -16,6 +16,16 @@ func minWindow(s string, t string) string {
 	for _, v := range t {
 		th[byte(v)]++
 	}
+
+	equals := func(a, b map[byte]int) bool {
+		for k, v := range a {
+			if b[k] < v {
+				return false
+			}
+		}
+		return true
+	}
+
 	st, e, ans := 0, 0, ""
 	for e < len(s) {
 		for e < len(s) && !equals(th, sh) {
@@ -41,15 +51,6 @@ func minWindow(s string, t string) string {
 		st++
 	}
 	return ans
-}
-
-func equals(a, b map[byte]int) bool {
-	for k, v := range a {
-		if b[k] < v {
-			return false
-		}
-	}
-	return true
 }
 
 // 78
@@ -258,6 +259,40 @@ func inorderTraversal(root *TreeNode) (res []int) {
 		root = root.Right
 	}
 	return
+}
+
+// 95
+func generateTrees(n int) []*TreeNode {
+
+	var build func(start, end int) []*TreeNode
+	build = func(start, end int) []*TreeNode {
+		if start > end {
+			return []*TreeNode{nil}
+		}
+		allTrees := []*TreeNode{}
+		// 枚举可行根节点
+		for i := start; i <= end; i++ {
+			// 获得所有可行的左子树集合
+			leftTrees := build(start, i-1)
+			// 获得所有可行的右子树集合
+			rightTrees := build(i+1, end)
+			// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上
+			for _, left := range leftTrees {
+				for _, right := range rightTrees {
+					currTree := &TreeNode{i, nil, nil}
+					currTree.Left = left
+					currTree.Right = right
+					allTrees = append(allTrees, currTree)
+				}
+			}
+		}
+		return allTrees
+	}
+
+	if n == 0 {
+		return nil
+	}
+	return build(1, n)
 }
 
 // 97

@@ -2,6 +2,112 @@ package lcp
 
 import "sort"
 
+// lcp 05
+
+func bonus(n int, leadership [][]int, operations [][]int) []int {
+
+	subs := make([][]int, n+1)
+	for _, l := range leadership {
+		subs[l[0]] = append(subs[l[0]], l[1])
+	}
+	arIn := make([]int, n+1)
+	arOut := make([]int, n+1)
+	i := 1
+	var dfs func(int)
+	dfs = func(a int) {
+		arIn[a], i = i, i+1
+		for _, b := range subs[a] {
+			dfs(b)
+		}
+		arOut[a] = i - 1
+	}
+	dfs(1)
+
+	t := newFenwickTree(int64(n), nil)
+	ans := make([]int, 0, 32)
+	for _, op := range operations {
+		a := op[1]
+		switch op[0] {
+		case 1:
+			t.addRange(int64(arIn[a]), int64(arIn[a]), int64(op[2]))
+		case 2:
+			t.addRange(int64(arIn[a]), int64(arOut[a]), int64(op[2]))
+		case 3:
+			ans = append(ans, int(t.queryDiff(int64(arIn[a]), int64(arOut[a])))%mod)
+		}
+	}
+
+	return ans
+}
+
+const mod = 1e9 + 7
+
+type fenwick struct {
+	a    []int64 // 原始数据，单点查询+区间更新传入
+	tree []int64 // 树状数组
+	diff []int64 // 差分数组, 用于区间加、区间求和
+}
+
+func newFenwickTree(n int64, a []int64) fenwick {
+	return fenwick{a, make([]int64, n+1), make([]int64, n+1)}
+}
+
+// 位置 i 增加 val
+// 1<=i<=n
+func (f fenwick) add(i, val int64) {
+	val1 := i * val
+	for ; i < int64(len(f.tree)); i += i & -i {
+		f.tree[i] += val
+		f.tree[i] %= mod
+		f.diff[i] += val1
+		f.diff[i] %= mod
+	}
+}
+
+// 求前缀和 [0,i]
+// 0<=i<=n
+func (f fenwick) sum(i int64) (res int64) {
+	for ; i > 0; i &= i - 1 {
+		res += f.tree[i]
+		res %= mod
+	}
+	return
+}
+
+func (f fenwick) sumDiff(i int64) (res int64) {
+	for ; i > 0; i &= i - 1 {
+		res += f.diff[i]
+		res %= mod
+	}
+	return
+}
+
+// 求区间和 [l,r]
+// 1<=l<=r<=n
+func (f fenwick) query(l, r int64) int64 {
+	ans := (f.sum(r) - f.sum(l-1) + mod) % mod
+	for ans < 0 {
+		ans += mod
+	}
+	return ans
+}
+
+func (f fenwick) queryDiff(l, r int64) int64 {
+	ans := (r+1)*f.sum(r)%mod - l*f.sum(l-1)%mod - (f.sumDiff(r)%mod - f.sumDiff(l-1)%mod) + mod
+	for ans < 0 {
+		ans += mod
+	}
+	return ans
+}
+
+// 差分树状数组，可用于区间更新+单点查询 queryOne(i) = a[i] + sum(i) // a 从 1 开始
+// r+1 即使超过 n 也没关系，因为不会用到
+// i >= 1
+func (f fenwick) queryOne(i int64) int64 { return f.a[i] + f.sum(i) }
+
+// [l,r]
+func (f fenwick) addRange(l, r, val int64) { f.add(l, val); f.add(r+1, -val) }
+
 // lcp 06
 func minCount(coins []int) int {
 	ans := 0
@@ -415,4 +521,34 @@ func maxWeight(edges [][]int, value []int) int {
 	}
 
 	return ans
+}
+
+// lcp 34
+func maxValue(root *TreeNode, k int) int {
+	var find func(node *TreeNode, k int) []int
+	max := func(v ...int) int {
+		mm := v[0]
+		for _, vv := range v {
+			if vv > mm {
+				mm = vv
+			}
+		}
+		return mm
+	}
+	find = func(root *TreeNode, k int) []int {
+		dp := make([]int, k+1)
+		if root == nil {
+			return dp
+		}
+		l, r := find(root.Left, k), find(root.Right, k)
+
+		dp[0] = max(l...) + max(r...)
+		for i := 0; i <= k; i++ {
+			for j := 0; j < i; j++ {
+				dp[i] = max(dp[i], l[j]+r[i-1-j]+root.Val)
+			}
+		}
+		return dp
+	}
+	return max(find(root, k)...)
 }

@@ -33,7 +33,7 @@ func (t seg) update(o, i, val int) {
 	} else {
 		t.update(o<<1|1, i, val)
 	}
-	t[o].val = min(t[o<<1].val, t[o<<1|1].val)
+	t[o].val = t.op(t[o<<1].val, t[o<<1|1].val)
 }
 
 func (t seg) updateRange(o, l, r, val int) {
@@ -76,11 +76,26 @@ func (t seg) queryRange(o, l, r int) int {
 	if m < l {
 		return t.queryRange(o<<1|1, l, r)
 	}
-	return min(t.queryRange(o<<1, l, r), t.queryRange(o<<1|1, l, r))
+	return t.op(t.queryRange(o<<1, l, r), t.queryRange(o<<1|1, l, r))
+}
+
+func (seg) op(a, b int) int {
+	return min(a, b)
+}
+
+func sum(a, b int) int {
+	return a + b
 }
 
 func min(a, b int) int {
 	if a > b {
+		return b
+	}
+	return a
+}
+
+func max(a, b int) int {
+	if b > a {
 		return b
 	}
 	return a

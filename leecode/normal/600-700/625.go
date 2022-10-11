@@ -87,3 +87,32 @@ func judgeSquareSum(c int) bool {
 	}
 	return false
 }
+
+// 649
+func predictPartyVictory(senate string) string {
+	var radiant, dire []int
+	n := len(senate)
+	for i, v := range senate {
+		switch v {
+		case 'R':
+			radiant = append(radiant, i)
+		case 'D':
+			dire = append(dire, i)
+		}
+	}
+
+	for len(radiant) > 0 && len(dire) > 0 {
+		a, b := radiant[0], dire[0]
+		radiant, dire = radiant[1:], dire[1:]
+		if a < b {
+			radiant = append(radiant, a+n)
+		} else {
+			dire = append(dire, b+n)
+		}
+	}
+
+	if len(radiant) > 0 {
+		return "Radiant"
+	}
+	return "Dire"
+}

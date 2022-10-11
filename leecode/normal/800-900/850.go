@@ -44,3 +44,29 @@ func kSimilarity(s1 string, s2 string) int {
 		ans++
 	}
 }
+
+// 870
+func advantageCount(nums1 []int, nums2 []int) []int {
+	n := len(nums1)
+	ans := make([]int, n)
+	sort.Ints(nums1)
+	ids := make([]int, 0, n)
+	for i := range nums2 {
+		ids = append(ids, i)
+	}
+	sort.Slice(ids, func(i int, j int) bool {
+		return nums2[ids[i]] < nums2[ids[j]]
+	})
+	l, r := 0, n-1
+	for _, v := range nums1 {
+		if v > nums2[ids[l]] {
+			ans[ids[l]] = v
+			l++
+		} else {
+			ans[ids[r]] = v
+			r--
+		}
+	}
+
+	return ans
+}

@@ -1,5 +1,76 @@
 package interview
 
+// 面试题 10-10
+type StreamRank struct {
+	t fenwick
+}
+
+func Constructor() StreamRank {
+	return StreamRank{newFenwickTree(50000+1, nil)}
+}
+
+func (this *StreamRank) Track(x int) {
+	this.t.add(int64(x+1), 1)
+}
+
+func (this *StreamRank) GetRankOfNumber(x int) int {
+	return int(this.t.query(1, int64(x+1)))
+}
+
+type fenwick struct {
+	a    []int64 // 原始数据，单点查询+区间更新传入
+	tree []int64 // 树状数组
+	diff []int64 // 差分数组, 用于区间加、区间求和
+}
+
+func newFenwickTree(n int64, a []int64) fenwick {
+	return fenwick{a, make([]int64, n+1), make([]int64, n+1)}
+}
+
+// 位置 i 增加 val
+// 1<=i<=n
+func (f fenwick) add(i, val int64) {
+	val1 := i * val
+	for ; i < int64(len(f.tree)); i += i & -i {
+		f.tree[i] += val
+		f.diff[i] += val1
+	}
+}
+
+// 求前缀和 [0,i]
+// 0<=i<=n
+func (f fenwick) sum(i int64) (res int64) {
+	for ; i > 0; i &= i - 1 {
+		res += f.tree[i]
+	}
+	return
+}
+
+func (f fenwick) sumDiff(i int64) (res int64) {
+	for ; i > 0; i &= i - 1 {
+		res += f.diff[i]
+	}
+	return
+}
+
+// 求区间和 [l,r]
+// 1<=l<=r<=n
+func (f fenwick) query(l, r int64) int64 {
+	return f.sum(r) - f.sum(l-1)
+}
+
+func (f fenwick) queryDiff(l, r int64) int64 {
+	return (r+1)*f.sum(r) - l*f.sum(l-1) - (f.sumDiff(r) - f.sumDiff(l-1))
+}
+
+// 差分树状数组，可用于区间更新+单点查询 queryOne(i) = a[i] + sum(i) // a 从 1 开始
+// r+1 即使超过 n 也没关系，因为不会用到
+// i >= 1
+func (f fenwick) queryOne(i int64) int64 { return f.a[i] + f.sum(i) }
+
+// [l,r]
+func (f fenwick) addRange(l, r, val int64) { f.add(l, val); f.add(r+1, -val) }
+
 // 面试题 13
 
 func reach(b [][]bool, i, j, m, n int) bool {

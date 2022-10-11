@@ -1,5 +1,27 @@
 package _00_900
 
+// 801
+func minSwap(nums1, nums2 []int) int {
+	n := len(nums1)
+	// f[i][0/1] 表示让 nums1 和 nums2 的前 i 个数严格递增所需操作的最小次数
+	// 其中 f[i][0] 不交换 nums1[i] 和 nums2[i]，f[i][1] 交换 nums1[i] 和 nums2[i]
+
+	f := make([][2]int, n)
+	f[0][1] = 1
+	for i := 1; i < n; i++ {
+		f[i] = [2]int{n, n} // 答案不会超过 n，故初始化成 n 方便后面取 min
+		if nums1[i-1] < nums1[i] && nums2[i-1] < nums2[i] {
+			f[i][0] = f[i-1][0]
+			f[i][1] = f[i-1][1] + 1
+		}
+		if nums2[i-1] < nums1[i] && nums1[i-1] < nums2[i] {
+			f[i][0] = min(f[i][0], f[i-1][1])
+			f[i][1] = min(f[i][1], f[i-1][0]+1)
+		}
+	}
+	return min(f[n-1][0], f[n-1][1])
+}
+
 // 802
 func eventualSafeNodes(graph [][]int) (ans []int) {
 	n := len(graph)
