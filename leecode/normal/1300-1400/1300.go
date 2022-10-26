@@ -35,6 +35,59 @@ func abs(x int) int {
 	return x
 }
 
+// 1311
+func watchedVideosByFriends(watchedVideos [][]string, friends [][]int, id int, level int) []string {
+	g := make(map[int][]int)
+	for i, v := range friends {
+		for _, vv := range v {
+			g[i] = append(g[i], vv)
+			g[vv] = append(g[vv], i)
+		}
+	}
+
+	idx, q, vis := 1, []int{id}, make(map[int]bool)
+	vis[id] = true
+	for idx <= level {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			for _, to := range g[v] {
+				if !vis[to] {
+					q = append(q, to)
+					vis[to] = true
+				}
+			}
+		}
+		idx++
+	}
+	type pair struct {
+		watch string
+		count int
+	}
+	ans, ansM := make([]*pair, 0), make(map[string]*pair)
+	for _, v := range q {
+		for _, vv := range watchedVideos[v] {
+			_, ok := ansM[vv]
+			if !ok {
+				ansM[vv] = &pair{
+					watch: vv,
+					count: 0,
+				}
+				ans = append(ans, ansM[vv])
+			}
+			ansM[vv].count++
+		}
+	}
+	sort.Slice(ans, func(i, j int) bool {
+		return ans[i].count < ans[j].count || (ans[i].count == ans[j].count && ans[j].watch > ans[i].watch)
+	})
+	res := make([]string, 0, len(ans))
+	for _, v := range ans {
+		res = append(res, v.watch)
+	}
+	return res
+}
+
 // 1314
 func matrixBlockSum(mat [][]int, k int) [][]int {
 	m, n := len(mat), len(mat[0])

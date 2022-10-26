@@ -1,5 +1,7 @@
 package _00_300
 
+import "strconv"
+
 // 226
 func invertTree(root *TreeNode) *TreeNode {
 	if root == nil {
@@ -59,6 +61,46 @@ func kthSmallest(root *TreeNode, k int) int {
 	}
 }
 
+// 233
+func countDigitOne(n int) int {
+	s := strconv.Itoa(n)
+
+	dp := make([][]int64, len(s))
+	for i := range dp {
+		dp[i] = make([]int64, len(s))
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	var f func(p, sum int, limitUp bool) int64
+	f = func(p, sum int, limitUp bool) (res int64) {
+		if p == len(s) {
+			return int64(sum)
+		} // sum
+		if !limitUp {
+			dv := &dp[p][sum]
+			if *dv >= 0 {
+				return *dv
+			} // *dv + sum*int64(math.Pow10(n-p))
+			defer func() { *dv = res }()
+		}
+		up := 9
+		if limitUp {
+			up = int(s[p] - '0')
+		}
+		for ch := 0; ch <= up; ch++ {
+			c := sum
+			if ch == 1 {
+				c++
+			}
+			res += f(p+1, c, limitUp && ch == up)
+		}
+		return
+	}
+	return int(f(0, 0, true))
+}
+
 // 235
 type TreeNode struct {
 	Val   int
@@ -109,4 +151,24 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 		qn = parent
 	}
 
+}
+
+// 239
+func maxSlidingWindow(nums []int, k int) []int {
+	q, ans := []int{}, []int{}
+
+	for i, v := range nums {
+		for len(q) > 0 && v >= nums[q[len(q)-1]] {
+			q = q[:len(q)-1]
+		}
+		q = append(q, i)
+		for len(q) > 0 && q[0] <= i-k {
+			q = q[1:]
+		}
+		if i >= k-1 {
+			ans = append(ans, nums[q[0]])
+		}
+	}
+
+	return ans
 }

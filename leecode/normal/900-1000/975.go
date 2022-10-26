@@ -96,6 +96,65 @@ func reserve(num []int) []int {
 	return num
 }
 
+// 990
+func equationsPossible(equations []string) bool {
+	g := make(map[byte][]byte)
+	for _, e := range equations {
+		if e[1:3] == "==" {
+			a, b := e[0], e[3]
+			g[a] = append(g[a], b)
+			g[b] = append(g[b], a)
+		}
+	}
+	for _, e := range equations {
+		a, b := e[0], e[3]
+		switch e[1:3] {
+		case "!=":
+			q := []byte{a}
+			vis := make(map[byte]bool)
+			vis[a] = true
+			for len(q) > 0 {
+				tmp := q
+				q = nil
+				for _, v := range tmp {
+					if v == b {
+						return false
+					}
+					for _, to := range g[v] {
+						if !vis[to] {
+							q = append(q, to)
+							vis[to] = true
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return true
+}
+
+func equationsPossibleV2(equations []string) bool {
+	uf := newUnionFind(26, make([]int, 26))
+	for _, e := range equations {
+		if e[1:3] == "==" {
+			a, b := int(e[0]-'a'), int(e[3]-'a')
+			uf.merge(a, b)
+		}
+	}
+	for _, e := range equations {
+		a, b := int(e[0]-'a'), int(e[3]-'a')
+		switch e[1:3] {
+		case "!=":
+			if uf.same(a, b) {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
 // 994
 func orangesRotting(grid [][]int) int {
 	m, n := len(grid), len(grid[0])

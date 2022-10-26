@@ -28,6 +28,55 @@ func (this *Solution) PickIndex() int {
 	return this.prefix[idx]
 }
 
+// 529
+func updateBoard(board [][]byte, click []int) [][]byte {
+	m, n := len(board), len(board[0])
+	x, y := click[0], click[1]
+	if board[x][y] == 'M' {
+		board[x][y] = 'X'
+		return board
+	}
+	dir := [][]int{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}}
+	vis := make([][]bool, m)
+	for i := range vis {
+		vis[i] = make([]bool, n)
+	}
+
+	q := [][]int{{x, y}}
+	vis[x][y] = true
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			boom := '0'
+			for _, d := range dir {
+				x, y := v[0]+d[0], v[1]+d[1]
+				if 0 <= x && x < m && 0 <= y && y < n {
+					if board[x][y] == 'M' {
+						boom++
+					}
+				}
+			}
+			if boom == '0' {
+				board[v[0]][v[1]] = 'B'
+				for _, d := range dir {
+					x, y := v[0]+d[0], v[1]+d[1]
+					if 0 <= x && x < m && 0 <= y && y < n {
+						if board[x][y] == 'E' && !vis[x][y] {
+							q = append(q, []int{x, y})
+							vis[x][y] = true
+						}
+					}
+				}
+			} else {
+				board[v[0]][v[1]] = byte(boom)
+			}
+		}
+	}
+
+	return board
+}
+
 // 540
 func singleNonDuplicate(a []int) int {
 	i := sort.Search(len(a)-1, func(i int) bool {

@@ -1,6 +1,8 @@
 package _00_800
 
-import "sort"
+import (
+	"sort"
+)
 
 // 700
 type TreeNode struct {
@@ -99,6 +101,65 @@ func longestWord(words []string) (longest string) {
 		}
 	}
 	return longest
+}
+
+// 721
+func accountsMerge(accounts [][]string) [][]string {
+
+	h := make(map[string]int)
+	fa := make([]int, len(accounts))
+	for i := range fa {
+		fa[i] = i
+	}
+	var find func(int) int
+	find = func(from int) int {
+		if fa[from] != from {
+			fa[from] = find(fa[from])
+		}
+		return fa[from]
+	}
+	merge := func(from, to int) {
+		from, to = find(from), find(to)
+		if from == to {
+			return
+		}
+		fa[from] = to
+	}
+
+	for i, v := range accounts {
+		for _, a := range v[1:] {
+			vv, ok := h[a]
+			if ok {
+				merge(i, vv)
+			}
+			h[a] = i
+		}
+	}
+
+	ans := make(map[int]map[string]bool)
+	for i, v := range accounts {
+		to := find(i)
+		m, ok := ans[to]
+		if !ok {
+			m = make(map[string]bool)
+			ans[to] = m
+		}
+		for _, v := range v[1:] {
+			m[v] = true
+		}
+	}
+	res := make([][]string, 0, len(ans))
+	for i, v := range ans {
+		e := make([]string, 0, len(v))
+		for vv := range v {
+			e = append(e, vv)
+		}
+		sort.Strings(e)
+		e = append([]string{accounts[i][0]}, e...)
+		res = append(res, e)
+	}
+
+	return res
 }
 
 // 724

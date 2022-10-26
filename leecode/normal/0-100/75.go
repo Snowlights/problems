@@ -245,6 +245,44 @@ func numDecodings(s string) int {
 	return dp[len(s)]
 }
 
+// 92
+func reverseBetween(head *ListNode, left int, right int) *ListNode {
+	newNode := &ListNode{
+		Val:  0,
+		Next: head,
+	}
+
+	cur, idx := newNode, 1
+	var pre, next, reHead, reEnd *ListNode
+	for idx < left {
+		cur = cur.Next
+		idx++
+	}
+	pre, reHead = cur, cur.Next
+	idx++
+	cur = cur.Next
+	pre.Next = nil
+	for idx <= right {
+		cur = cur.Next
+		idx++
+	}
+	reEnd, next = cur, cur.Next
+	reEnd.Next = nil
+
+	var p, n *ListNode
+	c := reHead
+	for c != nil {
+		n = c.Next
+		c.Next = p
+		p = c
+		c = n
+	}
+
+	pre.Next = reEnd
+	reHead.Next = next
+	return newNode.Next
+}
+
 // 94
 func inorderTraversal(root *TreeNode) (res []int) {
 	stack := []*TreeNode{}
@@ -339,4 +377,35 @@ func helper(root *TreeNode, lower, upper int) bool {
 		return false
 	}
 	return helper(root.Left, lower, root.Val) && helper(root.Right, root.Val, upper)
+}
+
+// 99
+func recoverTree(root *TreeNode) {
+
+	arr := make([]*TreeNode, 0)
+	var dfs func(node *TreeNode)
+	dfs = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		dfs(root.Left)
+		arr = append(arr, root)
+		dfs(root.Right)
+	}
+	dfs(root)
+	s, e := 0, len(arr)-1
+	for s+1 < e {
+		if arr[s].Val > arr[s+1].Val {
+			break
+		}
+		s++
+	}
+	for s < e-1 {
+		if arr[e].Val < arr[e-1].Val {
+			break
+		}
+		e--
+	}
+
+	arr[s].Val, arr[e].Val = arr[e].Val, arr[s].Val
 }

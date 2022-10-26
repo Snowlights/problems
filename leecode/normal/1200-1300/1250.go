@@ -48,3 +48,37 @@ func closedIsland(grid [][]int) int {
 	}
 	return res
 }
+
+// 1267
+func countServers(grid [][]int) int {
+	type pair struct {
+		x, y int
+	}
+	pairList := make([]pair, 0, len(grid))
+	for i, v := range grid {
+		for j, vv := range v {
+			if vv == 1 {
+				pairList = append(pairList, pair{i, j})
+			}
+		}
+	}
+
+	g := make(map[int][]int)
+	for i, v := range pairList {
+		for j := i + 1; j < len(pairList); j++ {
+			if v.x == pairList[j].x || v.y == pairList[j].y {
+				g[i] = append(g[i], j)
+				g[j] = append(g[j], i)
+			}
+		}
+	}
+
+	cnt := 0
+	for i := range pairList {
+		if len(g[i]) == 0 {
+			cnt++
+		}
+	}
+
+	return len(pairList) - cnt
+}

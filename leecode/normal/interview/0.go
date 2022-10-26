@@ -1,5 +1,7 @@
 package interview
 
+import "strconv"
+
 // 面试题 10-10
 type StreamRank struct {
 	t fenwick
@@ -110,4 +112,50 @@ func movingCount(m int, n int, k int) int {
 		}
 	}
 	return ans
+}
+
+// 面试题 16-07
+func numberOf2sInRange(n int) int {
+	s := strconv.Itoa(n)
+	m := len(s)
+	dp := make([][]int, m)
+	for i := range dp {
+		dp[i] = make([]int, m)
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	var f func(i, num int, limit bool) int
+	f = func(i, num int, limit bool) (res int) {
+		if i == m {
+			return num
+		}
+
+		if !limit {
+			dv := &dp[i][num]
+			if *dv >= 0 {
+				return *dv
+			}
+			defer func() {
+				*dv = res
+			}()
+		}
+
+		up := 9
+		if limit {
+			up = int(s[i] - '0')
+		}
+
+		for j := 0; j <= up; j++ {
+			c := num
+			if j == 2 {
+				c++
+			}
+			res += f(i+1, c, limit && j == up)
+		}
+		return
+	}
+
+	return f(0, 0, true)
 }

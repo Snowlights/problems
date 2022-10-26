@@ -254,6 +254,82 @@ func findOrder(n int, prerequisites [][]int) []int {
 	return ans
 }
 
+// 211 字典树
+type node struct {
+	chi [26]*node
+	end bool
+}
+
+type WordDictionary struct {
+	node *node
+}
+
+func Constructor211() WordDictionary {
+	return WordDictionary{node: &node{
+		chi: [26]*node{},
+		end: false,
+	}}
+}
+
+func (this *WordDictionary) AddWord(word string) {
+	q := []*node{this.node}
+	for _, v := range word {
+		tmp := q
+		q = nil
+		for _, c := range tmp {
+			chi := c.chi[int(v-'a')]
+			if chi == nil {
+				c.chi[int(v-'a')] = &node{
+					chi: [26]*node{},
+					end: false,
+				}
+			}
+			q = append(q, c.chi[int(v-'a')])
+		}
+	}
+
+	for _, v := range q {
+		v.end = true
+	}
+
+}
+
+func (this *WordDictionary) Search(word string) bool {
+	q := []*node{this.node}
+	for i, v := range word {
+		end := i == len(word)-1
+		tmp := q
+		q = nil
+		if v == '.' {
+			for _, vv := range tmp {
+				for _, c := range vv.chi {
+					if c != nil {
+						q = append(q, c)
+					}
+				}
+			}
+			continue
+		}
+		for _, c := range tmp {
+			chi := c.chi[int(v-'a')]
+			if chi != nil {
+				if end && chi.end {
+					return true
+				}
+				q = append(q, chi)
+			}
+		}
+	}
+
+	for _, v := range q {
+		if v.end {
+			return true
+		}
+	}
+
+	return false
+}
+
 // 213
 func _rob(nums []int) int {
 	first, second := nums[0], max(nums[0], nums[1])

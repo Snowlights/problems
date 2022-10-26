@@ -98,6 +98,28 @@ func shortestBridge(grid [][]int) int {
 	return ans - 1
 }
 
+// 940
+func distinctSubseqII(s string) int {
+	dp := make([][26]int64, len(s))
+	mod := int64(1e9 + 7)
+	dp[0][s[0]-'a'] = 1
+
+	for i := 1; i < len(s); i++ {
+		total := int64(0)
+		for j := 0; j < 26; j++ {
+			total += dp[i-1][j]
+		}
+		dp[i] = dp[i-1]
+		dp[i][s[i]-'a'] = total%mod + 1
+	}
+
+	total := int64(0)
+	for _, v := range dp[len(s)-1] {
+		total += v
+	}
+	return int(total % mod)
+}
+
 // 946
 func validateStackSequences(pushed []int, popped []int) bool {
 	s, idx := []int{}, 0
@@ -113,4 +135,42 @@ func validateStackSequences(pushed []int, popped []int) bool {
 		s = s[:len(s)-1]
 	}
 	return idx == len(popped)
+}
+
+// 947
+func removeStones(stones [][]int) int {
+	g := make(map[int][]int)
+
+	for i := 0; i < len(stones)-1; i++ {
+		a := stones[i]
+		for j := i + 1; j < len(stones); j++ {
+			b := stones[j]
+			if a[0] == b[0] || a[1] == b[1] {
+				g[i] = append(g[i], j)
+				g[j] = append(g[j], i)
+			}
+		}
+	}
+
+	vis, cnt := make(map[int]bool), 0
+	for i := 0; i < len(stones); i++ {
+		if !vis[i] {
+			cnt++
+			vis[i] = true
+			q := []int{i}
+			for len(q) > 0 {
+				tmp := q
+				q = nil
+				for _, v := range tmp {
+					for _, to := range g[v] {
+						if !vis[to] {
+							q = append(q, to)
+							vis[to] = true
+						}
+					}
+				}
+			}
+		}
+	}
+	return len(stones) - cnt
 }

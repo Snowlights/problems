@@ -139,3 +139,25 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 
 	return -1
 }
+
+// 817
+func numComponents(head *ListNode, nums []int) int {
+	h := make(map[int]bool)
+	for _, v := range nums {
+		h[v] = true
+	}
+
+	ans, flag, cur := 0, false, head
+	for cur != nil {
+		if h[cur.Val] {
+			if !flag {
+				ans++
+				flag = true
+			}
+		} else {
+			flag = false
+		}
+		cur = cur.Next
+	}
+	return ans
+}

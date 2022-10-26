@@ -34,3 +34,55 @@ func waysToSplit(a []int) (ans int) {
 	}
 	return ans % (1e9 + 7)
 }
+
+// 1722
+func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) int {
+	n := len(source)
+	fa := make([]int, n)
+	for i := range fa {
+		fa[i] = i
+	}
+	var find func(int) int
+	find = func(from int) int {
+		if fa[from] != from {
+			fa[from] = find(fa[from])
+		}
+		return fa[from]
+	}
+	merge := func(from, to int) {
+		from, to = find(from), find(to)
+		if from == to {
+			return
+		}
+		fa[from] = to
+	}
+
+	for _, v := range allowedSwaps {
+		merge(v[0], v[1])
+	}
+	sMap, tMap := make(map[int][]int), make([]map[int]int, n)
+	for i := range source {
+		to := find(i)
+		sMap[to] = append(sMap[to], source[i])
+		tm := tMap[to]
+		if tm == nil {
+			tm = make(map[int]int)
+			tMap[to] = tm
+		}
+		tm[target[i]]++
+	}
+	ans := 0
+	for i, s := range sMap {
+		for _, v := range s {
+			to := find(i)
+			tm := tMap[to]
+			if tm != nil && tm[v] > 0 {
+				tm[v]--
+				continue
+			}
+			ans++
+		}
+	}
+
+	return ans
+}

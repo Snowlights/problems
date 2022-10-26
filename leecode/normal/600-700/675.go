@@ -1,6 +1,7 @@
 package _00_700
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 )
@@ -164,6 +165,54 @@ func findRedundantConnection(edges [][]int) []int {
 //	return nil
 //}
 
+// 685
+func findRedundantDirectedConnection(edges [][]int) []int {
+
+	// [[2,1],[3,1],[4,2],[1,4]]
+	fa, parent := make([]int, len(edges)+1), make([]int, len(edges)+1)
+	for i := range fa {
+		fa[i] = i
+		parent[i] = i
+	}
+	var find func(int) int
+	find = func(from int) int {
+		if fa[from] != from {
+			fa[from] = find(fa[from])
+		}
+		return fa[from]
+	}
+	merge := func(from, to int) {
+		from, to = find(from), find(to)
+		if from == to {
+			return
+		}
+		fa[from] = to
+	}
+	var conflictEdge, cycleEdge []int
+	for _, e := range edges {
+		from, to := e[0], e[1]
+		if parent[to] != to { // to 有两个父节点
+			conflictEdge = e
+		} else {
+			parent[to] = from
+			if find(from) == find(to) { // from 和 to 已连接
+				cycleEdge = e
+			} else {
+				merge(from, to)
+			}
+		}
+	}
+
+	if conflictEdge == nil {
+		return cycleEdge
+	}
+
+	if cycleEdge != nil {
+		return []int{parent[conflictEdge[1]], conflictEdge[1]}
+	}
+	return conflictEdge
+}
+
 // 686
 func repeatedStringMatch(a string, b string) int {
 	m, n, exist := len(a), len(b), make([]bool, 26)
@@ -185,6 +234,39 @@ func repeatedStringMatch(a string, b string) int {
 		str += a
 	}
 	return -1
+}
+
+// 690
+type Employee struct {
+	Id           int
+	Importance   int
+	Subordinates []int
+}
+
+func getImportance(employees []*Employee, id int) int {
+	h, vis := make(map[int]*Employee, len(employees)), make(map[int]bool)
+	for _, v := range employees {
+		h[v.Id] = v
+	}
+	ans := 0
+	q := []*Employee{h[id]}
+	vis[id] = true
+	for len(q) > 0 {
+		fmt.Println(q)
+		tmp := q
+		q = nil
+		for _, e := range tmp {
+			ans += e.Importance
+			for _, sub := range e.Subordinates {
+				if !vis[sub] {
+					q = append(q, h[sub])
+					vis[sub] = true
+				}
+			}
+		}
+	}
+
+	return ans
 }
 
 // 692
