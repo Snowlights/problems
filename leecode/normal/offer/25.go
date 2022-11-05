@@ -109,6 +109,41 @@ func check(p, q *TreeNode) bool {
 	return p.Val == q.Val && check(p.Left, q.Right) && check(p.Right, q.Left)
 }
 
+// offer 28
+type TNode struct {
+	Val   int
+	Prev  *TNode
+	Next  *TNode
+	Child *TNode
+}
+
+func flatten(root *TNode) *TNode {
+	if root == nil {
+		return root
+	}
+	q := &TNode{}
+	cur := q
+	var dfs func(node *TNode)
+	dfs = func(node *TNode) {
+		for node != nil {
+			cur.Next = node
+			node.Prev = cur
+			cur = cur.Next
+
+			tmp := node.Next
+			if node.Child != nil {
+				dfs(node.Child)
+			}
+
+			node.Child = nil
+			node = tmp
+		}
+	}
+	dfs(root)
+	q.Next.Prev = nil
+	return q.Next
+}
+
 // offer 29
 func spiralOrder(matrix [][]int) []int {
 	m, n := len(matrix), len(matrix[0])

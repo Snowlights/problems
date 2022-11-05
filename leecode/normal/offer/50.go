@@ -5,6 +5,42 @@ import (
 	"strings"
 )
 
+// offer 50
+func pathSum50(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	q, ans := []*TreeNode{root}, 0
+
+	var dfs func(tree *TreeNode, val int)
+	dfs = func(tree *TreeNode, val int) {
+		if tree == nil {
+			return
+		}
+		val += tree.Val
+		if val == targetSum {
+			ans++
+		}
+		dfs(tree.Left, val)
+		dfs(tree.Right, val)
+	}
+
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+		for _, v := range tmp {
+			dfs(v, 0)
+			if v.Left != nil {
+				q = append(q, v.Left)
+			}
+			if v.Right != nil {
+				q = append(q, v.Right)
+			}
+		}
+	}
+	return ans
+}
+
 // offer 51
 func reversePairs(nums []int) int {
 	ans := 0

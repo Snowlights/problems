@@ -176,6 +176,11 @@ func _() {
 			pow2[i] = pow2[i-1] << 1 % mod
 		}
 
+		// 组合公式 数学
+		// 1*n + 2*(n-1) + 3*(n-2) + ... + (n-1)*2 + n*1 = C(n+2, 3) = n*(n+1)*(n+2) / 6
+		// C(n, 0) + C(n, 1) + C(n, 2) + ... + C(n, n) = 2^n
+		// C(r, r) + C(r+1,r) + C(r+2,r) + ... + C(n, r) = C(n+1, r+1)
+
 		_ = []interface{}{A, C, P, H, Catalan, Motzkin, initComb, lucas}
 	}
 }

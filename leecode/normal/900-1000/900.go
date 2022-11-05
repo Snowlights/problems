@@ -72,30 +72,43 @@ func totalFruit(fruits []int) int {
 }
 
 // 907
-func sumSubarrayMins(arr []int) int {
-	// 单调递增栈
-	stack := []int{}
-	arr = append(arr, 0)
-	res := 0
-	for i := 0; i < len(arr); i++ {
-		for len(stack) > 0 && arr[i] <= arr[stack[len(stack)-1]] {
-			index := stack[len(stack)-1]
-			stack = stack[:len(stack)-1]
-			// 设定prevIndex为-1 栈为空时 设定 left 左边元素个数为0
-			prevIndex := -1
-			if len(stack) > 0 {
-				prevIndex = stack[len(stack)-1]
-			}
-			left := index - prevIndex - 1
-			right := i - index - 1
-			// 计算元素个数 * 最小值 得到res
-			res += ((1 + left + right + (right * left)) * arr[index]) % 1000000007
-			res = res % 1000000007
+func sumSubarrayMins(arr []int) (ans int) {
+	arr = append(arr, -1)
+	st := []int{-1} // 哨兵
+	for r, x := range arr {
+		for len(st) > 1 && arr[st[len(st)-1]] >= x {
+			i := st[len(st)-1]
+			st = st[:len(st)-1]
+			ans += arr[i] * (i - st[len(st)-1]) * (r - i) // 累加贡献
 		}
-		stack = append(stack, i)
+		st = append(st, r)
 	}
-	return res
+	return ans % (1e9 + 7)
 }
+
+// func sumSubarrayMins(arr []int) int {
+//	n := len(arr)
+//	l, r := make([]int, len(arr)), make([]int, len(arr))
+//	q := []int{-1}
+//	for i := range r {
+//		r[i] = n
+//	}
+//	for i := 0; i < len(arr); i++ {
+//		for len(q) > 1 && arr[i] <= arr[q[len(q)-1]] {
+//			val := q[len(q)-1]
+//			q = q[:len(q)-1]
+//			r[val] = i
+//		}
+//		l[i] = q[len(q)-1]
+//		q = append(q, i)
+//	}
+//	const mod int = 1e9+7
+//	ans := 0
+//	for i, v := range arr {
+//		ans = ans + (i-l[i]) * (r[i] - i) * v % mod
+//	}
+//	return ans % mod
+//}
 
 // 910
 func smallestRangeII(nums []int, k int) int {
