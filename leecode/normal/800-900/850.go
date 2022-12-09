@@ -172,6 +172,67 @@ func distanceK(root *TreeNode, target *TreeNode, k int) []int {
 	return qL
 }
 
+// 864
+func shortestPathAllKeys(grid []string) int {
+	m, n := len(grid), len(grid[0])
+	ans, key, mask := 0, 0, 0
+	startx, starty := 0, 0
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] >= 'a' && grid[i][j] <= 'f' {
+				key |= 1 << (grid[i][j] - 'a')
+			}
+			if grid[i][j] == '@' {
+				startx, starty = i, j
+			}
+		}
+	}
+	vis := make([][][1 << 7]bool, m)
+	for i := range vis {
+		vis[i] = make([][1 << 7]bool, n)
+	}
+	vis[startx][starty][mask] = true
+
+	dir := [][]int{{0, -1}, {0, 1}, {1, 0}, {-1, 0}}
+	q := [][]int{{startx, starty, mask}}
+	for len(q) > 0 {
+		tmp := q
+		q = nil
+
+		for _, v := range tmp {
+			x, y, cur := v[0], v[1], v[2]
+			if cur == key {
+				return ans
+			}
+			for _, d := range dir {
+				xx, yy := x+d[0], y+d[1]
+				if 0 <= xx && xx < m && 0 <= yy && yy < n && grid[xx][yy] != '#' {
+					if grid[xx][yy] == '.' || grid[xx][yy] == '@' {
+						if !vis[xx][yy][cur] {
+							q = append(q, []int{xx, yy, cur})
+							vis[xx][yy][cur] = true
+						}
+					} else if grid[xx][yy] >= 'A' && grid[xx][yy] <= 'F' {
+						if cur>>(grid[xx][yy]-'A')&1 == 1 {
+							q = append(q, []int{xx, yy, cur})
+							vis[xx][yy][cur] = true
+						}
+					} else if grid[xx][yy] >= 'a' && grid[xx][yy] <= 'f' {
+						newMask := cur | 1<<(grid[xx][yy]-'a')
+						if !vis[xx][yy][newMask] {
+							q = append(q, []int{xx, yy, newMask})
+							vis[xx][yy][newMask] = true
+						}
+					}
+				}
+			}
+		}
+		ans++
+	}
+
+	return -1
+}
+
 // 865
 func subtreeWithAllDeepest(root *TreeNode) *TreeNode {
 	if root == nil {

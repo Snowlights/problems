@@ -71,7 +71,8 @@ func min(a, b int) int {
 }
 
 // 4
-
+// 数组的第二大元素
+// AtCoderABC140E 数组中下一个大的元素(第二个大)的位置
 func secondGreaterElement(nums []int) []int {
 	ans := make([]int, len(nums))
 	for i := range ans {

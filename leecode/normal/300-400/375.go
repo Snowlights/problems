@@ -1,9 +1,31 @@
 package _00_400
 
 import (
+	"math"
 	"math/rand"
 	"strings"
 )
+
+// 375
+func getMoneyAmount(n int) int {
+
+	dp := make([][]int, n+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+
+	for i := n - 1; i > 0; i-- {
+		for j := i + 1; j <= n; j++ {
+			dp[i][j] = math.MaxInt32
+			for k := i; k < j; k++ {
+				tmp := max(dp[i][k-1], dp[k+1][j]) + k
+				dp[i][j] = min(dp[i][j], tmp)
+			}
+		}
+	}
+
+	return dp[1][n]
+}
 
 // 376
 func wiggleMaxLength(nums []int) int {

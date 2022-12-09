@@ -136,6 +136,34 @@ func dfs(root *TreeNode) int {
 	return 1
 }
 
+// 971
+func flipMatchVoyage(root *TreeNode, voyage []int) (ans []int) {
+	var idx int
+	var n int = len(voyage)
+	var dfs func(root *TreeNode) bool
+	dfs = func(root *TreeNode) bool {
+		if root == nil {
+			return true
+		}
+
+		if root.Val != voyage[idx] {
+			return false
+		}
+
+		if idx+1 < n && root.Left != nil && root.Right != nil &&
+			root.Left.Val != voyage[idx+1] && root.Right.Val == voyage[idx+1] {
+			ans = append(ans, root.Val)
+			root.Left, root.Right = root.Right, root.Left
+		}
+		idx++
+		return dfs(root.Left) && dfs(root.Right)
+	}
+	if dfs(root) {
+		return ans
+	}
+	return []int{-1}
+}
+
 // 973
 func kClosest(points [][]int, k int) [][]int {
 

@@ -1,5 +1,7 @@
 package _00_900
 
+import "sort"
+
 // 801
 func minSwap(nums1, nums2 []int) int {
 	n := len(nums1)
@@ -160,4 +162,22 @@ func numComponents(head *ListNode, nums []int) int {
 		cur = cur.Next
 	}
 	return ans
+}
+
+// 823
+func numFactoredBinaryTrees(arr []int) int {
+	h, ans, mod := make(map[int]int), 0, int(1e9+7)
+	sort.Ints(arr)
+	for i, v := range arr {
+		h[v] = 1
+		for _, j := range arr[:i] {
+			if v%j == 0 {
+				h[v] += h[j] * h[v/j]
+				h[v] %= mod
+			}
+		}
+		ans += h[v]
+	}
+
+	return ans % mod
 }

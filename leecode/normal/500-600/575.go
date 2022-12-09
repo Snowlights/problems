@@ -2,6 +2,41 @@ package _00_600
 
 import "sort"
 
+// 576
+func findPaths(m int, n int, maxMove int, startRow int, startColumn int) int {
+
+	const (
+		mod int = 1e9 + 7
+	)
+	// 移动i步之后在x,y的方案数
+	dp := make([][][]int, maxMove+1)
+	dir := [][]int{{0, -1}, {0, 1}, {1, 0}, {-1, 0}}
+	ans := 0
+	for i := range dp {
+		dp[i] = make([][]int, m)
+		for j := range dp[i] {
+			dp[i][j] = make([]int, n)
+		}
+	}
+	dp[0][startRow][startColumn] = 1
+	for i := 0; i < maxMove; i++ {
+		for j := 0; j < m; j++ {
+			for k := 0; k < n; k++ {
+				count := dp[i][j][k]
+				for _, d := range dir {
+					x, y := j+d[0], k+d[1]
+					if 0 <= x && x < m && 0 <= y && y < n {
+						dp[i+1][x][y] = (dp[i+1][x][y] + count) % mod
+					} else {
+						ans = (ans + count) % mod
+					}
+				}
+			}
+		}
+	}
+	return ans
+}
+
 // 581
 func findUnsortedSubarray(nums []int) int {
 	if sort.IntsAreSorted(nums) {

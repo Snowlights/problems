@@ -86,7 +86,106 @@ func buildGraph(dislikes [][]int, n int, graph [][]bool) {
 	}
 }
 
+// 891
+func sumSubseqWidths(nums []int) int {
+	const (
+		mod int = 1e9 + 7
+	)
+	ans, n := 0, len(nums)
+
+	pow := make([]int, n+1)
+	pow[0] = 1
+	for i := 1; i <= n; i++ {
+		pow[i] = (pow[i-1] * 2) % mod
+	}
+
+	sort.Ints(nums)
+	for i, v := range nums {
+		ans = (ans + (pow[i]-pow[n-1-i])*v) % mod
+	}
+
+	return ans
+}
+
+// 894
+func allPossibleFBT(n int) []*TreeNode {
+
+	ans := make([]*TreeNode, 0)
+	if n%2 == 0 {
+		return ans
+	}
+
+	if n == 1 {
+		return append(ans, &TreeNode{})
+	}
+
+	for i := 1; i < n; i += 2 {
+		l, r := allPossibleFBT(i), allPossibleFBT(n-1-i)
+		for _, v := range l {
+			for _, v2 := range r {
+				ans = append(ans, &TreeNode{Left: v, Right: v2})
+			}
+		}
+	}
+
+	return ans
+}
+
+// 895
+type FreqStack struct {
+	h     map[int]int
+	stack [][]int
+}
+
+func Constructor() FreqStack {
+	return FreqStack{
+		h:     map[int]int{},
+		stack: [][]int{},
+	}
+}
+
+func (this *FreqStack) Push(val int) {
+	c := this.h[val]
+	if c == len(this.stack) {
+		this.stack = append(this.stack, []int{val})
+	} else {
+		this.stack[c] = append(this.stack[c], val)
+	}
+	this.h[val]++
+}
+
+func (this *FreqStack) Pop() int {
+	sLen := len(this.stack) - 1
+	l := len(this.stack[sLen]) - 1
+	val := this.stack[sLen][l]
+
+	if l == 0 {
+		this.stack = this.stack[:sLen]
+	} else {
+		this.stack[sLen] = this.stack[sLen][:l]
+	}
+	this.h[val]--
+	return val
+}
+
 // 896
 func isMonotonic(nums []int) bool {
 	return sort.IsSorted(sort.IntSlice(nums)) || sort.IsSorted(sort.Reverse(sort.IntSlice(nums)))
+}
+
+// 898
+func subarrayBitwiseORs(arr []int) int {
+	cur, ans := make(map[int]bool), make(map[int]bool)
+	for _, v := range arr {
+		cur2 := map[int]bool{v: true}
+		for k := range cur {
+			cur2[k|v] = true
+		}
+		cur = cur2
+		for k := range cur {
+			ans[k|v] = true
+		}
+	}
+
+	return len(ans)
 }

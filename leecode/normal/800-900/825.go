@@ -52,6 +52,57 @@ func uniqueLetterString(s string) (ans int) {
 	return
 }
 
+// 837
+func new21Game(n int, k int, maxPts int) float64 {
+	dp := make([]float64, k+maxPts)
+	s := 0.0
+	for i := k; i < k+maxPts; i++ {
+		if i > n {
+			dp[i] = 0
+		} else {
+			dp[i] = 1
+		}
+		s += dp[i]
+	}
+
+	for i := k - 1; i >= 0; i-- {
+		dp[i] = s / float64(maxPts)
+		s -= dp[i+maxPts]
+		s += dp[i]
+	}
+
+	return dp[0]
+}
+
+// 838
+func longestMountain(arr []int) int {
+	n := len(arr)
+	l, r := make([]int, n), make([]int, n)
+
+	for i, v := range arr {
+		if i > 0 && v > arr[i-1] {
+			l[i] = l[i-1] + 1
+		} else {
+			l[i] = 1
+		}
+	}
+	for i := n - 1; i >= 0; i-- {
+		if i < n-1 && arr[i] > arr[i+1] {
+			r[i] = r[i+1] + 1
+		} else {
+			r[i] = 1
+		}
+	}
+
+	ans := 0
+	for i := 1; i < n; i++ {
+		if l[i] > 1 && r[i] > 1 {
+			ans = max(ans, l[i]+r[i]-1)
+		}
+	}
+	return ans
+}
+
 // 841
 func canVisitAllRooms(rooms [][]int) bool {
 	vis := make(map[int]bool)

@@ -1,5 +1,6 @@
 package p3500
 
+// http://acm.hdu.edu.cn/showproblem.php?pid=3555
 // 3555
 //typedef long long ll;
 //
@@ -51,3 +52,58 @@ package p3500
 //    }
 //}
 //
+
+// http://acm.hdu.edu.cn/showproblem.php?pid=2089
+// long long n, m;
+//string s;
+//long long dp[30][2];
+//
+//long long f(int i, int pre, int stat, bool limit) {
+//    if (i == s.length()) {
+//        return 1;
+//    }
+//
+//    if (!limit && dp[i][stat] >= 0) {
+//        return dp[i][stat];
+//    }
+//
+//    long long res = 0;
+//    int up = 9;
+//    if (limit) {
+//        up = s[i] - '0';
+//    }
+//
+//    for (int j = 0; j <= up; j++) {
+//        if (pre == 6 && j == 2)
+//            continue;
+//        if (j == 4)
+//            continue;
+//        res += f(i + 1, j, j == 6, limit && j == up);
+//    }
+//
+//    if (!limit) {
+//        dp[i][stat] = res;
+//    }
+//
+//    return res;
+//}
+//
+//
+//int main() {
+//
+//    while (1) {
+//        cin >> n >> m;
+//        if (n == 0 && m == 0) {
+//            break;
+//        }
+//        s = to_string(n-1);
+//        memset(dp, -1, sizeof(dp));
+//        long long a = f(0, 0, 0, true);
+//        s = to_string(m);
+//        memset(dp, -1, sizeof(dp));
+//        long long b = f(0, 0, 0, true);
+//        cout << b - a << endl;
+//    };
+//
+//    return 0;
+//}

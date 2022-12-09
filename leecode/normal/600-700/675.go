@@ -236,6 +236,34 @@ func repeatedStringMatch(a string, b string) int {
 	return -1
 }
 
+// 688
+func knightProbability(n int, k int, row int, column int) float64 {
+	dir := [][]int{
+		{-2, -1}, {-2, 1}, {2, -1}, {2, 1},
+		{-1, -2}, {-1, 2}, {1, -2}, {1, 2},
+	}
+
+	dp := make([][][]float64, k+1)
+	for i := range dp {
+		dp[i] = make([][]float64, n)
+		for j := range dp[i] {
+			dp[i][j] = make([]float64, n)
+			for k := range dp[i][j] {
+				if i == 0 {
+					dp[i][j][k] = 1
+				} else {
+					for _, d := range dir {
+						if x, y := j+d[0], k+d[1]; 0 <= x && x < n && 0 <= y && y < n {
+							dp[i][j][k] += dp[i-1][x][y] / 8
+						}
+					}
+				}
+			}
+		}
+	}
+	return dp[k][row][column]
+}
+
 // 690
 type Employee struct {
 	Id           int

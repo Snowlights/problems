@@ -181,6 +181,17 @@ func _() {
 		// C(n, 0) + C(n, 1) + C(n, 2) + ... + C(n, n) = 2^n
 		// C(r, r) + C(r+1,r) + C(r+2,r) + ... + C(n, r) = C(n+1, r+1)
 
-		_ = []interface{}{A, C, P, H, Catalan, Motzkin, initComb, lucas}
+		// 多个数最大公约数
+		gcd := func(a, b int) int {
+			for a%b != 0 {
+				a, b = b, a%b
+			}
+			return b
+		}
+		// 多个数最小公倍数
+		lcm := func(a, b int) int {
+			return a / gcd(a, b) * b
+		}
+		_ = []interface{}{A, C, P, H, Catalan, Motzkin, initComb, lucas, lcm}
 	}
 }

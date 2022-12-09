@@ -8,7 +8,7 @@ func parseBoolExpr(expression string) bool {
 		switch v {
 		case ')':
 			f, t, ans := 0, 0, 'f'
-			for stack[len(stack)-1] == 'f' || stack[len(stack)-1] == 't' || stack[len(stack)-1] == ','{
+			for stack[len(stack)-1] == 'f' || stack[len(stack)-1] == 't' || stack[len(stack)-1] == ',' {
 				switch stack[len(stack)-1] {
 				case 'f':
 					f++

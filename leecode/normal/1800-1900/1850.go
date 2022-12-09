@@ -1,6 +1,64 @@
 package _800_1900
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
+
+// 1850
+func getMinSwaps(num string, k int) int {
+
+	original, ans := []byte(num), []byte(num)
+	for i := 0; i < k; i++ {
+		ans = next(ans)
+	}
+	fmt.Println(string(original), string(ans))
+	n, res := len(original), 0
+	for i := range original {
+		if original[i] == ans[i] {
+			continue
+		}
+
+		j := i + 1
+		for j < n && original[j] != ans[i] {
+			j++
+		}
+
+		for ; j > i+1; j-- {
+			res++
+			original[j], original[j-1] = original[j-1], original[j]
+		}
+	}
+
+	return res
+}
+
+func next(original []byte) []byte {
+	n := len(original)
+
+	l := n - 2
+	for l >= 0 && original[l] >= original[l+1] {
+		l--
+	}
+
+	if l >= 0 {
+		r := n - 1
+		for r >= 0 && original[l] >= original[r] {
+			r--
+		}
+		original[l], original[r] = original[r], original[l]
+	}
+
+	l++
+	n--
+	for l < n {
+		original[l], original[n] = original[n], original[l]
+		l++
+		n--
+	}
+
+	return original
+}
 
 // 1855
 func maxDistance(x, y []int) (ans int) {
