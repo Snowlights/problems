@@ -75,3 +75,31 @@ func maxScoreSightseeingPair(values []int) int {
 
 	return int(ans)
 }
+
+// 1024
+func videoStitching(clips [][]int, time int) (ans int) {
+	f := make([]int, time)
+	for _, c := range clips {
+		l, r := c[0], c[1]
+		if l < time && r > f[l] {
+			f[l] = r
+		}
+	}
+
+	pre, last, ans := 0, 0, 0
+	for i, v := range f {
+		if v > last {
+			last = v
+		}
+		if i == last {
+			return -1
+		}
+
+		if i == pre {
+			pre = last
+			ans++
+		}
+
+	}
+	return ans
+}

@@ -1,5 +1,84 @@
 package _000_1100
 
+// 1027
+func longestArithSeqLength(nums []int) int {
+	n := len(nums)
+	dp := make([]map[int]int, n)
+	for i := range dp {
+		dp[i] = map[int]int{}
+	}
+	ans := 0
+
+	max := func(a, b int) int {
+		if a < b {
+			return b
+		}
+		return a
+	}
+
+	for i, v := range nums {
+		for j := 0; j < i; j++ {
+			diff := nums[j] - v
+
+			cnt, ok := dp[j][diff]
+			if ok {
+				dp[i][diff] = cnt + 1
+			} else {
+				dp[i][diff] = 2
+			}
+
+			ans = max(ans, dp[i][diff])
+		}
+	}
+
+	return ans
+}
+
+// 1039
+func minScoreTriangulation(values []int) int {
+	n := len(values)
+	dp := make([][]int, n)
+	for i := range dp {
+		dp[i] = make([]int, n)
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	var dfs func(l, r int) int
+	dfs = func(l, r int) int {
+		if r-l < 2 {
+			return 0
+		}
+
+		if dp[l][r] >= 0 {
+			return dp[l][r]
+		}
+
+		if r-l == 2 {
+			return values[l] * values[l+1] * values[r]
+		}
+
+		res := int(1e9)
+		cur := values[l] * values[r]
+		for j := l + 1; j < r; j++ {
+			res = min(res, cur*values[j]+dfs(l, j)+dfs(j, r))
+		}
+
+		dp[l][r] = res
+		return res
+	}
+
+	return dfs(0, n-1)
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+
 // 1042
 
 func gardenNoAdj(n int, paths [][]int) []int {

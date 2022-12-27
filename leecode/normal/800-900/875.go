@@ -107,6 +107,24 @@ func sumSubseqWidths(nums []int) int {
 	return ans
 }
 
+// 893
+func mincostTickets(days []int, costs []int) int {
+	sort.Ints(days)
+	dp := make([]int, days[len(days)-1]+30)
+	for _, d := range days {
+		dp[d] = 1
+	}
+	for d := 1; d < days[len(days)-1]+30; d++ {
+		if dp[d] > 0 {
+			dp[d] = min(dp[max(d-1, 0)]+costs[0], min(
+				dp[max(d-7, 0)]+costs[1], dp[max(d-30, 0)]+costs[2]))
+		} else {
+			dp[d] = dp[d-1]
+		}
+	}
+	return dp[days[len(days)-1]+29]
+}
+
 // 894
 func allPossibleFBT(n int) []*TreeNode {
 

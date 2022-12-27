@@ -1,5 +1,7 @@
 package _100_1200
 
+import "math"
+
 // 1129
 func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int {
 	rg, bg := map[int]map[int]bool{}, map[int]map[int]bool{}
@@ -50,6 +52,50 @@ func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int 
 
 type node struct {
 	id, steps, color int // red:color=1, blue:color=2
+}
+
+// 1130
+func mctFromLeafValues(arr []int) int {
+	n := len(arr)
+	type pair struct {
+		max, sum int
+	}
+	dp := make([][]*pair, n)
+	for i := range dp {
+		dp[i] = make([]*pair, n)
+	}
+
+	var dfs func(l, r int) *pair
+	dfs = func(l, r int) *pair {
+		if l == r {
+			return &pair{
+				max: arr[l],
+				sum: 0,
+			}
+		}
+		if dp[l][r] != nil {
+			return dp[l][r]
+		}
+		ans := &pair{
+			max: 0,
+			sum: 0,
+		}
+		sum, mx := math.MaxInt64, 0
+		for j := l; j < r; j++ {
+			left, right := dfs(l, j), dfs(j+1, r)
+			cur := left.max*right.max + left.sum + right.sum
+			if cur < sum {
+				sum = cur
+				mx = max(left.max, right.max)
+			}
+		}
+		ans.max = mx
+		ans.sum = sum
+		dp[l][r] = ans
+		return ans
+	}
+
+	return dfs(0, n-1).sum
 }
 
 // 1137
