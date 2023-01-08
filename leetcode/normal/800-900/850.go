@@ -1,6 +1,9 @@
 package _00_900
 
-import "sort"
+import (
+	"container/list"
+	"sort"
+)
 
 /// 851
 func loudAndRich(richer [][]int, quiet []int) []int {
@@ -87,6 +90,61 @@ func kSimilarity(s1 string, s2 string) int {
 		}
 		ans++
 	}
+}
+
+// 855
+type ExamRoom struct {
+	seat *list.List // 表示坐着的同学的位置
+	n    int
+}
+
+func Constructor855(N int) ExamRoom {
+	return ExamRoom{
+		seat: list.New(),
+		n:    N - 1,
+	}
+}
+
+func (this *ExamRoom) Seat() int {
+	// 还没有人入座，直接将0插入
+	if this.seat.Len() == 0 {
+		this.seat.PushFront(0)
+		return 0
+	}
+	e := this.seat.Front()
+	pre := e.Value.(int)
+	max := pre // 头部需要特殊判断
+	addVal := 0
+	addFront := e
+	e = e.Next()
+	for ; e != nil; e = e.Next() {
+		val := e.Value.(int)
+		distant := (val - pre) / 2 // 两点之间的最远距离
+		if distant > max {
+			max = distant
+			addFront = e           // 需要插入的点的后一个元素。方便找到后直接插入
+			addVal = pre + distant // 需要插入的位置
+		}
+		pre = val
+	}
+	distant := this.n - pre // 尾部特殊判断
+	if distant > max {
+		this.seat.PushBack(this.n) // 直接插入到链表尾部
+		return this.n
+	}
+	this.seat.InsertBefore(addVal, addFront) // 插入
+	return addVal
+}
+
+// 遍历知道对应的位置删除
+func (this *ExamRoom) Leave(p int) {
+	for e := this.seat.Front(); e != nil; e = e.Next() {
+		if e.Value.(int) == p {
+			this.seat.Remove(e)
+			return
+		}
+	}
+	return
 }
 
 // 862

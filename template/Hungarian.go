@@ -2,7 +2,7 @@ package template
 
 import "fmt"
 
-//
+// 匈牙利算法-最大匹配问题
 
 func hungarian() {
 	var n, v int
