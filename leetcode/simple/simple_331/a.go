@@ -55,3 +55,63 @@ func vowelStrings(words []string, queries [][]int) []int {
 }
 
 // 3
+func minCapability(nums []int, k int) int {
+	return sort.Search(1e9, func(mx int) bool {
+		f0, f1 := 0, 0
+		for _, v := range nums {
+			if v <= mx {
+				f0, f1 = f1, max(f0+1, f1)
+			} else {
+				f0 = f1
+			}
+		}
+		return f1 >= k
+	})
+}
+
+func max(a, b int) int {
+	if a < b {
+		return b
+	}
+	return a
+}
+
+// 4
+func minCost(basket1, basket2 []int) (ans int64) {
+	cnt := map[int]int{}
+	for i, x := range basket1 {
+		cnt[x]++
+		cnt[basket2[i]]--
+	}
+
+	mn, a := math.MaxInt32, []int{}
+	for x, c := range cnt {
+		if c%2 != 0 {
+			return -1
+		}
+		mn = min(mn, x)
+		for c = abs(c) / 2; c > 0; c-- {
+			a = append(a, x)
+		}
+	}
+
+	sort.Ints(a) // 也可以用快速选择
+	for _, x := range a[:len(a)/2] {
+		ans += int64(min(x, mn*2))
+	}
+	return
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+
+func abs(x int) int {
+	if x > 0 {
+		return x
+	}
+	return -x
+}

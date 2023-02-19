@@ -30,13 +30,13 @@ func mergeArrays(nums1 [][]int, nums2 [][]int) [][]int {
 
 // 2
 func minOperations(n int) int {
-	lowbit := func(x int) int{
+	lowbit := func(x int) int {
 		return x & (-x)
 	}
 
 	var dfs func(x int) int
-	dfs = func(x int) int{
-		if x & (x-1) == 0 {
+	dfs = func(x int) int {
+		if x&(x-1) == 0 {
 			return 1
 		}
 		return 1 + min(dfs(x+lowbit(x)), dfs(x-lowbit(x)))
@@ -54,15 +54,15 @@ func min(a, b int) int {
 
 // 3
 func squareFreeSubsets(nums []int) int {
-	mod := int(1e9+7)
+	mod := int(1e9 + 7)
 	m, Mask := 1<<10, []int{-1, 0, 1, 2, -1, 4, 3, 8, -1, -1, 5, 16, -1, 32, 9, 6, -1, 64, -1, 128, -1, 10, 17, 256, -1, -1, 33, -1, -1, 512, 7}
 	f := make([]int, m)
 	f[0] = 1
-	for i := 1; i < len(nums) + 1; i++ {
+	for i := 1; i < len(nums)+1; i++ {
 		if mask := Mask[nums[i-1]]; mask >= 0 {
-			for j := m-1; j >= 0; j-- {
-				if mask & j == mask {
-					f[j] = (f[j] + f[j^mask] ) % mod
+			for j := m - 1; j >= 0; j-- {
+				if mask&j == mask {
+					f[j] = (f[j] + f[j^mask]) % mod
 				}
 			}
 		}
@@ -72,7 +72,7 @@ func squareFreeSubsets(nums []int) int {
 		ans += v
 		ans %= mod
 	}
-	return (ans -1 + mod) % mod
+	return (ans - 1 + mod) % mod
 }
 
 // 4
@@ -124,4 +124,9 @@ func findTheString(lcp [][]int) string {
 	return string(s)
 }
 
-func max(a, b int) int { if a < b { return b }; return a }
+func max(a, b int) int {
+	if a < b {
+		return b
+	}
+	return a
+}
