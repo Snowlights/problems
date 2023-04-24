@@ -116,6 +116,40 @@ func tribonacci(n int) int {
 	}
 }
 
+// 1140
+func stoneGameII(s []int) int {
+	n := len(s)
+	for i := n - 2; i >= 0; i-- {
+		s[i] += s[i+1] // 后缀和
+	}
+
+	cache := make([][]int, n-1)
+	for i := range cache {
+		cache[i] = make([]int, (n+1)/4+1)
+		for j := range cache[i] {
+			cache[i][j] = -1 // -1 表示没有访问过
+		}
+	}
+	var dfs func(int, int) int
+	dfs = func(i, m int) int {
+		if i+m*2 >= n {
+			return s[i]
+		}
+		v := &cache[i][m]
+		if *v != -1 {
+			return *v
+		}
+		mn := math.MaxInt64
+		for x := 1; x <= m*2; x++ {
+			mn = min(mn, dfs(i+x, max(m, x)))
+		}
+		res := s[i] - mn
+		*v = res
+		return res
+	}
+	return dfs(0, 1)
+}
+
 // 1143
 func longestCommonSubsequence(t1, t2 string) int {
 
