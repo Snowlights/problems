@@ -220,93 +220,59 @@ func maxGroupNumber(tiles []int) int {
 
 // 5 todo 未通过 https://leetcode.cn/contest/season/2021-spring/
 func minRecSize(lines [][]int) float64 {
-	flag := false
-	for _, line := range lines {
-		if line[0] != lines[len(lines)-1][0] {
-			flag = true
-		}
+	n := len(lines)
+	k, b := make([]int, n), make([]int, n)
+	sort.Slice(lines, func(i, j int) bool {
+		return lines[i][0] < lines[j][0] ||
+			lines[i][0] == lines[j][0] && lines[i][1] < lines[j][1]
+	})
+
+	for i := 0; i < n; i++ {
+		k[i], b[i] = lines[i][0], lines[i][1]
 	}
-	if !flag {
+
+	p, q := 0, 0
+	for q < n && k[q] == k[p] {
+		q++
+	}
+	if q >= n {
 		return 0
 	}
 
-	cmp1 := func() {
-		sort.Slice(lines, func(i, j int) bool {
-			a, b := lines[i], lines[j]
-			if a[0] == b[0] {
-				return a[1] > b[1]
-			}
-			return a[0] < b[0]
-		})
-	}
-	cmp2 := func() {
-		sort.Slice(lines, func(i, j int) bool {
-			a, b := lines[i], lines[j]
-			if a[0] == b[0] {
-				return a[1] > b[1]
-			}
-			return a[0] > b[0]
-		})
-	}
-	min, max := func(a, b float64) float64 {
+	min := func(a, b float64) float64 {
 		if a < b {
 			return a
 		}
 		return b
-	}, func(a, b float64) float64 {
-		if a < b {
-			return b
+	}
+	max := func(a, b float64) float64 {
+		if a > b {
+			return a
 		}
-		return a
+		return b
 	}
 
-	s1 := func() float64 {
-		res := 1e18
-		cmp1()
-		for i := 1; i < len(lines); i++ {
-			if lines[i][0] != lines[i-1][0] {
-				res = min(res, float64(-(lines[i][1]-lines[i-1][1])*1.0/(lines[i][0]-lines[i-1][0])))
-			}
+	x_min, x_max, y_min, y_max := 1e100, -1e100, 1e100, -1e100
+	for q < n {
+		r := q
+		for r+1 < n && k[r+1] == k[q] {
+			r++
 		}
-		return res
-	}
+		cx1 := 1.0 * float64(b[r]-b[p]) / float64(k[r]-k[p])
+		cx2 := 1.0 * float64(b[q]-b[q-1]) / float64(k[q]-k[q-1])
+		x_min = min(x_min, min(cx1, cx2))
+		x_max = max(x_max, max(cx1, cx2))
 
-	s2 := func() float64 {
-		res := -1e18
-		cmp2()
-		for i := 1; i < len(lines); i++ {
-			if lines[i][0] != lines[i-1][0] {
-				res = max(res, float64(-(lines[i][1]-lines[i-1][1])*1.0/(lines[i][0]-lines[i-1][0])))
-			}
+		cy1 := 1.0 * float64(b[r]*k[p]-b[p]*k[r]) / float64(k[r]-k[p])
+		cy2 := 1.0 * float64(b[q]*k[q-1]-b[q-1]*k[q]) / float64(k[q]-k[q-1])
+		y_min = min(y_min, min(cy1, cy2))
+		y_max = max(y_max, max(cy1, cy2))
+		p = q
+		for q < n && k[q] == k[p] {
+			q++
 		}
-		return res
 	}
-
-	s3 := func() float64 {
-		res := 1e18
-		cmp1()
-		for i := 1; i < len(lines); i++ {
-			if lines[i][0] != lines[i-1][0] {
-				res = min(res,
-					float64(-(lines[i][1]-lines[i-1][1])*1.0/(lines[i][0]-lines[i-1][0])*lines[i][0]+lines[i][1]))
-			}
-		}
-		return res
-	}
-
-	s4 := func() float64 {
-		res := 1e18
-		cmp2()
-		for i := 1; i < len(lines); i++ {
-			if lines[i][0] != lines[i-1][0] {
-				res = max(res,
-					float64(-(lines[i][1]-lines[i-1][1])*1.0/(lines[i][0]-lines[i-1][0])*lines[i][0]+lines[i][1]))
-			}
-		}
-		return res
-	}
-
-	return (s2() - s1()) * (s4() - s3())
+	return (x_max - x_min) * (y_max - y_min)
 }
 
 // 6
