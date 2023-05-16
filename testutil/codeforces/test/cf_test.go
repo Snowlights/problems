@@ -12,24 +12,46 @@ func TestCF1775E(t *testing.T) {
 	//
 
 	// just copy from website
-	rawText := `
-inputCopy
-5
-3
-1 2 -3
-5
-1 0 0 -1 -1
-6
-2 -4 3 -5 4 1
-5
-1 -1 1 -1 1
-7
-0 0 0 0 0 0 0
-outputCopy
-3
-2
-6
-1
-0`
-	codeforces.AssertEqualCase(t, CF1775E, rawText, 0)
+	//	rawText := `
+	//inputCopy
+	//5
+	//3
+	//1 2 -3
+	//5
+	//1 0 0 -1 -1
+	//6
+	//2 -4 3 -5 4 1
+	//5
+	//1 -1 1 -1 1
+	//7
+	//0 0 0 0 0 0 0
+	//outputCopy
+	//3
+	//2
+	//6
+	//1
+	//0`
+	//	codeforces.AssertEqualCase(t, CF1775E, rawText, 0)
+	var customTestCases = [][2]string{
+		{
+			`5
+			3
+			1 2 -3
+			5
+			1 0 0 -1 -1
+			6
+			2 -4 3 -5 4 1
+			5
+			1 -1 1 -1 1
+			7
+			0 0 0 0 0 0 0`,
+			`3
+			2
+			6
+			1
+			0`,
+		},
+	}
+	codeforces.AssertEqualStringCase(t, CF1775E, customTestCases, 0)
+
 }
