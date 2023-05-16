@@ -105,31 +105,3 @@ func gardenNoAdj(n int, paths [][]int) []int {
 	}
 	return res
 }
-
-// 1048
-func longestStrChain(words []string) int {
-	m := make(map[string]int)
-	for i := range words {
-		m[words[i]] = 0
-	}
-	var dfs func(s string) int
-	dfs = func(s string) int {
-		res := m[s]
-		if res > 0 {
-			return res
-		}
-		for i := range s {
-			t := s[:i] + s[i+1:]
-			if _, ok := m[t]; ok {
-				res = int(max(int64(res), int64(dfs(t))))
-			}
-		}
-		m[s] = res + 1
-		return res + 1
-	}
-	ans := 0
-	for i := range words {
-		ans = int(max(int64(ans), int64(dfs(words[i]))))
-	}
-	return ans
-}
