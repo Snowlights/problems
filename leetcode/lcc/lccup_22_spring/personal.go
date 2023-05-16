@@ -2,7 +2,6 @@ package lccup_22_spring
 
 import (
 	"math/bits"
-	. "problems/testutil/leetcode"
 	"sort"
 )
 
@@ -128,6 +127,11 @@ func (t seg) spreadAll(o int) {
 	t.spread(o)
 	t.spreadAll(o << 1)
 	t.spreadAll(o<<1 | 1)
+}
+
+type TreeNode struct {
+	Val         int
+	Left, Right *TreeNode
 }
 
 func getNumber(root *TreeNode, ops [][]int) (ans int) {
