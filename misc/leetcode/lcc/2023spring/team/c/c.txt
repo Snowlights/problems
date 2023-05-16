@@ -1,0 +1,7 @@
+["sd","ep"]
+"speed"
+10
+
+["abc","daf","geg"]
+"sad"
+-1

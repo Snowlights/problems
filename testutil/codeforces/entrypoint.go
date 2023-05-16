@@ -160,3 +160,129 @@ func AssertEqualFileCaseWithName(t *testing.T, runFunc ioFunc, dir, inName, ansN
 
 	AssertEqualStringCase(t, runFunc, testCases, targetCaseNum)
 }
+
+// 对拍
+// runFuncAC 为暴力逻辑或已 AC 逻辑，runFunc 为当前测试的逻辑
+func AssertEqualRunResults(t *testing.T, inputs []string, targetCaseNum int, runFuncAC, runFunc ioFunc) {
+	if len(inputs) == 0 {
+		return
+	}
+
+	for curCaseNum, input := range inputs {
+		if targetCaseNum > 0 && curCaseNum+1 != targetCaseNum {
+			continue
+		}
+
+		input = removeExtraSpace(input)
+		const maxInputSize = 150
+		inputInfo := input
+		if len(inputInfo) > maxInputSize { // 截断过长的输入
+			inputInfo = inputInfo[:maxInputSize] + "..."
+		}
+
+		mockReader := strings.NewReader(input)
+		mockWriterAC := &strings.Builder{}
+		runFuncAC(mockReader, mockWriterAC)
+		expectedOutput := removeExtraSpace(mockWriterAC.String())
+
+		mockReader = strings.NewReader(input)
+		mockWriter := &strings.Builder{}
+		_f := func() { runFunc(mockReader, mockWriter) }
+		if targetCaseNum == 0 && isTLE(_f) {
+			t.Errorf("Time Limit Exceeded %d\nInput:\n%s", curCaseNum+1, inputInfo)
+			continue
+		} else if targetCaseNum != 0 {
+			_f()
+		}
+		actualOutput := removeExtraSpace(mockWriter.String())
+
+		assert.Equal(t, expectedOutput, actualOutput, "Wrong Answer %d\nInput:\n%s", curCaseNum+1, inputInfo)
+	}
+}
+
+// 无尽对拍模式
+// inputGenerator 生成随机测试数据，runFuncAC 为暴力逻辑或已 AC 逻辑，runFunc 为当前测试的逻辑
+func AssertEqualRunResultsInf(t *testing.T, inputGenerator func() string, runFuncAC, runFunc ioFunc) {
+	for tc, checkTC := 1, 1; ; tc++ {
+		input := inputGenerator()
+		input = removeExtraSpace(input)
+
+		mockReader := strings.NewReader(input)
+		mockWriterAC := &strings.Builder{}
+		runFuncAC(mockReader, mockWriterAC)
+		expectedOutput := removeExtraSpace(mockWriterAC.String())
+
+		mockReader = strings.NewReader(input)
+		mockWriter := &strings.Builder{}
+		if isTLE(func() { runFunc(mockReader, mockWriter) }) {
+			t.Errorf("Time Limit Exceeded %d\nInput:\n%s", tc, input)
+			continue
+		}
+		actualOutput := removeExtraSpace(mockWriter.String())
+
+		if DisableLogInput {
+			assert.Equal(t, expectedOutput, actualOutput, "Wrong Answer %d", tc)
+		} else {
+			assert.Equal(t, expectedOutput, actualOutput, "Wrong Answer %d\nInput:\n%s", tc, input)
+		}
+
+		if tc == checkTC {
+			t.Logf("%d cases checked.", tc)
+			checkTC <<= 1
+		}
+
+		if Once {
+			break
+		}
+	}
+}
+
+type OutputChecker func(string) bool
+
+// 无尽验证模式
+// inputGenerator 除了返回随机输入数据外，还需要返回一个闭包，这个闭包接收 runFunc 的输出结果，根据输入数据验证输出结果是否正确
+func CheckRunResultsInfWithTarget(t *testing.T, inputGenerator func() (string, OutputChecker), targetCaseNum int, runFunc ioFunc) {
+	for tc, checkTC := 1, 1; ; tc++ {
+		input, checker := inputGenerator()
+		if targetCaseNum > 0 && tc != targetCaseNum {
+			continue
+		}
+
+		input = removeExtraSpace(input)
+		mockReader := strings.NewReader(input)
+		mockWriter := &strings.Builder{}
+		if isTLE(func() { runFunc(mockReader, mockWriter) }) {
+			t.Errorf("Time Limit Exceeded %d\nInput:\n%s", tc, input)
+			continue
+		}
+		actualOutput := removeExtraSpace(mockWriter.String())
+
+		ok := checker(actualOutput)
+
+		if DisableLogInput {
+			assert.Truef(t, ok, "Wrong Answer %d", tc)
+		} else {
+			assert.Truef(t, ok, "Wrong Answer %d\nInput:\n%s\nOutput:\n%s", tc, input, actualOutput)
+		}
+
+		if targetCaseNum > 0 {
+			if ok {
+				CheckRunResultsInfWithTarget(t, inputGenerator, 0, runFunc)
+			}
+			return
+		}
+
+		if tc == checkTC {
+			t.Logf("%d cases checked.", tc)
+			checkTC <<= 1
+		}
+
+		if Once {
+			break
+		}
+	}
+}
+
+func CheckRunResultsInf(t *testing.T, inputGenerator func() (string, OutputChecker), runFunc ioFunc) {
+	CheckRunResultsInfWithTarget(t, inputGenerator, 0, runFunc)
+}

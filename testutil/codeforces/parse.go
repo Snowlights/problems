@@ -8,6 +8,12 @@ import (
 )
 
 var (
+	// true: test only one case in AssertEqualRunResultsInf / CheckRunResultsInf
+	Once bool
+
+	// true: only print test case number when assertion failed
+	DisableLogInput bool
+
 	DebugTLE = 2 * time.Second
 
 	AssertOutput = true
