@@ -1,10 +1,10 @@
-### 思路
+## 思路
 
-用哈希表 `{cnt}` 统计每个数的出现次数。
+用哈希表 $\textit{cnt}$ 统计每个数的出现次数。
 
-用哈希表 `{freq}` 统计出现次数的出现次数，从而可以 `{O}(1)` 回答 `{hasFrequency}`。
+用哈希表 $\textit{freq}$ 统计出现次数的出现次数，从而可以 $\mathcal{O}(1)$ 回答 $\texttt{hasFrequency}$。
 
-添加删除元素的时候，除了修改 `{cnt}[{number}]`，还需要根据 `{cnt}[{number}]` 的变化来修改 `{freq}`，具体见代码。
+添加删除元素的时候，除了修改 $\textit{cnt}[\textit{number}]$，还需要根据 $\textit{cnt}[\textit{number}]$ 的变化来修改 $\textit{freq}$，具体见代码。
 
 ```py [sol1-Python3]
 class FrequencyTracker:
@@ -110,5 +110,5 @@ func (f FrequencyTracker) HasFrequency(frequency int) bool {
 
 ### 复杂度分析
 
-- 时间复杂度：所有操作均为 `{O}(1)`。
-- 空间复杂度：`{O}(q)`。其中 `q` 为操作次数。
+- 时间复杂度：所有操作均为 $\mathcal{O}(1)$。
+- 空间复杂度：$\mathcal{O}(q)$。其中 $q$ 为操作次数。

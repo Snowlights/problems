@@ -1,3 +1,4 @@
+## 思路
 
 ```py [sol1-Python3]
 def score(a: List[int]) -> int:
@@ -39,5 +40,6 @@ func isWinner(player1, player2 []int) int {
 
 ### 复杂度分析
 
-- 时间复杂度：${O}(n)$，其中 $n$ 为 ${player}_1$ 的长度。
-- 空间复杂度：${O}(1)$。仅用到若干额外变量。
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{player}_1$ 的长度。
+- 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。
+

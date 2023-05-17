@@ -1,4 +1,4 @@
----
+## 思路
 
 ### 提示 1
 
@@ -6,13 +6,13 @@
 
 ### 提示 2
 
-把「乘 `2`」分配给多个数，不如只分配给一个数，这样更有可能得到更大的答案。
+把「乘 $2$」分配给多个数，不如只分配给一个数，这样更有可能得到更大的答案。
 
 ### 提示 3
 
-枚举把哪个 `{nums}[i]` 乘 `k` 次 `2`（左移 `k` 次）。
+枚举把哪个 $\textit{nums}[i]$ 乘 $k$ 次 $2$（左移 $k$ 次）。
 
-代码实现时，可以仿照 [238. 除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)，预处理每个 `{nums}[i]` 左侧元素的或值 `{pre}`，以及右侧元素的或值 `{suf}`，从而快速计算出把 `{nums}[i]` 乘 `k` 次 `2` 后的所有元素的或值。进一步地，只需要预处理右侧元素的或值，左侧的或值可以一边枚举一边计算。
+代码实现时，可以仿照 [238. 除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)，预处理每个 $\textit{nums}[i]$ 左侧元素的或值 $\textit{pre}$，以及右侧元素的或值 $\textit{suf}$，从而快速计算出把 $\textit{nums}[i]$ 乘 $k$ 次 $2$ 后的所有元素的或值。进一步地，只需要预处理右侧元素的或值，左侧的或值可以一边枚举一边计算。
 
 ```py [sol1-Python3]
 class Solution:
@@ -81,13 +81,13 @@ func maximumOr(nums []int, k int) int64 {
 func max(a, b int) int { if a < b { return b }; return a }
 ```
 
-#### 复杂度分析
+### 复杂度分析
 
-- 时间复杂度：`{O}(n)`，其中 `n` 为 `{nums}` 的长度。
-- 空间复杂度：`{O}(n)`。
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
+- 空间复杂度：$\mathcal{O}(n)$。
 
 ### 思考题
 
-把 `2` 换成其它数，方法是否一样？
+把 $2$ 换成其它数，方法是否一样？
 
 把乘法改成除法，把 OR 改成 AND，要怎么做？

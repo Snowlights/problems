@@ -1,6 +1,6 @@
----
+## 思路
 
-# 方法一：动态规划
+### 方法一：动态规划
 
 ### 前置知识：动态规划、记忆化搜索
 
@@ -164,7 +164,7 @@ func min(a, b int) int { if b < a { return b }; return a }
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-#### 复杂度分析
+### 复杂度分析
 
 - 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。动态规划的时间复杂度 `=` 状态个数 `times` 单个状态的计算时间。本题中状态个数等于 `{O}(mn)`，单个状态的计算时间为 `{O}(1)`，因此时间复杂度为 `{O}(mn)`。
 - 空间复杂度：`{O}(mn)`。
@@ -180,7 +180,7 @@ func max(a, b int) int { if b > a { return b }; return a }
 - [931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/)
 - [2435. 矩阵中和能被 K 整除的路径](https://leetcode.cn/problems/paths-in-matrix-whose-sum-is-divisible-by-k/)
 
-# 方法二：BFS
+### 方法二：BFS
 
 也可以用 BFS 做，每一轮向右搜索一列。
 
@@ -233,7 +233,7 @@ func min(a, b int) int { if b < a { return b }; return a }
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-#### 复杂度分析
+### 复杂度分析
 
 - 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。
 - 空间复杂度：`{O}(m)`。

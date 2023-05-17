@@ -626,7 +626,7 @@ func handleProblems(session *grequests.Session, problems []*problem) error {
 			if err := p.writeTestDataFile(); err != nil {
 				fmt.Println("writeTestFile err:", p.url, err)
 			}
-			if err := copyTemplate(p.contestDir + p.id + "/" + p.id + ".md"); err != nil {
+			if err := copyTemplate(p.contestDir + p.id + "/" + "README.md"); err != nil {
 				fmt.Println("copyTemplate err:", p.url, err)
 			}
 		}(p)

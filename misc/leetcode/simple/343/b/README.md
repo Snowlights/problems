@@ -1,11 +1,10 @@
+## 思路
 
----
+首先遍历 $\textit{mat}$，用一个 $\textit{pos}$ 数组记录 $\textit{mat}[i][j]$ 在 $\textit{mat}$ 中的位置。
 
-首先遍历 `{mat}`，用一个 `{pos}` 数组记录 `{mat}[i][j]` 在 `{mat}` 中的位置。
+然后遍历 $\textit{arr}[i]$，同时用两个数组 $\textit{rowCnt}$ 和 $\textit{colCnt}$ 记录每行每列的涂色个数。
 
-然后遍历 `{arr}[i]`，同时用两个数组 `{rowCnt}` 和 `{colCnt}` 记录每行每列的涂色个数。
-
-如果出现某一行或某一列上都被涂色的情况，就返回 `i`。
+如果出现某一行或某一列上都被涂色的情况，就返回 $i$。
 
 ```py [sol1-Python3]
 class Solution:
@@ -52,5 +51,5 @@ func firstCompleteIndex(arr []int, mat [][]int) int {
 
 ### 复杂度分析
 
-- 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{mat}` 的行数和列数。
-- 空间复杂度：`{O}(m+n)`。
+- 时间复杂度：$\mathcal{O}(mn)$，其中 $m$ 和 $n$ 分别为 $\textit{mat}$ 的行数和列数。
+- 空间复杂度：$\mathcal{O}(m+n)$。

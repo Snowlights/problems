@@ -1,38 +1,38 @@
----
+## 思路
 
 ### 前置知识：异或运算的性质
 
-`a a = 0`。
+$a\oplus a = 0$。
 
-`a b = c` 两边同时异或 `a` 可以得到 `b = c a`。
+$a\oplus b = c$ 两边同时异或 $a$ 可以得到 $b = c\oplus a$。
 
 ### 思路
 
-如果知道 `{original}[0]`，利用 `{derived}[i]` 可以推出其余 `{original}[i]` 的值，即
+如果知道 $\textit{original}[0]$，利用 $\textit{derived}[i]$ 可以推出其余 $\textit{original}[i]$ 的值，即
 
-``
-{original}[i+1] = {original}[i] ⊕ {derived}[i]
-``
+$$
+\textit{original}[i+1] = \textit{original}[i]\oplus \textit{derived}[i]
+$$
 
-那么有 
+那么有
 
-``
-{original}[n-1] = {original}[0] ⊕ {derived}[0] ⊕ {derived}[1] ⊕ {derived}[n-2]
-``
+$$
+\textit{original}[n-1] = \textit{original}[0] \oplus \textit{derived}[0] \oplus \textit{derived}[1]\oplus \cdots \oplus \textit{derived}[n-2]
+$$
 
-由于 
+由于
 
-``
-{original}[0] ⊕ {original}[n-1] ={derived}[n-1]
-``
+$$
+\textit{original}[0]\oplus \textit{original}[n-1] =\textit{derived}[n-1]
+$$
 
 联立得
 
-``
-{derived}[0] ⊕ {derived}[1] ⊕ {derived}[n-1] = 0
-``
+$$
+\textit{derived}[0] \oplus \textit{derived}[1] \oplus\cdots \oplus \textit{derived}[n-1] = 0
+$$
 
-所以如果上式成立，`{original}` 必然存在。
+所以如果上式成立，$\textit{original}$ 必然存在。
 
 ```py [sol1-Python3]
 class Solution:
@@ -75,5 +75,5 @@ func doesValidArrayExist(derived []int) bool {
 
 #### 复杂度分析
 
-- 时间复杂度：`{O}(n)`，其中 `n` 为 `{derived}` 的长度。
-- 空间复杂度：`{O}(1)`。仅用到若干额外变量。
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{derived}$ 的长度。
+- 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

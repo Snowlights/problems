@@ -1,5 +1,4 @@
-
----
+## 思路
 
 DFS 统计每个包含正数的连通块的元素和，最大值即为答案。
 
@@ -98,5 +97,5 @@ func max(a, b int) int { if a < b { return b }; return a }
 
 ### 复杂度分析
 
-- 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。
-- 空间复杂度：`{O}(mn)`。递归需要 `{O}(mn)` 的栈空间。
+- 时间复杂度：$\mathcal{O}(mn)$，其中 $m$ 和 $n$ 分别为 $\textit{grid}$ 的行数和列数。
+- 空间复杂度：$\mathcal{O}(mn)$。递归需要 $\mathcal{O}(mn)$ 的栈空间。

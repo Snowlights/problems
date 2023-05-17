@@ -1,8 +1,8 @@
-### 思路
+## 思路
 
-先倒序枚举 `{nums}`，并记录每个后缀的不同元素个数到 `{suf}` 数组中，这可以用哈希表做到。
+先倒序枚举 $\textit{nums}$，并记录每个后缀的不同元素个数到 $\textit{suf}$ 数组中，这可以用哈希表做到。
 
-然后正序枚举 `{nums}[i]`，同样地，记录每个前缀的不同元素个数，减去 `{suf}[i+1]`，即为答案。
+然后正序枚举 $\textit{nums}[i]$，同样地，记录每个前缀的不同元素个数，减去 $\textit{suf}[i+1]$，即为答案。
 
 ```py [sol1-Python3]
 class Solution:
@@ -88,5 +88,5 @@ func distinctDifferenceArray(nums []int) []int {
 
 ### 复杂度分析
 
-- 时间复杂度：`{O}(n)`，其中 `n` 为 `{nums}` 的长度。
-- 空间复杂度：`{O}(n)`。
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
+- 空间复杂度：$\mathcal{O}(n)$。

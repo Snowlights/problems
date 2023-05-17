@@ -217,7 +217,8 @@ func GenCodeforcesProblemTemplates(problemURL string, openWebsite bool) (err err
 	}
 	// todo 依据实际情况做变动
 	sampleTest := doc.Find("div.sample-test")
-	input := sampleTest.Find("div.input").Find("pre")
+	// 	input := sampleTest.Find("div.input").Find("pre")
+	input := sampleTest.Find("div.input").Find("pre").Find("div")
 	output := sampleTest.Find("div.output").Find("pre")
 	inputs, outputs := []string{}, []string{}
 	for _, v := range input.Nodes {
@@ -253,13 +254,18 @@ func main() { CF%[1]s(os.Stdin, os.Stdout) }
 `, problemID)
 
 	// 创建 x_test.go
+	//examples := ""
+	//for i, input := range inputs {
+	//	examples += "\n\t\t{\n"
+	//	examples += "\t\t\t`" + strings.ReplaceAll(input, "\n", "\n\t\t\t") + "`,\n"
+	//	examples += "\t\t\t`" + strings.ReplaceAll(outputs[i], "\n", "\n\t\t\t") + "`,\n"
+	//	examples += "\t\t},"
+	//}
 	examples := ""
-	for i, input := range inputs {
-		examples += "\n\t\t{\n"
-		examples += "\t\t\t`" + strings.ReplaceAll(input, "\n", "\n\t\t\t") + "`,\n"
-		examples += "\t\t\t`" + strings.ReplaceAll(outputs[i], "\n", "\n\t\t\t") + "`,\n"
-		examples += "\t\t},"
-	}
+	examples += "\n\t\t{\n"
+	examples += "\t\t\t`" + strings.ReplaceAll(strings.Join(inputs, "\n"), "\n", "\n\t\t\t") + "`,\n"
+	examples += "\t\t\t`" + strings.ReplaceAll(strings.Join(outputs, "\n"), "\n", "\n\t\t\t") + "`,\n"
+	examples += "\t\t},"
 
 	mainTestStr := fmt.Sprintf(`package main
 
