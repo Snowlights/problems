@@ -1,4 +1,5 @@
 ###题目
+
 <p>给你一个正整数&nbsp;<code>n</code>&nbsp;，请你返回&nbsp;<code>n</code>&nbsp;的&nbsp;<strong>惩罚数</strong>&nbsp;。</p>
 
 <p><code>n</code>&nbsp;的 <strong>惩罚数</strong>&nbsp;定义为所有满足以下条件 <code>i</code>&nbsp;的数的平方和：</p>
@@ -79,5 +80,6 @@ func punishmentNumber(n int) (ans int) {
 ```
 
 ### 复杂度分析
-时间复杂度：预处理 $\\mathcal{O}(U^2)$，其中 $U=1000$。对于数字 $i$，它转成字符串后的长度为 $m=\\mathcal{O}(\\log i)$，所以回溯需要 $\\mathcal{O}(2^m)=\\mathcal{O}(i)$ 的时间，所以整个预处理需要 $\\mathcal{O}(U^2)$ 的时间。  
-空间复杂度：预处理 $\\mathcal{O}(U)$。
+
+- 时间复杂度：预处理 $\mathcal{O}(U^{1 + 2\log_{10} 2})\approx\mathcal{O}(U^{1.602})$，其中 $U=1000$。对于数字 $i^2$，它转成字符串后的长度为 $m=\lfloor1+2\log_{10} i\rfloor$，所以回溯需要 $\mathcal{O}(2^m)=\mathcal{O}(i^{2\log_{10} 2})$ 的时间，对其积分可知，整个预处理需要 $\mathcal{O}(U^{1 + 2\log_{10} 2})$ 的时间。
+- 空间复杂度：预处理 $\mathcal{O}(U)$。

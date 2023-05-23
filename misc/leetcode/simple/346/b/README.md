@@ -1,4 +1,5 @@
 ###题目
+
 <p>给你一个由 <strong>小写英文字母</strong> 组成的字符串 <code>s</code> ，你可以对其执行一些操作。在一步操作中，你可以用其他小写英文字母 <strong>替换</strong>&nbsp; <code>s</code> 中的一个字符。</p>
 
 <p>请你执行 <strong>尽可能少的操作</strong> ，使 <code>s</code> 变成一个 <strong>回文串</strong> 。如果执行 <strong>最少</strong> 操作次数的方案不止一种，则只需选取 <strong>字典序最小</strong> 的方案。</p>
@@ -42,7 +43,15 @@
 </ul>
 
 ### 思路
+
 贪心替换
+
+对于两个中心对称的字母 $x=s[i]$ 和 $y=s[n-1-i]$，如果 $x\ne y$，那么只需要修改一次，就可以让这两个字母相同：把 $x$ 改成 $y$ 或者把 $y$ 改成 $x$。
+
+- 如果 $x>y$，那么把 $x$ 修改成 $y$ 更好，这样字典序更小。
+- 如果 $x<y$，那么把 $y$ 修改成 $x$ 更好，这样字典序更小。
+
+代码实现时可以把 $x=y$ 的情况合并到 $x<y$ 中，从而少写一个 `else if` 的判断逻辑。
 
 ```go 
 func makeSmallestPalindrome(s string) (ans string) {
