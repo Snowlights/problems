@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"github.com/levigross/grequests"
 	"github.com/skratchdot/open-golang/open"
 	"golang.org/x/net/html"
@@ -256,6 +257,8 @@ type problem struct {
 	funcLos       []int
 	customComment string
 
+	problemDes string
+
 	sampleIns  [][]string
 	sampleOuts [][]string
 
@@ -363,10 +366,10 @@ func (p *problem) parseHTML(session *grequests.Session) (err error) {
 				jsonText = jsonText[:len(jsonText)-3] + "]" // remove , at end
 				jsonText = strings.Replace(jsonText, `'`, `"`, -1)
 
-				data := []struct {
+				var data []struct {
 					Value       string `json:"value"`
 					DefaultCode string `json:"defaultCode"`
-				}{}
+				}
 				if err := json.Unmarshal([]byte(jsonText), &data); err != nil {
 					return err
 				}
@@ -493,6 +496,13 @@ func (p *problem) parseHTML(session *grequests.Session) (err error) {
 	if len(p.sampleIns) == 0 {
 		return fmt.Errorf("解析失败，未找到样例输入输出！")
 	}
+
+	doc := goquery.NewDocumentFromNode(rootNode)
+	p.problemDes, _ = doc.Find("div.content-wrapper").
+		Find("div.container").Find("div.row").
+		Find("div.col-md-12").Find("div.row").Find("div.col-md-12").
+		Find("div.default-content").Html()
+
 	return nil
 }
 
@@ -626,7 +636,7 @@ func handleProblems(session *grequests.Session, problems []*problem) error {
 			if err := p.writeTestDataFile(); err != nil {
 				fmt.Println("writeTestFile err:", p.url, err)
 			}
-			if err := copyTemplate(p.contestDir + p.id + "/" + "README.md"); err != nil {
+			if err := copyTemplate(p.contestDir+p.id+"/"+"README.md", p.problemDes); err != nil {
 				fmt.Println("copyTemplate err:", p.url, err)
 			}
 		}(p)
@@ -636,20 +646,22 @@ func handleProblems(session *grequests.Session, problems []*problem) error {
 	return nil
 }
 
-func copyTemplate(dir string) error {
-	const templateDir = "../problem.md"
-	src, err := os.Open(templateDir)
-	if err != nil {
-		return err
-	}
-	defer src.Close()
+func copyTemplate(dir, problemDes string) error {
+	//const templateDir = "../problem.md"
+	//src, err := os.Open(templateDir)
+	//if err != nil {
+	//	return err
+	//}
+	// defer src.Close()
+	src := fmt.Sprintf("### 题目  \n\n%s\n \n### 思路  \n\n```go \n\n```\n\n### 复杂度分析  \n"+
+		"- 时间复杂度：`{O}\\mathcal(n)`。\n- 空间复杂度：`{O}\\mathcal(n)`。", strings.TrimSpace(problemDes))
+
 	f, err := os.Create(dir)
 	if err != nil {
 		return err
 	}
-	defer f.Close()
-	io.Copy(f, src)
-	return nil
+	f.Write([]byte(src))
+	return f.Close()
 }
 
 func updateComment(cmt string) string {

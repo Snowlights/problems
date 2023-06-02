@@ -231,7 +231,10 @@ func GenCodeforcesProblemTemplates(problemURL string, openWebsite bool) (err err
 	if !isGYM {
 		problemID = contestID + problemID
 	}
-	mainStr := fmt.Sprintf(`package main
+	mainStr := fmt.Sprintf(`//go:build main
+// +build main
+
+package main
 
 import (
 	"bufio"
@@ -267,7 +270,10 @@ func main() { CF%[1]s(os.Stdin, os.Stdout) }
 	examples += "\t\t\t`" + strings.ReplaceAll(strings.Join(outputs, "\n"), "\n", "\n\t\t\t") + "`,\n"
 	examples += "\t\t},"
 
-	mainTestStr := fmt.Sprintf(`package main
+	mainTestStr := fmt.Sprintf(`//go:build main
+// +build main
+
+package main
 
 import (
 	"problems/testutil/codeforces"

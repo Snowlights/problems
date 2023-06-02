@@ -192,6 +192,105 @@ func _() {
 		lcm := func(a, b int) int {
 			return a / gcd(a, b) * b
 		}
-		_ = []interface{}{A, C, P, H, Catalan, Motzkin, initComb, lucas, lcm}
+
+		// 预处理: [2,mx] 范围内的质数
+		// 埃筛 埃氏筛 埃拉托斯特尼筛法 Sieve of Eratosthenes
+		// https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+		// https://oeis.org/A055399 Number of stages of sieve of Eratosthenes needed to identify n as prime or composite
+		// https://oeis.org/A230773 Minimum number of steps in an alternate definition of the Sieve of Eratosthenes needed to identify n as prime or composite
+		// 质数个数 π(n) https://oeis.org/A000720
+		//         π(10^n) https://oeis.org/A006880
+		//         4, 25, 168, 1229, 9592, 78498, 664579, 5761455, 50847534, /* 1e9 */
+		//         455052511, 4118054813, 37607912018, 346065536839, 3204941750802, 29844570422669, 279238341033925, 2623557157654233, 24739954287740860, 234057667276344607,
+		// 思想应用 https://codeforces.com/contest/1646/problem/E
+		sieve := func() {
+			const mx int = 1e6
+			primes := []int{}
+			pid := [mx + 1]int{-1, -1}
+			for i := 2; i <= mx; i++ {
+				if pid[i] == 0 {
+					primes = append(primes, i)
+					pid[i] = len(primes)
+					for j := i * i; j <= mx; j += i {
+						pid[j] = -1
+					}
+				}
+			}
+
+			// EXTRA: pi(n), the number of primes <= n https://oeis.org/A000720
+			pi := [mx + 1]int{}
+			for i := 2; i <= mx; i++ {
+				pi[i] = pi[i-1]
+				if pid[i] > 0 {
+					pi[i]++
+				}
+			}
+		}
+
+		// 分解质因数
+		// LPF(n): least prime dividing n (when n > 1); a(1) = 1 https://oeis.org/A020639
+		// 有时候数据范围比较大，用 primeFactorsAll 预处理会 MLE，这时候就要用 LPF 了（同样是预处理但是内存占用低）
+		// 先预处理出 LPF，然后对要处理的数 v 不断地除 LPF(v) 直到等于 1
+		// 		LPF 前缀和 https://oeis.org/A046669 https://oeis.org/A088821 前缀积 https://oeis.org/A072486
+		//      - a(n) ~ n^2/(2 log n)
+		//		n+LPF(n) https://oeis.org/A061228 the smallest number greater than n which is not coprime to n
+		// 		n-LPF(n) https://oeis.org/A046666
+		// 			迭代至 0 的次数 https://oeis.org/A175126 相关题目 https://codeforces.com/contest/1076/problem/B
+		//		n*LPF(n) https://oeis.org/A285109
+		// 		n/LPF(n) https://oeis.org/A032742 即 n 的最大因子 = Max{gcd(n,j); j=n+1..2n-1}
+		//
+		//		只考虑奇质数 https://oeis.org/A078701
+		//
+		// GPF(n): greatest prime dividing n, for n >= 2; a(1)=1 https://oeis.org/A006530
+		//		GPF(p-1) https://oeis.org/A023503
+		//		GPF(p+1) https://oeis.org/A023509
+		// 		GPF 前缀和 https://oeis.org/A046670 前缀积 https://oeis.org/A104350
+		//		n+GPF(n) https://oeis.org/A070229 the next m>n such that GPF(n)|m
+		// 		n-GPF(n) https://oeis.org/A076563
+		// 			迭代至 0 的次数 https://oeis.org/A309892
+		// 		n*GPF(n) https://oeis.org/A253560
+		// 		n/GPF(n) https://oeis.org/A052126
+		//      a(1)=1, a(n+1)=a(n)+GPF(a(n)) https://oeis.org/A076271
+		//
+		// 		n/LPF(n)*GPF(n) https://oeis.org/A130064
+		// 		n/GPF(n)*LPF(n) https://oeis.org/A130065
+		//
+		// https://codeforces.com/problemset/problem/385/C
+		// https://codeforces.com/gym/103107/problem/F (另一种做法是欧拉筛）
+		lpfAll := func() {
+			const mx int = 1e6
+			lpf := [mx + 1]int{1: 1}
+			for i := 2; i <= mx; i++ {
+				if lpf[i] == 0 {
+					for j := i; j <= mx; j += i {
+						if lpf[j] == 0 { // 去掉这个判断就变成求 GPF，也可以用来（从大到小地）分解质因数
+							lpf[j] = i
+						}
+					}
+				}
+			}
+		}
+		{
+			// 也可以用欧拉筛求，实际测试下来耗时和上面差不多
+			lpf := [mx + 1]int{1: 1}
+			primes := []int{} // 可以提前确定空间
+			for i := 2; i <= mx; i++ {
+				if lpf[i] == 0 {
+					lpf[i] = i
+					primes = append(primes, i)
+				}
+				for _, p := range primes {
+					if p*i > mx {
+						break
+					}
+					lpf[p*i] = p
+					if i%p == 0 {
+						break
+					}
+				}
+			}
+		}
+
+		_ = []interface{}{A, C, P, H, Catalan, Motzkin, initComb, lucas, lcm, sieve, lpfAll}
 	}
 }

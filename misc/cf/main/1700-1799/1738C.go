@@ -1,10 +1,12 @@
+//go:build main
+// +build main
+
 package main
 
 import (
 	"bufio"
 	. "fmt"
 	"io"
-	"os"
 )
 
 func CF1738C(_r io.Reader, _w io.Writer) {
@@ -35,4 +37,4 @@ func CF1738C(_r io.Reader, _w io.Writer) {
 	}
 }
 
-func main() { CF1738C(os.Stdin, os.Stdout) }
+// func main() { CF1738C(os.Stdin, os.Stdout) }

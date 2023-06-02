@@ -1,10 +1,12 @@
+//go:build main
+// +build main
+
 package main
 
 import (
 	"bufio"
 	. "fmt"
 	"io"
-	"os"
 )
 
 func CF1693B(_r io.Reader, _w io.Writer) {
@@ -44,4 +46,4 @@ func CF1693B(_r io.Reader, _w io.Writer) {
 
 }
 
-func main() { CF1693B(os.Stdin, os.Stdout) }
+// func main() { CF1693B(os.Stdin, os.Stdout) }

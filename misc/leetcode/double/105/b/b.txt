@@ -1,0 +1,10 @@
+"leetscode"
+["leet","code","leetcode"]
+1
+
+"sayhelloworld"
+["hello","world"]
+3
+
+
+

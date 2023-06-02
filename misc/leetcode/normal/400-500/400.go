@@ -1,6 +1,7 @@
 package _00_500
 
 import (
+	"math"
 	"sort"
 	"strconv"
 )
@@ -32,6 +33,61 @@ func longestPalindrome(s string) int {
 		}
 	}
 	return ans
+}
+
+// 410
+func splitArray(nums []int, k int) int {
+	// [7,2,5,10,8]
+	//  2
+	// 18
+	sum, mx := 0, nums[0]
+	for _, v := range nums {
+		sum += v
+		mx = max(mx, v)
+	}
+	return max(mx, sort.Search(sum, func(i int) bool {
+		cnt, cur := 0, 0
+		for _, v := range nums {
+			cur += v
+			if cur > i {
+				cnt++
+				cur = v
+			}
+		}
+		return cnt < k
+	}))
+}
+
+func splitArrayV2(nums []int, k int) int {
+	// 先求前缀和 pre
+	//dp[i][j]表示 0-i内，被分割为j段的最小的最大值
+	//对于某个d[i][j], 枚举0 - i区间内的每个分割点k,
+	// 使得0 -- k 为分割好的部分，(k + 1) -- i 为一部分,
+	//在这种分割情况下各部分的最大值为max(dp[k][j - 1], pre[i] - pre[k])
+	//那么dp[i][j] = min(dp[i][j], max(dp[k][j - 1], pre[i] - pre[k]))
+
+	n := len(nums)
+	pre := make([]int, n+1)
+	for i := range nums {
+		pre[i+1] = pre[i] + nums[i]
+	}
+	dp := make([][]int, n+1)
+	for i := range dp {
+		dp[i] = make([]int, k+1)
+		for j := range dp[i] {
+			dp[i][j] = math.MaxInt64
+		}
+	}
+
+	dp[0][0] = 0
+	for i := 1; i <= n; i++ {
+		for j := 1; j <= min(i, k); j++ {
+			for k := 0; k < i; k++ {
+				dp[i][j] = min(dp[i][j], max(dp[k][j-1], pre[i]-pre[k]))
+			}
+		}
+	}
+	return dp[n][k]
 }
 
 // 413
@@ -165,6 +221,13 @@ func characterReplacement(s string, k int) int {
 
 func max(a, b int) int {
 	if b > a {
+		return b
+	}
+	return a
+}
+
+func min(a, b int) int {
+	if a > b {
 		return b
 	}
 	return a

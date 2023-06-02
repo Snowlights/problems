@@ -76,7 +76,7 @@ func maximumTastiness(price []int, k int) int {
 			}
 		}
 
-		return cnt >= k
+		return cnt < k
 	})
 }
 

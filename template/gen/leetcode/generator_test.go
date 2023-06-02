@@ -35,7 +35,7 @@ func genLeetCodeTests(weekly bool) error {
 	} else {
 		contestID := GetBiweeklyContestID(0) // 自动生成下一场双周赛 ID
 		tag = GetBiweeklyContestTag(contestID)
-		dir = fmt.Sprintf("../../../misc/leetcode/test/%d/", contestID) // 自定义生成目录
+		dir = fmt.Sprintf("../../../misc/leetcode/double/%d/", contestID) // 自定义生成目录
 	}
 	return GenLeetCodeTests(username, password, tag, true, dir, comment)
 }

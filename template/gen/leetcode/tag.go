@@ -18,7 +18,7 @@ func GetWeeklyContestID(contestID int) int {
 
 		// 以 2020 年第一场周赛的结束时间为基准
 		endTime170 := time.Date(2020, 1, 5, 12, 0, 0, 0, utc8)
-		weeksSince170 := 1 + int(time.Since(endTime170)/(7*24*time.Hour))
+		weeksSince170 := 0 + int(time.Since(endTime170)/(7*24*time.Hour))
 		contestID += 170 + weeksSince170
 	}
 	return contestID
