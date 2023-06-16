@@ -21,6 +21,11 @@ func Test_run(t *testing.T) {
 			1011011011011011011011`,
 			`9999999993`,
 		},
+		{
+			`1
+			1`,
+			`20000000000`,
+		},
 	}
 	codeforces.AssertEqualStringCase(t, run, testCases, 0)
 }

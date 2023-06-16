@@ -1,6 +1,7 @@
 package _400_1500
 
 import (
+	"math"
 	"math/bits"
 	"sort"
 )
@@ -43,6 +44,51 @@ func minDays(bloomDay []int, m, k int) int {
 		return bouquets >= m
 	})
 }
+
+// 1483
+type TreeAncestor struct {
+	ancestor [][]int
+}
+
+func Constructor(n int, parent []int) TreeAncestor {
+	mx := bits.Len(uint(n))
+	pa := make([][]int, n)
+	for i := range pa {
+		pa[i] = make([]int, mx)
+		pa[i][0] = parent[i]
+	}
+	for i := 0; i+1 < mx; i++ {
+		for v := range pa {
+			if p := pa[v][i]; p != -1 {
+				pa[v][i+1] = pa[p][i]
+			} else {
+				pa[v][i+1] = -1
+			}
+		}
+	}
+	return TreeAncestor{pa}
+}
+
+func (this *TreeAncestor) GetKthAncestor(node int, k int) int {
+	pa := this.ancestor
+	mx := bits.Len(uint(k))
+	uptoKthPa := func(v, k int) int {
+		for i := 0; i < mx && v != -1; i++ {
+			if k>>i&1 > 0 {
+				v = pa[v][i]
+			}
+		}
+		return v
+	}
+
+	return uptoKthPa(node, k)
+}
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * obj := Constructor(n, parent);
+ * param_1 := obj.GetKthAncestor(node,k);
+ */
 
 // 1484
 // SELECT sell_date,
@@ -89,6 +135,48 @@ func minNumberOfSemesters(n int, dependencies [][]int, k int) int {
 		}
 	}
 	return dp[m-1]
+}
+
+func minNumberOfSemestersV2(n int, relations [][]int, k int) int {
+	pre1 := make([]int, n)
+	for _, r := range relations {
+		pre1[r[1]-1] |= 1 << (r[0] - 1) // r[1] 的先修课程集合，下标改从 0 开始
+	}
+
+	u := 1<<n - 1 // 全集
+	memo := make([]int, 1<<n)
+	for i := range memo {
+		memo[i] = -1 // -1 表示没有计算过
+	}
+	var dfs func(int) int
+	dfs = func(i int) (res int) {
+		if i == 0 { // 空集
+			return
+		}
+		p := &memo[i]
+		if *p != -1 { // 之前算过了
+			return *p
+		}
+		defer func() { *p = res }() // 记忆化
+		ci := u ^ i                 // i 的补集
+		i1 := 0
+		for j, p := range pre1 {
+			if i>>j&1 > 0 && p|ci == ci { // p 在 i 的补集中
+				i1 |= 1 << j
+			}
+		}
+		if bits.OnesCount(uint(i1)) <= k { // 如果个数小于 k，则可以全部学习，不再枚举子集
+			return dfs(i^i1) + 1
+		}
+		res = math.MaxInt
+		for j := i1; j > 0; j = (j - 1) & i1 { // 枚举 i1 的子集 j
+			if bits.OnesCount(uint(j)) <= k {
+				res = min(res, dfs(i^j)+1)
+			}
+		}
+		return res
+	}
+	return dfs(u)
 }
 
 func min(a, b int) int {

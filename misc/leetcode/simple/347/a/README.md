@@ -40,5 +40,5 @@ func removeTrailingZeros(n string) (ans string) {
 
 ### 复杂度分析
 
-- 时间复杂度：`{O}(n)`。
-- 空间复杂度：`{O}(n)`。
+- 时间复杂度：$\mathcal{O}(n)$。
+- 空间复杂度：$\mathcal{O}(n)$。

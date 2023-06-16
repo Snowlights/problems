@@ -199,6 +199,42 @@ func findCheapestPrice(n int, flights [][]int, src int, dst int, K int) int {
 	return res
 }
 
+// 792
+func numMatchingSubseq(s string, words []string) int {
+	n := len(s)
+	pos := [26]int{}
+	for i := range pos {
+		pos[i] = n
+	}
+	nxt := make([][26]int, n)
+	for i := n - 1; i >= 0; i-- {
+		nxt[i] = pos
+		pos[s[i]-'a'] = i
+	}
+
+	ans := 0
+	check := func(word string) bool {
+		i, j := 0, 0
+		if word[0] == s[0] {
+			j = 1
+		}
+		for ; j < len(word); j++ {
+			next := nxt[i][word[j]-'a']
+			if next == n {
+				return false
+			}
+			i = next
+		}
+		return true
+	}
+	for _, w := range words {
+		if check(w) {
+			ans++
+		}
+	}
+	return ans
+}
+
 // 797
 func allPathsSourceTarget(graph [][]int) [][]int {
 	n := len(graph)

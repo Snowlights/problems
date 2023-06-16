@@ -2,6 +2,18 @@ package _300_1400
 
 import "math"
 
+// 1375
+func numTimesAllBlue(flips []int) int {
+	mx, ans := 0, 0
+	for i, v := range flips {
+		mx = max(v-1, mx)
+		if mx == i {
+			ans++
+		}
+	}
+	return ans
+}
+
 // 1376
 func numOfMinutes(n int, headID int, manager []int, informTime []int) int {
 

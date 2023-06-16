@@ -1,6 +1,9 @@
 package _100_1200
 
-import "math"
+import (
+	"math"
+	"sort"
+)
 
 // 1162
 func maxDistance(grid [][]int) int {
@@ -50,4 +53,30 @@ func min(a, b int) int {
 		return b
 	}
 	return a
+}
+
+// 1170
+func numSmallerByFrequency(queries []string, words []string) []int {
+	w := make([]int, 0, len(words))
+	f := func(word string) int {
+		h := make(map[int]int)
+		for i := range word {
+			h[int(word[i]-'a')]++
+		}
+		for i := 0; i < 26; i++ {
+			if val, ok := h[i]; ok {
+				return val
+			}
+		}
+		return 0
+	}
+	for _, word := range words {
+		w = append(w, f(word))
+	}
+	sort.Ints(w)
+	ans := make([]int, len(queries))
+	for i, q := range queries {
+		ans[i] = len(q) - sort.SearchInts(w, f(q)+1)
+	}
+	return ans
 }

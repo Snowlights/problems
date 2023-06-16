@@ -9,6 +9,44 @@ import (
 )
 
 func _() {
+	// 子序列自动机
+	// LC727 https://leetcode-cn.com/problems/minimum-window-subsequence/
+	// LC792 https://leetcode-cn.com/problems/number-of-matching-subsequences/
+	// LC2014 https://leetcode-cn.com/problems/longest-subsequence-repeated-k-times/
+	subsequenceAutomaton := func(s string) {
+		// build nxt
+		// nxt[i][j] 表示在 i 右侧的字符 j 的最近位置
+		pos := [26]int{}
+		for i := range pos {
+			pos[i] = len(s)
+		}
+		nxt := make([][26]int, len(s))
+		for i := len(s) - 1; i >= 0; i-- {
+			nxt[i] = pos
+			pos[s[i]-'a'] = i
+		}
+
+		// 返回是 s 的子序列的最长的 t 的前缀的长度
+		match := func(t string) int {
+			if t == "" || s == "" {
+				return 0
+			}
+			i, j := 0, 0
+			if t[0] == s[0] {
+				j = 1
+			}
+			for ; j < len(t); j++ {
+				i = nxt[i][t[j]-'a']
+				if i == len(s) {
+					break
+				}
+			}
+			return j
+		}
+		_ = match
+	}
+	_ = []interface{}{subsequenceAutomaton}
+
 	/* 后缀数组
 	SA-IS 与 DC3 的效率对比 https://riteme.site/blog/2016-6-19/sais.html#5
 	注：Go1.13 开始使用 SA-IS 算法

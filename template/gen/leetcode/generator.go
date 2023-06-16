@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/levigross/grequests"
-	"github.com/skratchdot/open-golang/open"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 	"io"
@@ -525,7 +524,7 @@ import . "problems/testutil/leetcode"
 
 	filePath := p.contestDir + fmt.Sprintf("%[1]s/%[1]s.go", p.id)
 	if p.id == "a" {
-		defer open.Run(absPath(filePath)) // 打开第一道题的文件
+		// defer open.Run(absPath(filePath)) // 打开第一道题的文件
 	}
 	return os.WriteFile(filePath, []byte(fileContent), 0644)
 }
@@ -589,9 +588,9 @@ func handleProblems(session *grequests.Session, problems []*problem) error {
 		defer wg.Done()
 		for _, p := range problems {
 			if p.openURL {
-				if err := open.Run(p.url); err != nil {
-					fmt.Println("open err:", p.url, err)
-				}
+				//if err := open.Run(p.url); err != nil {
+				//	fmt.Println("open err:", p.url, err)
+				//}
 			}
 		}
 	}()
@@ -653,8 +652,8 @@ func copyTemplate(dir, problemDes string) error {
 	//	return err
 	//}
 	// defer src.Close()
-	src := fmt.Sprintf("### 题目  \n\n%s\n \n### 思路  \n\n```go \n\n```\n\n### 复杂度分析  \n"+
-		"- 时间复杂度：`{O}\\mathcal(n)`。\n- 空间复杂度：`{O}\\mathcal(n)`。", strings.TrimSpace(problemDes))
+	src := fmt.Sprintf("### 题目  \n\n%s\n \n### 思路  \n\n```go \n\n```\n\n### 复杂度分析  \n\n"+
+		"- 时间复杂度：$\\mathcal{O}(n)$。\n- 空间复杂度：$\\mathcal{O}(n)$ 。", strings.TrimSpace(problemDes))
 
 	f, err := os.Create(dir)
 	if err != nil {

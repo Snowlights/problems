@@ -136,7 +136,7 @@ func main() { run(os.Stdin, os.Stdout) }
 	mainFilePath := dirPath + problem + ".go"
 	if !isContest || problem == "A" {
 		// 比赛时，在 IDE 中打开 A 题
-		defer open.Run(absPath(mainFilePath))
+		// defer open.Run(absPath(mainFilePath))
 	}
 	if err := os.WriteFile(mainFilePath, []byte(mainFileContent), 0644); err != nil {
 		return err
@@ -303,18 +303,18 @@ func TestCF%[3]s(t *testing.T) {
 
 	mainFilePath := dir + problemID + ".go"
 	if _, err := os.Stat(mainFilePath); !os.IsNotExist(err) {
-		open.Run(absPath(mainFilePath))
+		// open.Run(absPath(mainFilePath))
 		return fmt.Errorf("文件已存在！")
 	}
 	if err := ioutil.WriteFile(mainFilePath, []byte(mainStr), 0644); err != nil {
 		return err
 	}
-	open.Run(absPath(mainFilePath))
+	// open.Run(absPath(mainFilePath))
 	testFilePath := dir + problemID + "_test.go"
 	if err := ioutil.WriteFile(testFilePath, []byte(mainTestStr), 0644); err != nil {
 		return err
 	}
-	open.Run(absPath(testFilePath))
+	// open.Run(absPath(testFilePath))
 	return nil
 }
 
@@ -336,7 +336,7 @@ func GenTemplates(problemNum int, rootPath string, overwrite bool) error {
 				return err
 			}
 			if i == 'a' && j == 0 {
-				open.Run(absPath(goFilePath))
+				// open.Run(absPath(goFilePath))
 			}
 		}
 	}

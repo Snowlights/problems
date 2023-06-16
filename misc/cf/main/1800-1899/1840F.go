@@ -53,7 +53,6 @@ o:
 		Fprintln(out, -1)
 	}
 
-	
 }
 
 func main() { CF1840F(os.Stdin, os.Stdout) }

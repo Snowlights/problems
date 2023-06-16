@@ -85,7 +85,6 @@ func runV2(in io.Reader, out io.Writer) {
 	Fprintln(w, f[n])
 }
 
-
 func max(a, b int) int {
 	if b > a {
 		return b

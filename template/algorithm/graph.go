@@ -2,6 +2,9 @@ package algorithm
 
 import (
 	"container/heap"
+	"fmt"
+	"io"
+	"math/bits"
 )
 
 func _() {
@@ -42,7 +45,395 @@ func _() {
 		return dist
 	}
 
-	_ = []interface{}{dijkstra}
+	// 最近公共祖先 · 其一 · 基于树上倍增和二分搜索
+	lcaBinarySearch := func(n, root int, g [][]int, max func(int, int) int) {
+		// O(nlogn) 预处理，O(logn) 查询
+		// 适用于查询量和节点数等同的情形
+		// NOTE: 多个点的 LCA 等于 dfn_min 和 dfn_max 的 LCA
+		// https://oi-wiki.org/graph/lca/#_5
+		//
+		// 模板题 https://www.luogu.com.cn/problem/P3379
+		// 到两点距离相同的点的数量 https://codeforces.com/problemset/problem/519/E
+		// https://atcoder.jp/contests/arc060/tasks/arc060_c
+		// https://codeforces.com/problemset/problem/33/D
+		// 路径点权乘积 https://ac.nowcoder.com/acm/contest/6913/C
+		// 树上倍增应用（静态路径查询）：代码见下面的 EXTRA 部分
+		//    维护最大值（与 MST 结合）https://codeforces.com/problemset/problem/609/E
+		//       变体 https://codeforces.com/problemset/problem/733/F
+		//    维护最大值（与 MST 结合）LC1697 https://leetcode-cn.com/problems/checking-existence-of-edge-length-limited-paths/
+		//    维护最大值（与 MST 结合）LC1724（上面这题的在线版）https://leetcode-cn.com/problems/checking-existence-of-edge-length-limited-paths-ii/
+		//    维护最大值和严格次大值（严格次小 MST）：见 graph.go 中的 strictlySecondMST
+		//    维护前十大（点权）https://codeforces.com/problemset/problem/587/C
+		// 树上倍增-查询深度最小的未被标记的点 https://codeforces.com/problemset/problem/980/E
+		// 题目推荐 https://cp-algorithms.com/graph/lca.html#toc-tgt-2
+
+		const mx = 17 // bits.Len(最大节点数)
+		pa := make([][mx]int, n)
+		dep := make([]int, n)
+		var buildPa func(v, p, d int)
+		buildPa = func(v, p, d int) {
+			pa[v][0] = p
+			dep[v] = d
+			for _, w := range g[v] {
+				if w != p {
+					buildPa(w, v, d+1)
+				}
+			}
+		}
+		buildPa(root, -1, 0) // d 从 0 开始
+		// 倍增
+		for i := 0; i+1 < mx; i++ {
+			for v := range pa {
+				if p := pa[v][i]; p != -1 {
+					pa[v][i+1] = pa[p][i]
+				} else {
+					pa[v][i+1] = -1
+				}
+			}
+		}
+
+		// 从 v 开始，向上跳到指定深度 d
+		// https://en.wikipedia.org/wiki/Level_ancestor_problem
+		// https://codeforces.com/problemset/problem/1535/E
+		uptoDep := func(v, d int) int {
+			if d > dep[v] {
+				panic(-1)
+			}
+			for i := 0; i < mx; i++ {
+				if (dep[v]-d)>>i&1 > 0 {
+					v = pa[v][i]
+				}
+			}
+			return v
+		}
+		_lca := func(v, w int) int {
+			if dep[v] > dep[w] {
+				v, w = w, v
+			}
+			w = uptoDep(w, dep[v])
+			if w == v {
+				return v
+			}
+			for i := mx - 1; i >= 0; i-- {
+				if pv, pw := pa[v][i], pa[w][i]; pv != pw {
+					v, w = pv, pw
+				}
+			}
+			return pa[v][0]
+		}
+		disVW := func(v, w int) int { return dep[v] + dep[w] - dep[_lca(v, w)]*2 }
+
+		// EXTRA: 输入 v 和 to，to 可能是 v 的子孙，返回从 v 到 to 路径上的第二个节点（v 的一个儿子）
+		// 如果 v 不是 to 的子孙，返回 -1
+		down1 := func(v, to int) int {
+			if dep[v] >= dep[to] {
+				return -1
+			}
+			to = uptoDep(to, dep[v]+1)
+			if pa[to][0] == v {
+				return to
+			}
+			return -1
+		}
+
+		// EXTRA: 从 v 出发，向 to 方向走一步
+		// 输入需要保证 v != to
+		move1 := func(v, to int) int {
+			if v == to {
+				panic(-1)
+			}
+			if _lca(v, to) == v { // to 在 v 下面
+				return uptoDep(to, dep[v]+1)
+			}
+			// lca 在 v 上面
+			return pa[v][0]
+		}
+
+		// EXTRA: 从 v 开始，向上跳 k 步
+		// 不存在则返回 -1
+		// O(1) 求法见长链剖分
+		uptoKthPa := func(v, k int) int {
+			for i := 0; i < mx && v != -1; i++ {
+				if k>>i&1 > 0 {
+					v = pa[v][i]
+				}
+			}
+			return v
+		}
+
+		// EXTRA: 输入 v 和 w，返回 v 到 w 路径上的中点
+		// 返回值是一个数组，因为可能有两个中点
+		// 在有两个中点的情况下，保证返回值的第一个中点离 v 更近
+		midPath := func(v, w int) []int {
+			lca := _lca(v, w)
+			dv := dep[v] - dep[lca]
+			dw := dep[w] - dep[lca]
+			if dv == dw {
+				return []int{lca}
+			}
+			if dv > dw {
+				mid := uptoKthPa(v, (dv+dw)/2)
+				if (dv+dw)%2 == 0 {
+					return []int{mid}
+				}
+				return []int{mid, pa[mid][0]}
+			} else {
+				mid := uptoKthPa(w, (dv+dw)/2)
+				if (dv+dw)%2 == 0 {
+					return []int{mid}
+				}
+				return []int{pa[mid][0], mid} // pa[mid][0] 离 v 更近
+			}
+		}
+
+		{
+			// 加权树上二分
+			var dep []int64 // 加权深度，dfs 预处理略
+			// 从 v 开始向根移动至多 d 距离，返回最大移动次数，以及能移动到的离根最近的点
+			// 变形 https://codeforces.com/problemset/problem/932/D
+			uptoDep := func(v int, d int64) (int, int) {
+				step := 0
+				dv := dep[v]
+				for i := mx - 1; i >= 0; i-- {
+					if p := pa[v][i]; p != -1 && dv-dep[p] <= d {
+						step |= 1 << i
+						v = p
+					}
+				}
+				return step, v
+			}
+			_ = uptoDep
+		}
+
+		{
+			// EXTRA: 倍增的时候维护其他属性，如边权最值等
+			// 下面的代码来自 https://codeforces.com/problemset/problem/609/E
+			// EXTRA: 额外维护最值边的下标，见 https://codeforces.com/contest/733/submission/120955685
+			type nb struct{ to, wt int }
+			g := make([][]nb, n)
+			// read g ...
+			const mx = 18
+			type pair struct{ p, maxWt int }
+			pa := make([][mx]pair, n)
+			dep := make([]int, n)
+			var build func(v, p, d int)
+			build = func(v, p, d int) {
+				pa[v][0].p = p
+				dep[v] = d
+				for _, e := range g[v] {
+					if w := e.to; w != p {
+						pa[w][0].maxWt = e.wt
+						build(w, v, d+1)
+					}
+				}
+			}
+			build(0, -1, 0)
+
+			for i := 0; i+1 < mx; i++ {
+				for v := range pa {
+					if p := pa[v][i]; p.p != -1 {
+						pp := pa[p.p][i]
+						pa[v][i+1] = pair{pp.p, max(p.maxWt, pp.maxWt)}
+					} else {
+						pa[v][i+1].p = -1
+					}
+				}
+			}
+
+			// 求 LCA(v,w) 的同时，顺带求出 v-w 上的边权最值
+			_lca := func(v, w int) (lca, maxWt int) {
+				if dep[v] > dep[w] {
+					v, w = w, v
+				}
+				for i := 0; i < mx; i++ {
+					if (dep[w]-dep[v])>>i&1 > 0 {
+						p := pa[w][i]
+						maxWt = max(maxWt, p.maxWt)
+						w = p.p
+					}
+				}
+				if w != v {
+					for i := mx - 1; i >= 0; i-- {
+						if pv, pw := pa[v][i], pa[w][i]; pv.p != pw.p {
+							maxWt = max(maxWt, max(pv.maxWt, pw.maxWt))
+							v, w = pv.p, pw.p
+						}
+					}
+					maxWt = max(maxWt, max(pa[v][0].maxWt, pa[w][0].maxWt))
+					v = pa[v][0].p
+				}
+				// 如果是点权的话这里加上 maxWt = max(maxWt, pa[v][0].maxWt)
+				lca = v
+				return
+			}
+
+			_ = _lca
+		}
+
+		_ = []interface{}{disVW, uptoKthPa, down1, move1, midPath}
+	}
+
+	// 最近公共祖先 · 其二 · 基于 RMQ
+	lcaRMQ := func(root int, g [][]int) {
+		// O(nlogn) 预处理，O(1) 查询
+		// 由于预处理 ST 表是基于一个长度为 2n 的序列，所以常数上是比倍增算法要大的。内存占用也比倍增要大一倍左右（这点可忽略）
+		// 优点是查询的复杂度低，适用于查询量大的情形
+		// https://oi-wiki.org/graph/lca/#rmq
+		// https://codeforces.com/problemset/problem/342/E
+
+		vs := make([]int, 0, 2*len(g)-1)  // 欧拉序列
+		pos := make([]int, len(g))        // pos[v] 表示 v 在 vs 中第一次出现的位置编号
+		dep := make([]int, 0, 2*len(g)-1) // 深度序列，和欧拉序列一一对应
+		disRoot := make([]int, len(g))    // disRoot[v] 表示 v 到 root 的距离
+		var build func(v, p, d int)       // 若有边权需额外传参 dis
+		build = func(v, p, d int) {
+			pos[v] = len(vs)
+			vs = append(vs, v)
+			dep = append(dep, d)
+			disRoot[v] = d
+			for _, w := range g[v] {
+				if w != p {
+					build(w, v, d+1) // d+e.wt
+					vs = append(vs, v)
+					dep = append(dep, d)
+				}
+			}
+		}
+		build(root, -1, 0)
+		type stPair struct{ v, i int }
+		const mx = 17 + 1 // bits.Len(len(dep))
+		var st [][mx]stPair
+		stInit := func(a []int) {
+			n := len(a)
+			st = make([][mx]stPair, n)
+			for i, v := range a {
+				st[i][0] = stPair{v, i}
+			}
+			for j := 1; 1<<j <= n; j++ {
+				for i := 0; i+1<<j <= n; i++ {
+					if a, b := st[i][j-1], st[i+1<<(j-1)][j-1]; a.v < b.v {
+						st[i][j] = a
+					} else {
+						st[i][j] = b
+					}
+				}
+			}
+		}
+		stInit(dep)
+		stQuery := func(l, r int) int { // [l,r) 注意 l r 是从 0 开始算的
+			k := bits.Len(uint(r-l)) - 1
+			a, b := st[l][k], st[r-1<<k][k]
+			if a.v < b.v {
+				return a.i
+			}
+			return b.i
+		}
+		// 注意下标的换算，打印 LCA 的话要 +1
+		_lca := func(v, w int) int {
+			pv, pw := pos[v], pos[w]
+			if pv > pw {
+				pv, pw = pw, pv
+			}
+			return vs[stQuery(pv, pw+1)]
+		}
+		_d := func(v, w int) int { return disRoot[v] + disRoot[w] - disRoot[_lca(v, w)]*2 }
+
+		_ = _d
+	}
+
+	// 最近公共祖先 · 其三 · Tarjan 离线算法
+	lcaTarjan := func(in io.Reader, n, q, root int) []int {
+		// 时间复杂度 O(n+qα)
+		// 原论文 https://dl.acm.org/doi/pdf/10.1145/800061.808753
+		// https://core.ac.uk/download/pdf/82125836.pdf
+		// https://oi-wiki.org/graph/lca/#tarjan
+		// https://cp-algorithms.com/graph/lca_tarjan.html
+		// 扩展：Tarjan RMQ https://codeforces.com/blog/entry/48994
+		// LC2646 https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/
+		g := make([][]int, n)
+		for i := 1; i < n; i++ {
+			v, w := 0, 0
+			fmt.Fscan(in, &v, &w)
+			v--
+			w--
+			g[v] = append(g[v], w)
+			g[w] = append(g[w], v)
+		}
+
+		lca := make([]int, q)
+		dis := make([]int, q) // dis(q.v,q.w)
+		type query struct{ w, i int }
+		qs := make([][]query, n)
+		for i := 0; i < q; i++ {
+			v, w := 0, 0
+			fmt.Fscan(in, &v, &w)
+			v--
+			w--
+
+			// 第一种写法：保证在 v=w 时恰好只更新一个（结合下面的 if w := q.w; w == v || ... 理解）
+			qs[v] = append(qs[v], query{w, i})
+			if v != w {
+				qs[w] = append(qs[w], query{v, i})
+			}
+
+			// 第二种写法：单独处理 v==w 的情况
+			//if v != w {
+			//	qs[v] = append(qs[v], query{w, i})
+			//	qs[w] = append(qs[w], query{v, i})
+			//} else {
+			//	// do v==w...
+			//	lca[i] = v
+			//	dis[i] = 0
+			//}
+		}
+
+		_fa := make([]int, n)
+		for i := range _fa {
+			_fa[i] = i
+		}
+		var find func(int) int
+		find = func(x int) int {
+			if _fa[x] != x {
+				_fa[x] = find(_fa[x])
+			}
+			return _fa[x]
+		}
+
+		dep := make([]int, n)
+		// 为什么不用 bool 数组？
+		// 对于下面代码中的 do(v, w, lcaVW)
+		// 如果 v 是 w 的祖先节点，那么 w 递归结束后会触发一次，v 递归结束后又会触发一次
+		// 如果 do 中有增量更新，这样就错了
+		// 而三色标记法可以保证只会触发一次
+		color := make([]int8, n)
+		var tarjan func(v, d int)
+		tarjan = func(v, d int) {
+			dep[v] = d
+			color[v] = 1
+			for _, w := range g[v] {
+				if color[w] == 0 {
+					tarjan(w, d+1)
+					_fa[w] = v // 相当于把 w 的子树节点全部 merge 到 v
+				}
+			}
+			for _, q := range qs[v] {
+				w := q.w
+				// color[w] == 2 意味着 y 所在子树已经遍历完
+				// 也就意味着 w 已经 merge 到它和 v 的 LCA 上了
+				if w == v || color[w] == 2 {
+					// do(v, w, lcaVW)...
+					lcaVW := find(w)
+					lca[q.i] = lcaVW
+					dis[q.i] = dep[v] + dep[w] - dep[lcaVW]*2
+				}
+			}
+			color[v] = 2
+		}
+		tarjan(root, 0)
+		return lca
+	}
+
+	_ = []interface{}{dijkstra, lcaBinarySearch, lcaRMQ, lcaTarjan}
 }
 
 type vdPair struct {

@@ -5,6 +5,7 @@ import (
 	. "fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func run(_r io.Reader, _w io.Writer) {
@@ -12,8 +13,14 @@ func run(_r io.Reader, _w io.Writer) {
 	out := bufio.NewWriter(_w)
 	defer out.Flush()
 
-	var n int
-	Fscan(in, &n)
+	var s string
+	Fscan(in, &s)
+
+	if strings.Contains(s, "7") {
+		Fprintln(out, "Yes")
+	} else {
+		Fprintln(out, "No")
+	}
 
 }
 
