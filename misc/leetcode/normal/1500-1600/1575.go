@@ -1,6 +1,9 @@
 package _500_1600
 
-import "sort"
+import (
+	"math"
+	"sort"
+)
 
 // 1584
 func minCostConnectPoints(points [][]int) int {
@@ -63,4 +66,61 @@ func minCostConnectPoints(points [][]int) int {
 	}
 
 	return ans
+}
+
+// 1505
+func connectTwoGroups(cost [][]int) int {
+	n, m := len(cost), len(cost[0])
+	minCost := make([]int, m)
+	for i := range minCost {
+		minCost[i] = math.MaxInt64
+	}
+	for _, v := range cost {
+		for j, vv := range v {
+			minCost[j] = min(minCost[j], vv)
+		}
+	}
+
+	dp := make([][]int, n)
+	for i := range dp {
+		dp[i] = make([]int, 1<<m)
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	var dfs func(i, j int) int
+	dfs = func(i, j int) (res int) {
+		if i < 0 {
+			for k, c := range minCost {
+				if j>>k&1 == 1 {
+					res += c
+				}
+			}
+			return
+		}
+
+		dv := &dp[i][j]
+		if *dv >= 0 {
+			return *dv
+		}
+		defer func() {
+			*dv = res
+		}()
+
+		res = math.MaxInt64
+		for k, c := range cost[i] {
+			res = min(res, dfs(i-1, j&^(1<<k))+c)
+		}
+		return
+	}
+
+	return dfs(n-1, 1<<m-1)
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
