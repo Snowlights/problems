@@ -1,6 +1,69 @@
 package _600_1700
 
-import "sort"
+import (
+	"math"
+	"math/bits"
+	"sort"
+)
+
+// 1681
+func minimumIncompatibility(nums []int, k int) int {
+	h := make(map[int]int)
+	for _, v := range nums {
+		h[v]++
+		if h[v] > k {
+			return -1
+		}
+	}
+
+	n := len(nums)
+	sort.Ints(nums)
+	size := n / k
+	dp := make([][]int, 1<<n)
+	for i := range dp {
+		dp[i] = make([]int, n)
+		for j := range dp[i] {
+			dp[i][j] = -1
+		}
+	}
+
+	var dfs func(left, pre int) int
+	dfs = func(left, pre int) (res int) {
+		if left == 0 {
+			return 0
+		}
+
+		dv := &dp[left][pre]
+		if *dv >= 0 {
+			return *dv
+		}
+		defer func() {
+			*dv = res
+		}()
+		res = math.MaxInt32
+		if bits.OnesCount(uint(left))%size == 0 {
+			lb := left & -left
+			res = dfs(left^lb, bits.Len(uint(lb))-1)
+			return
+		}
+		last := nums[pre]
+		for i := pre + 1; i < n; i++ {
+			if left>>i&1 == 1 && nums[i] != last {
+				last = nums[i]
+				res = min(res, last-nums[pre]+dfs(left^(1<<i), i))
+			}
+		}
+		return
+	}
+	return dfs((1<<n)-2, 0)
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 
 // 1697
 func distanceLimitedPathsExist(n int, edgeList [][]int, queries [][]int) []bool {

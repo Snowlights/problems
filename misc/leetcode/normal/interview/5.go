@@ -1,5 +1,9 @@
 package interview
 
+import (
+	"fmt"
+)
+
 // 面试题 05-01
 func insertBits(N int, M int, i int, j int) int {
 	// 分别截断高位 替换位 低位
@@ -45,4 +49,32 @@ func max(a, b int) int {
 		return b
 	}
 	return a
+}
+
+// 面试题 05-04
+
+func findClosedNumbers(num int) []int {
+	ret := []int{-1, -1}
+	s := fmt.Sprintf("0%b", num)
+	p, count := 0, 0
+	for i := len(s) - 1; i > 0; i-- {
+		if s[i] == '1' && s[i-1] == '0' && ret[0] == -1 {
+			ret[0] = (num>>p+1)<<p + 1<<count - 1
+		}
+		if s[i] == '0' && s[i-1] == '1' && ret[1] == -1 {
+			ret[1] = (num>>p-1)<<p + 1<<p - 1<<(p-count)
+		}
+		if s[i] == '1' {
+			count++
+		}
+		p++
+	}
+	if ret[0] > 2147483647 || ret[0] < 0 {
+		ret[0] = -1
+	}
+
+	if ret[1] > 2147483647 || ret[1] < 0 {
+		ret[1] = -1
+	}
+	return ret
 }

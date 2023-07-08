@@ -1,6 +1,3 @@
-//go:build main
-// +build main
-
 package main
 
 import (
@@ -68,10 +65,9 @@ func CF1729G(_r io.Reader, _w io.Writer) {
 			}
 			return
 		}
-		ans := f(0, 0)
-		Fprintln(out, minMove, ans)
+		Fprintln(out, minMove, f(0, 0))
 	}
-	
+
 }
 
 func main() { CF1729G(os.Stdin, os.Stdout) }
