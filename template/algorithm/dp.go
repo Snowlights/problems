@@ -324,6 +324,240 @@ func _() {
 		}
 		_ = []interface{}{digitDP}
 	}
+
+	// 换根 DP / 二次扫描法
+	// 进阶指南 p.292-295
+	// https://codeforces.com/blog/entry/20935
+	// todo 另一种模板（用的前后缀+扣掉中间访问的子树 w 的思路） https://ei1333.hateblo.jp/entry/2017/04/10/224413
+	//          https://atcoder.jp/contests/abc222/editorial/2763
+	//          https://qiita.com/keymoon/items/2a52f1b0fb7ef67fb89e
+	//
+	// LC310 也可以用拓扑排序的思想 https://leetcode.cn/problems/minimum-height-trees/
+	// https://www.luogu.com.cn/problem/P3478
+	// https://www.luogu.com.cn/problem/P2986
+	// https://codeforces.com/problemset/problem/763/A（有更巧妙的做法）
+	// https://codeforces.com/problemset/problem/1092/F
+	// https://codeforces.com/problemset/problem/219/D
+	// https://codeforces.com/problemset/problem/337/D
+	// 注意不存在逆元的情形 https://codeforces.com/problemset/problem/543/D
+	// https://codeforces.com/problemset/problem/1626/E
+	// 还可以用直径做 https://atcoder.jp/contests/abc222/tasks/abc222_f
+	// 计数 https://codeforces.com/problemset/problem/1691/F
+	// https://codeforces.com/problemset/problem/1794/E
+
+	// 给一棵无根树
+	// 返回每个点到其余点的距离之和
+	// LC834 https://leetcode-cn.com/problems/sum-of-distances-in-tree
+	// - 变形：把距离之和改成每个距离的平方之和？
+	// - 记录子树大小 size[v] 和子树每个节点的深度之和 sum(dep[sub])
+	// 任意两点距离除以 k 的上取整之和 https://codeforces.com/problemset/problem/791/D
+	sumOfDistancesInTree := func(g [][]int) []int {
+		n := len(g)
+		size := make([]int, n)
+		var f func(int, int) int        // int64
+		f = func(v, fa int) (sum int) { // sum 表示以 0 为根时的子树 v 中的节点到 v 的距离之和
+			size[v] = 1
+			for _, w := range g[v] {
+				if w != fa {
+					sum += f(w, v) + size[w] // 子树 w 的每个节点都要经过 w-v，因此这条边对 sum 产生的贡献为 size[w]
+					size[v] += size[w]
+				}
+			}
+			return
+		}
+		sum0 := f(0, -1)
+
+		ans := make([]int, n)
+		var reroot func(v, fa, sum int)
+		reroot = func(v, fa, sum int) {
+			ans[v] = sum
+			for _, w := range g[v] {
+				if w != fa {
+					// 换根后，离子树 w 中的所有节点近了 1，又离不在子树 w 中的节点远了 1
+					// 所以要减去 sz[w]，并加上 n-size[w]
+					reroot(w, v, sum+n-size[w]*2)
+				}
+			}
+		}
+		reroot(0, -1, sum0)
+		return ans
+	}
+
+	// 积蓄程度 https://www.acwing.com/problem/content/289/ http://poj.org/problem?id=3585
+	reRootDP := func(n int) {
+		type edge struct{ to, cap int }
+		g := make([][]edge, n)
+		// read...
+
+		subCap := make([]int, n)
+		var f func(v, fa int) int
+		f = func(v, fa int) (c int) {
+			for _, e := range g[v] {
+				if w := e.to; w != fa {
+					if len(g[w]) == 1 {
+						c += e.cap
+					} else {
+						c += min(e.cap, f(w, v))
+					}
+				}
+			}
+			subCap[v] = c
+			return
+		}
+		f(0, -1)
+
+		ans := make([]int, n)
+		var reroot func(v, fa, ansV int)
+		reroot = func(v, fa, ansV int) {
+			ans[v] = ansV
+			for _, e := range g[v] {
+				if w, c := e.to, e.cap; w != fa {
+					if sc := subCap[w]; len(g[v]) == 1 {
+						reroot(w, v, sc+c)
+					} else {
+						reroot(w, v, sc+min(c, ansV-min(sc, c)))
+					}
+				}
+			}
+		}
+		reroot(0, -1, subCap[0])
+	}
+
+	// 树上所有路径的位运算与(&)的和
+	// 单个点也算路径
+	// 解法：对每一位，统计仅含 1 的路径个数
+	// a[i] <= 2^20
+	// https://ac.nowcoder.com/acm/contest/10167/C
+	andPathSum := func(g [][]int, a []int) int64 {
+		const mx = 21
+		ans := int64(0)
+		for i := 0; i < mx; i++ {
+			cntOnePath := int64(0)
+			var f func(v, fa int) int64
+			f = func(v, fa int) int64 {
+				one := int64(a[v] >> i & 1)
+				cntOnePath += one
+				for _, w := range g[v] {
+					if w != fa {
+						o := f(w, v)
+						if one > 0 {
+							cntOnePath += one * o
+							one += o
+						}
+					}
+				}
+				return one
+			}
+			f(0, -1)
+			ans += 1 << i * cntOnePath
+		}
+
+		{
+			// 另一种做法是对每一位，用并查集求出 1 组成的连通分量，每个连通分量对答案的贡献是 sz*(sz+1)/2
+			n := len(a)
+			fa := make([]int, n)
+			var find func(int) int
+			find = func(x int) int {
+				if fa[x] != x {
+					fa[x] = find(fa[x])
+				}
+				return fa[x]
+			}
+			merge := func(from, to int) { fa[find(from)] = find(to) }
+
+			ans := int64(0)
+			for i := 0; i < mx; i++ {
+				for j := range fa {
+					fa[j] = j
+				}
+				sz := make([]int, n)
+				for v, vs := range g {
+					for _, w := range vs {
+						if a[v]>>i&1 > 0 && a[w]>>i&1 > 0 {
+							merge(v, w)
+						}
+					}
+				}
+				for j := 0; j < n; j++ {
+					sz[find(j)]++
+				}
+				for j, f := range fa {
+					if j == f && a[j]>>i&1 > 0 {
+						ans += 1 << i * int64(sz[j]) * int64(sz[j]+1) / 2
+					}
+				}
+			}
+		}
+		return ans
+	}
+
+	// 树上所有路径的位运算或(|)的和
+	// 单个点也算路径
+	// 做法和上面类似，求出仅含 0 的路径的个数，然后用路径总数 n*(n+1) 减去该个数就得到了包含至少一个 1 的路径个数
+	// 也可以用并查集求出 0 组成的连通分量
+
+	// 树上所有路径的位运算异或(^)的和
+	// 原题失效了，只找到几个题解可以参考 https://www.cnblogs.com/kuronekonano/p/11135742.html https://blog.csdn.net/qq_36876305/article/details/80060491
+	// 上面链接是边权，这里改成点权，且路径至少有两个点
+	// 解法：由于任意路径异或和可以用从根节点出发的路径异或和表示
+	// 对每一位，统计从根节点出发的路径异或和在该位上的 0 的个数和 1 的个数，
+	// 只有当 0 与 1 异或时才对答案有贡献，所以贡献即为这两个个数之积
+	xorPathSum := func(g [][]int, a []int) int64 {
+		n := len(a)
+		const mx = 30
+		cnt := [mx]int{}
+		xor := 0
+		var f func(v, fa int)
+		f = func(v, fa int) {
+			xor ^= a[v]
+			for _, w := range g[v] {
+				if w != fa {
+					f(w, v)
+				}
+			}
+			for i := 0; i < mx; i++ {
+				cnt[i] += xor >> i & 1
+			}
+			xor ^= a[v]
+		}
+		f(0, -1)
+		ans := int64(0)
+		for i, c := range cnt {
+			ans += 1 << i * int64(c) * int64(n-c)
+		}
+		return ans
+	}
+
+	// 树上所有路径的位运算异或(^)的异或和
+	// 这里的路径至少有两个点
+	// 方法是考虑每个点出现在多少条路径上，若数目为奇数则对答案有贡献
+	// 路径分两种情况，一种是没有父节点参与的，树形 DP 一下就行了；另一种是父节点参与的，个数就是 子树*(n-子树)
+	// https://ac.nowcoder.com/acm/contest/272/B
+	xorPathXorSum := func(g [][]int, a []int) int {
+		n := len(a)
+		ans := 0
+		var f func(v, fa int) int64
+		f = func(v, fa int) int64 {
+			cnt := int64(0)
+			sz := int64(1)
+			for _, w := range g[v] {
+				if w != fa {
+					s := f(w, v)
+					cnt += sz * s
+					sz += s
+				}
+			}
+			cnt += sz * (int64(n) - sz)
+			// 若一个点也算路径，那就再加一。或者在递归结束后把 ans^=a[0]^...^a[n-1]
+			if cnt&1 > 0 {
+				ans ^= a[v]
+			}
+			return sz
+		}
+		f(0, -1)
+		return ans
+	}
+	_ = []interface{}{sumOfDistancesInTree, reRootDP, andPathSum, xorPathSum, xorPathXorSum}
 }
 
 func abs(x int) int {

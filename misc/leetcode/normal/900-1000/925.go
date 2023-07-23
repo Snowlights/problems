@@ -1,6 +1,37 @@
 package _00_1000
 
-import "math"
+import (
+	"math"
+	"sort"
+)
+
+// 926
+func maxProfitAssignment(difficulty []int, profit []int, worker []int) int {
+	type pair struct {
+		diff, pro int
+	}
+	pairList := make([]*pair, 0)
+	for i, v := range difficulty {
+		pairList = append(pairList, &pair{
+			diff: v,
+			pro:  profit[i],
+		})
+	}
+	sort.Slice(pairList, func(i, j int) bool {
+		return pairList[i].diff < pairList[j].diff
+	})
+
+	ans := 0
+	for _, w := range worker {
+		tmp, idx := 0, 0
+		for idx < len(pairList) && pairList[idx].diff <= w {
+			tmp = max(tmp, pairList[idx].pro)
+			idx++
+		}
+		ans += tmp
+	}
+	return ans
+}
 
 // 931
 func minFallingPathSum(matrix [][]int) int {

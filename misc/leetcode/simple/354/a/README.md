@@ -1,4 +1,4 @@
-### 题目  
+### 题目
 
 <p>给你一个下标从 <strong>1</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> 。</p>
 
@@ -28,15 +28,15 @@
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 &lt;= nums.length == n &lt;= 50</code></li>
-	<li><code>1 &lt;= nums[i] &lt;= 50</code></li>
+	<li><code>1 <= nums.length == n <= 50</code></li>
+	<li><code>1 <= nums[i] <= 50</code></li>
 </ul>
- 
-### 思路  
+
+### 思路
 
 按照题目遍历即可
 
-```go 
+```go
 func sumOfSquares(nums []int) (ans int) {
 	for i, x := range nums {
 		if len(nums)%(i+1) == 0 {
@@ -47,7 +47,7 @@ func sumOfSquares(nums []int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+### 复杂度分析
 
--  时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

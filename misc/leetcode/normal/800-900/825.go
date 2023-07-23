@@ -1,37 +1,5 @@
 package _00_900
 
-import (
-	"sort"
-)
-
-// 926
-func maxProfitAssignment(difficulty []int, profit []int, worker []int) int {
-	type pair struct {
-		diff, pro int
-	}
-	pairList := make([]*pair, 0)
-	for i, v := range difficulty {
-		pairList = append(pairList, &pair{
-			diff: v,
-			pro:  profit[i],
-		})
-	}
-	sort.Slice(pairList, func(i, j int) bool {
-		return pairList[i].diff < pairList[j].diff
-	})
-
-	ans := 0
-	for _, w := range worker {
-		tmp, idx := 0, 0
-		for idx < len(pairList) && pairList[idx].diff <= w {
-			tmp = max(tmp, pairList[idx].pro)
-			idx++
-		}
-		ans += tmp
-	}
-	return ans
-}
-
 // 828
 func uniqueLetterString(s string) (ans int) {
 	sum, last := 0, [26][2]int{}
@@ -50,6 +18,43 @@ func uniqueLetterString(s string) (ans int) {
 		last[c][0] = i
 	}
 	return
+}
+
+// 834 换根dp
+func sumOfDistancesInTree(n int, edges [][]int) []int {
+	g := make([][]int, n) // g[x] 表示 x 的所有邻居
+	for _, e := range edges {
+		x, y := e[0], e[1]
+		g[x] = append(g[x], y)
+		g[y] = append(g[y], x)
+	}
+
+	ans := make([]int, n)
+	size := make([]int, n)
+	var dfs func(int, int, int)
+	dfs = func(x, fa, depth int) {
+		ans[0] += depth // depth 为 0 到 x 的距离
+		size[x] = 1
+		for _, y := range g[x] { // 遍历 x 的邻居 y
+			if y != fa { // 避免访问父节点
+				dfs(y, x, depth+1) // x 是 y 的父节点
+				size[x] += size[y] // 累加 x 的儿子 y 的子树大小
+			}
+		}
+	}
+	dfs(0, -1, 0) // 0 没有父节点
+
+	var reroot func(int, int)
+	reroot = func(x, fa int) {
+		for _, y := range g[x] { // 遍历 x 的邻居 y
+			if y != fa { // 避免访问父节点
+				ans[y] = ans[x] + n - 2*size[y]
+				reroot(y, x) // x 是 y 的父节点
+			}
+		}
+	}
+	reroot(0, -1) // 0 没有父节点
+	return ans
 }
 
 // 837
