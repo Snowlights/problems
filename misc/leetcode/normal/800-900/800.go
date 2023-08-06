@@ -1,6 +1,9 @@
 package _00_900
 
-import "sort"
+import (
+	"math"
+	"sort"
+)
 
 // 801
 func minSwap(nums1, nums2 []int) int {
@@ -160,6 +163,29 @@ func numComponents(head *ListNode, nums []int) int {
 			flag = false
 		}
 		cur = cur.Next
+	}
+	return ans
+}
+
+// 822
+func flipgame(fronts []int, backs []int) int {
+	forbidden := make(map[int]bool)
+	for i, v := range fronts {
+		if v == backs[i] {
+			forbidden[v] = true
+		}
+	}
+	ans := math.MaxInt32
+	for i, v := range fronts {
+		if !forbidden[v] {
+			ans = min(ans, v)
+		}
+		if !forbidden[backs[i]] {
+			ans = min(ans, backs[i])
+		}
+	}
+	if ans == math.MaxInt32 {
+		return 0
 	}
 	return ans
 }

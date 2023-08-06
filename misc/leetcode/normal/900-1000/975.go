@@ -13,6 +13,46 @@ func sortedSquares(nums []int) []int {
 	return ans
 }
 
+func uniquePathsIII(grid [][]int) int {
+	n, m := len(grid), len(grid[0])
+	s, e, cnt := 0, 0, 0
+	for i, v := range grid {
+		for j, vv := range v {
+			switch vv {
+			case 1:
+				cnt++
+				s, e = i, j
+			case 0:
+				cnt++
+			}
+		}
+	}
+
+	dir := [][]int{{0, -1}, {0, 1}, {1, 0}, {-1, 0}}
+	var dfs func(i, j, cnt int) int
+	dfs = func(i, j, cnt int) int {
+		if grid[i][j] == 2 {
+			if cnt == 0 {
+				return 1
+			}
+			return 0
+		}
+
+		res, tmp := 0, grid[i][j]
+		grid[i][j] = -1
+		for _, d := range dir {
+			x, y := i+d[0], j+d[1]
+			if 0 <= x && x < n && 0 <= y && y < m && (grid[x][y] == 0 || grid[x][y] == 2) {
+				res += dfs(x, y, cnt-1)
+			}
+		}
+		grid[i][j] = tmp
+		return res
+	}
+
+	return dfs(s, e, cnt)
+}
+
 // 981
 type TimeMap struct {
 	h map[string][]*pair

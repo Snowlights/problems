@@ -30,4 +30,9 @@ func minimumString(a, b, c string) (ans string) {
 	return
 }
 
-func min(a, b int) int { if b < a { return b }; return a }
+func min(a, b int) int {
+	if b < a {
+		return b
+	}
+	return a
+}

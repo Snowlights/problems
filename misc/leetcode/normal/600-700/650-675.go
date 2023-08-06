@@ -89,6 +89,18 @@ func abs(x int) int {
 	return x
 }
 
+// 660
+func sumOfPower(nums []int) int {
+	s, ans := 0, 0
+	const mod int = 1e9 + 7
+	sort.Ints(nums)
+	for _, v := range nums {
+		ans = (ans + v*v%mod*(v+s)) % mod
+		s = ((s * 2) + v) % mod
+	}
+	return ans
+}
+
 // 670
 func maximumSwap(num int) int {
 	s := []byte(strconv.Itoa(num))

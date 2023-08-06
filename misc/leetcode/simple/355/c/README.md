@@ -73,18 +73,15 @@
 ```go 
 func maxIncreasingGroups(usageLimits []int) (ans int) {
 	sort.Ints(usageLimits)
-	s, sum := make([]int, len(usageLimits)), usageLimits[0]
-	s[0] = 1
-	for i := 1; i < len(usageLimits); i++ {
-		sum += usageLimits[i]
-		if usageLimits[i] > s[i-1] || (s[i-1]+1)*(s[i-1]+2)/2 <= sum {
-			s[i] = s[i-1] + 1
-		} else {
-			s[i] = s[i-1]
+	ans, cur := 0, 0
+	for _, v := range usageLimits {
+		cur += v
+		if cur > ans {
+			ans++
+			cur -= ans
 		}
 	}
-
-	return s[len(s)-1]
+	return ans
 }
 ```
 

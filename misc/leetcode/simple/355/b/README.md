@@ -48,21 +48,18 @@
 栈顶存储的是从右往左遍历中最新的已合并元素；假设当前元素能与栈顶元素合并，则进行合并，否则无法合并，加入栈中。最后寻找栈中的最大值即可
 
 ```go 
-
 func maxArrayValue(a []int) int64 {
-	s := []int{}
+	var s []int
+	var ans int
 	for i := len(a) - 1; i >= 0; i-- {
 		if len(s) == 0 || s[len(s)-1] < a[i] {
 			s = append(s, a[i])
 		} else {
 			s[len(s)-1] += a[i]
+			ans = max(ans, s[len(s)-1])
 		}
 	}
-	ans := 0
-	for _, v := range s {
-		ans = max(ans, v)
-	}
-	return int64(ans)
+	return int64(max(ans, s[len(s)-1]))
 }
 
 func max(a, b int) int {
