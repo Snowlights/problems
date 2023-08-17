@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/emirpasic/gods/trees/redblacktree"
 	"math"
 )
@@ -14,6 +15,7 @@ func minAbsoluteDifference(nums []int, k int) int {
 		t.Put(nums[i], nil)
 		c, _ := t.Ceiling(y)
 		f, _ := t.Floor(y)
+		fmt.Println(c, f)
 		ans = min(ans, min(c.Key.(int)-y, y-f.Key.(int)))
 	}
 	return ans
