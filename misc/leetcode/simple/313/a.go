@@ -23,7 +23,7 @@ func gcd(a, b int) int {
 	return b
 }
 
-//2
+// 2
 func maxSum(grid [][]int) (ans int) {
 	for i := 1; i < len(grid)-1; i++ {
 		for j := 1; j < len(grid[i])-1; j++ {

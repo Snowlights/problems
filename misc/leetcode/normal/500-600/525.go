@@ -62,7 +62,7 @@ func updateBoard(board [][]byte, click []int) [][]byte {
 				for _, d := range dir {
 					x, y := v[0]+d[0], v[1]+d[1]
 					if 0 <= x && x < m && 0 <= y && y < n {
-						if board[x][y] == 'E' && !vis[x][y] {
+						if board[x][y] == 'e' && !vis[x][y] {
 							q = append(q, []int{x, y})
 							vis[x][y] = true
 						}

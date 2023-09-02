@@ -1,5 +1,7 @@
 package _00_900
 
+import "strings"
+
 // 828
 func uniqueLetterString(s string) (ans int) {
 	sum, last := 0, [26][2]int{}
@@ -18,6 +20,30 @@ func uniqueLetterString(s string) (ans int) {
 		last[c][0] = i
 	}
 	return
+}
+
+// 833
+func findReplaceString(s string, indices []int, sources []string, targets []string) string {
+	replace, replaceLen := make([]string, len(s)), make([]int, len(s))
+	for i, v := range indices {
+		if strings.HasPrefix(s[v:], sources[i]) {
+			replace[v] = targets[i]
+			replaceLen[v] = len(sources[i])
+		}
+	}
+
+	ans := strings.Builder{}
+	for i := 0; i < len(s); {
+		if len(replace[i]) > 0 {
+			ans.WriteString(replace[i])
+			i += replaceLen[i]
+		} else {
+			ans.WriteString(string(s[i]))
+			i++
+		}
+	}
+
+	return ans.String()
 }
 
 // 834 换根dp

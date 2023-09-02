@@ -450,7 +450,7 @@ func LCMeiTuan0013(in io.Reader, out io.Writer) {
 	fmt.Fscan(r, &n, &s)
 	ans, tmp := 0, 0
 	for _, v := range s {
-		if v == 'E' {
+		if v == 'e' {
 			tmp++
 			ans = max(ans, tmp)
 		} else {

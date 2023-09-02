@@ -7,7 +7,7 @@ import (
 )
 
 func Test_run(t *testing.T) {
-	t.Log("Current test is [E]")
+	t.Log("Current test is [e]")
 	testCases := [][2]string{
 		{
 			`4

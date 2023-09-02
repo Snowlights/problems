@@ -2,7 +2,7 @@ package double_88
 
 import "sort"
 
-//1
+// 1
 func equalFrequency(word string) bool {
 next:
 	for i := range word {
