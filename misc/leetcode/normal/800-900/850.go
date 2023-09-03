@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-/// 851
+// / 851
 func loudAndRich(richer [][]int, quiet []int) []int {
 	g := make([][]int, len(quiet))
 	for _, r := range richer {

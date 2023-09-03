@@ -5,7 +5,7 @@ import "sort"
 func sortVowels(s string) (ans string) {
 	in := func(bb byte) bool {
 		return bb == 'a' || bb == 'e' || bb == 'i' || bb == 'o' || bb == 'u' ||
-			bb == 'A' || bb == 'E' || bb == 'I' || bb == 'O' || bb == 'U'
+			bb == 'A' || bb == 'e' || bb == 'I' || bb == 'O' || bb == 'U'
 	}
 	a, b := make([]byte, 0), []byte(s)
 	for _, v := range b {

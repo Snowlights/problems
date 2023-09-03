@@ -16,7 +16,6 @@ package algorithm
 // 模版题：https://loj.ac/p/130  solution: https://loj.ac/s/1589521
 // 结构体写法
 // 单点查询时：a为原始数组，tree为更新之后的diff值(或者a使用前缀和进行优化，tree为diff值)、
-//
 type fenwick struct {
 	a    []int64 // 原始数据，单点查询+区间更新传入
 	tree []int64 // 树状数组

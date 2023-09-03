@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-// E
+// e
 func AtCoderABC154E(in io.Reader, out io.Writer) {
 	r := bufio.NewReader(in)
 	w := bufio.NewWriter(out)
