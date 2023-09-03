@@ -1,4 +1,4 @@
-### 题目  
+### 题目
 
 <p>给你一个字符串 <code>s</code> 和一个整数 <code>k</code> 。</p>
 
@@ -8,15 +8,15 @@
 
 <p>k 子序列的 <strong>美丽值</strong> 定义为这个子序列中每一个字符 <code>c</code> 的 <code>f(c)</code> 之 <strong>和</strong> 。</p>
 
-<p>比方说，<code>s = &#34;abbbdd&#34;</code> 和 <code>k = 2</code> ，我们有：</p>
+<p>比方说，<code>s = "abbbdd"</code> 和 <code>k = 2</code> ，我们有：</p>
 
 <ul>
-	<li><code>f(&#39;a&#39;) = 1</code>, <code>f(&#39;b&#39;) = 3</code>, <code>f(&#39;d&#39;) = 2</code></li>
+	<li><code>f('a') = 1</code>, <code>f('b') = 3</code>, <code>f('d') = 2</code></li>
 	<li><code>s</code> 的部分 k 子序列为：
 	<ul>
-		<li><code>&#34;<em><strong>ab</strong></em>bbdd&#34;</code> -&gt; <code>&#34;ab&#34;</code> ，美丽值为 <code>f(&#39;a&#39;) + f(&#39;b&#39;) = 4</code></li>
-		<li><code>&#34;<em><strong>a</strong></em>bbb<em><strong>d</strong></em>d&#34;</code> -&gt; <code>&#34;ad&#34;</code> ，美丽值为 <code>f(&#39;a&#39;) + f(&#39;d&#39;) = 3</code></li>
-		<li><code>&#34;a<em><strong>b</strong></em>bb<em><strong>d</strong></em>d&#34;</code> -&gt; <code>&#34;bd&#34;</code> ，美丽值为 <code>f(&#39;b&#39;) + f(&#39;d&#39;) = 5</code></li>
+		<li><code>"<em><strong>ab</strong></em>bbdd"</code> -> <code>"ab"</code> ，美丽值为 <code>f('a') + f('b') = 4</code></li>
+		<li><code>"<em><strong>a</strong></em>bbb<em><strong>d</strong></em>d"</code> -> <code>"ad"</code> ，美丽值为 <code>f('a') + f('d') = 3</code></li>
+		<li><code>"a<em><strong>b</strong></em>bb<em><strong>d</strong></em>d"</code> -> <code>"bd"</code> ，美丽值为 <code>f('b') + f('d') = 5</code></li>
 	</ul>
 	</li>
 </ul>
@@ -36,27 +36,27 @@
 
 <p><strong class="example">示例 1：</strong></p>
 
-<pre><b>输入：</b>s = &#34;bcca&#34;, k = 2
+<pre><b>输入：</b>s = "bcca", k = 2
 <b>输出：</b>4
-<b>解释：</b><span style="white-space: normal">s 中我们有 f(&#39;a&#39;) = 1 ，f(&#39;b&#39;) = 1 和 f(&#39;c&#39;) = 2 。</span>
+<b>解释：</b><span style="white-space: normal">s 中我们有 f('a') = 1 ，f('b') = 1 和 f('c') = 2 。</span>
 s 的 k 子序列为：
-<em><strong>bc</strong></em>ca ，美丽值为 f(&#39;b&#39;) + f(&#39;c&#39;) = 3
-<em><strong>b</strong></em>c<em><strong>c</strong></em>a ，美丽值为 f(&#39;b&#39;) + f(&#39;c&#39;) = 3
-<em><strong>b</strong></em>cc<em><strong>a</strong></em> ，美丽值为 f(&#39;b&#39;) + f(&#39;a&#39;) = 2
-b<em><strong>c</strong></em>c<em><strong>a</strong></em><strong> </strong>，美丽值为 f(&#39;c&#39;) + f(&#39;a&#39;) = 3
-bc<em><strong>ca</strong></em> ，美丽值为 f(&#39;c&#39;) + f(&#39;a&#39;) = 3
+<em><strong>bc</strong></em>ca ，美丽值为 f('b') + f('c') = 3
+<em><strong>b</strong></em>c<em><strong>c</strong></em>a ，美丽值为 f('b') + f('c') = 3
+<em><strong>b</strong></em>cc<em><strong>a</strong></em> ，美丽值为 f('b') + f('a') = 2
+b<em><strong>c</strong></em>c<em><strong>a</strong></em><strong> </strong>，美丽值为 f('c') + f('a') = 3
+bc<em><strong>ca</strong></em> ，美丽值为 f('c') + f('a') = 3
 总共有 4 个 k 子序列美丽值为最大值 3 。
 所以答案为 4 。
 </pre>
 
 <p><strong class="example">示例 2：</strong></p>
 
-<pre><b>输入：</b>s = &#34;abbcd&#34;, k = 4
+<pre><b>输入：</b>s = "abbcd", k = 4
 <b>输出：</b>2
-<b>解释：</b><span style="white-space: normal">s 中我们有 f(&#39;a&#39;) = 1 ，f(&#39;b&#39;) = 2 ，f(&#39;c&#39;) = 1 和</span> f(&#39;d&#39;) = 1 。
+<b>解释：</b><span style="white-space: normal">s 中我们有 f('a') = 1 ，f('b') = 2 ，f('c') = 1 和</span> f('d') = 1 。
 s 的 k 子序列为：
-<em><strong>ab</strong></em>b<em><strong>cd</strong></em> ，美丽值为 f(&#39;a&#39;) + f(&#39;b&#39;) + f(&#39;c&#39;) + f(&#39;d&#39;) = 5
-<span style="white-space: normal;"><b><i>a</i></b></span>b<em><strong>bcd</strong></em> ，美丽值为 f(&#39;a&#39;) + f(&#39;b&#39;) + f(&#39;c&#39;) + f(&#39;d&#39;) = 5 
+<em><strong>ab</strong></em>b<em><strong>cd</strong></em> ，美丽值为 f('a') + f('b') + f('c') + f('d') = 5
+<span style="white-space: normal;"><b><i>a</i></b></span>b<em><strong>bcd</strong></em> ，美丽值为 f('a') + f('b') + f('c') + f('d') = 5 
 总共有 2 个 k 子序列美丽值为最大值 5 。
 所以答案为 2 。
 </pre>
@@ -66,16 +66,19 @@ s 的 k 子序列为：
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 &lt;= s.length &lt;= 2 * 10<sup>5</sup></code></li>
-	<li><code>1 &lt;= k &lt;= s.length</code></li>
+	<li><code>1 <= s.length <= 2 * 10<sup>5</sup></code></li>
+	<li><code>1 <= k <= s.length</code></li>
 	<li><code>s</code> 只包含小写英文字母。</li>
 </ul>
- 
-### 思路  
+
+### 思路
 
 如果 $k >= 26$ 或者 $s$ 中去重的字符个数 $< k$ 则结果必然位0，否则必然存在:
 
-```go 
+剩下的结果中，前 $m$ 个取 最大的几个，
+如果最后取得值有多个($count$个)则从 $count$ 个数中取 $n-m$ 个数
+
+```go  
 const (
 	mod int = 1e9 + 7
 	mx      = 30
@@ -144,7 +147,7 @@ func countKSubsequencesWithMaxBeauty(s string, k int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$ 。
