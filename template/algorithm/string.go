@@ -298,7 +298,6 @@ func _() {
 		_ = []interface{}{lessSub, compareSub, equalSub, longestDupSubstring, findAllSubstring}
 	}
 
-
 	// KMP (Knuth–Morris–Pratt algorithm)
 	// match[i] 为 s[:i+1] 的真前缀和真后缀的最长的匹配长度
 	// 特别地，match[n-1] 为 s 的真前缀和真后缀的最长的匹配长度

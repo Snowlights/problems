@@ -200,7 +200,9 @@ func (matrix) inv(A matrix) matrix {
 // https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/GaussianElimination.java.html
 // https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/GaussJordanElimination.java.html
 // 模板题 https://www.luogu.com.cn/problem/P3389 https://www.luogu.com.cn/problem/P2455
-//       https://codeforces.com/problemset/problem/21/B
+//
+//	https://codeforces.com/problemset/problem/21/B
+//
 // 与 SCC 结合 https://www.luogu.com.cn/problem/P6030
 func gaussJordanElimination(A matrix, B []int64) (sol []float64, infSol bool) {
 	const eps = 1e-8
