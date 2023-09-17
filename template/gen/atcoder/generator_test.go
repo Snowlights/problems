@@ -14,6 +14,7 @@ func TestGenAtCoderProblemTemplate(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// raw := "https://atcoder.jp/contests/arc136/tasks/arc136_d"
 	problemURL := strings.TrimSpace(string(raw))
 	if err := GenAtCoderProblemTemplate(problemURL); err != nil {
 		t.Fatal(err)
@@ -22,7 +23,7 @@ func TestGenAtCoderProblemTemplate(t *testing.T) {
 
 // TODO: update REVEL_SESSION
 func TestGenAtCoderContestTemplates(t *testing.T) {
-	const contestID = "arc110" // abc260
+	const contestID = "code-festival-2016-qualc" // abc260
 	// todo username := os.Getenv("ATCODER_USERNAME")
 	//   password := os.Getenv("ATCODER_PASSWORD")
 	if err := GenAtCoderContestTemplates(contestID); err != nil {

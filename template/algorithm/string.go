@@ -298,5 +298,66 @@ func _() {
 		_ = []interface{}{lessSub, compareSub, equalSub, longestDupSubstring, findAllSubstring}
 	}
 
-	_ = []interface{}{suffixArray}
+	// KMP (Knuth–Morris–Pratt algorithm)
+	// match[i] 为 s[:i+1] 的真前缀和真后缀的最长的匹配长度
+	// 特别地，match[n-1] 为 s 的真前缀和真后缀的最长的匹配长度
+	// 我在知乎上对 KMP 的讲解 https://www.zhihu.com/question/21923021/answer/37475572
+	// https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+	// https://oi-wiki.org/string/kmp/ todo 统计每个前缀的出现次数
+	// https://cp-algorithms.com/string/prefix-function.html
+	// https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/KMP.java.html
+	//
+	// 模板题 https://loj.ac/p/103 https://www.luogu.com.cn/problem/P3375
+	//       LC28 https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/
+	//       LC1392 https://leetcode-cn.com/problems/longest-happy-prefix/
+	// 最长回文前缀 LC214 https://leetcode.cn/problems/shortest-palindrome/
+	// LC1316 https://leetcode.cn/problems/distinct-echo-substrings/
+	// 构造 t+"#"+s https://codeforces.com/problemset/problem/25/E
+	// - LC2800 https://leetcode.cn/problems/shortest-string-that-contains-three-strings/
+	// https://codeforces.com/problemset/problem/432/D
+	// https://codeforces.com/problemset/problem/471/D
+	// 与 LCS 结合 https://codeforces.com/problemset/problem/346/B
+	// 与 DP 结合 https://codeforces.com/problemset/problem/1163/D
+	// 与计数 DP 结合 https://codeforces.com/problemset/problem/494/B
+	// https://codeforces.com/problemset/problem/1003/F
+	// http://acm.hdu.edu.cn/showproblem.php?pid=2087
+	// 最大匹配个数 https://codeforces.com/problemset/problem/615/C
+	// 与贝尔数（集合划分）结合 https://codeforces.com/problemset/problem/954/I
+	// https://oj.socoding.cn/p/1446 https://leetcode.cn/problems/find-all-good-strings/
+	// - https://github.com/tdzl2003/leetcode_live/blob/master/socoding/1446.md
+	calcMaxMatchLengths := func(s string) []int {
+		match := make([]int, len(s))
+		for i, c := 1, 0; i < len(s); i++ {
+			v := s[i]
+			for c > 0 && s[c] != v {
+				c = match[c-1]
+			}
+			if s[c] == v {
+				c++
+			}
+			match[i] = c
+		}
+		return match
+	}
+	// search pattern from text, return all start positions
+	kmpSearch := func(text, pattern string) (pos []int) {
+		match := calcMaxMatchLengths(pattern)
+		lenP := len(pattern)
+		c := 0
+		for i, v := range text {
+			for c > 0 && pattern[c] != byte(v) {
+				c = match[c-1]
+			}
+			if pattern[c] == byte(v) {
+				c++
+			}
+			if c == lenP {
+				pos = append(pos, i-lenP+1)
+				c = match[c-1] // 不允许重叠时 c = 0
+			}
+		}
+		return
+	}
+
+	_ = []interface{}{suffixArray, kmpSearch}
 }

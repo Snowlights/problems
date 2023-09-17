@@ -1,5 +1,7 @@
 package _100_1200
 
+import . "problems/testutil/leetcode"
+
 // 1106
 func parseBoolExpr(expression string) bool {
 	stack := []byte{}
@@ -40,4 +42,24 @@ func parseBoolExpr(expression string) bool {
 	}
 
 	return stack[0] == 't'
+}
+
+// 1123
+func lcaDeepestLeaves(root *TreeNode) *TreeNode {
+	ans, d := root, 0
+	var dfs func(node *TreeNode, depth int) int
+	dfs = func(node *TreeNode, depth int) int {
+		if node == nil {
+			d = max(d, depth)
+			return depth
+		}
+		l, r := dfs(node.Left, depth+1), dfs(node.Right, depth+1)
+		if l == r && d == l {
+			ans = node
+		}
+		return max(l, r)
+	}
+
+	dfs(root, 0)
+	return ans
 }
