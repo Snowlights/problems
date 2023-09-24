@@ -15,10 +15,35 @@ import (
 
 var customTestCases = [][2]string{
 	{
-		``,
-		``,
+		`2
+		1 3`,
+		`6`,
+	},
+	{
+		`1
+		1`,
+		`1`,
 	},
 }
+
+// s, ans = [0] * (n + 1), 0
+//for i in range(n):
+//    s[i + 1] = s[i] + a[i]
+//for i in range(25):
+//    mask, cnt = (1 << i) - 1, 0
+//    zero, one = SortedList(), SortedList()
+//    for j in range(n + 1):
+//        m = s[j] & mask
+//        if s[j] & (1 << i):
+//            cnt += len(one) - one.bisect_right(m)
+//            cnt += zero.bisect_right(m)
+//            one.add(m)
+//        else:
+//            cnt += one.bisect_right(m)
+//            cnt += len(zero) - zero.bisect_right(m)
+//            zero.add(m)
+//    ans += cnt % 2 * (1 << i)
+//print(ans)
 
 func Test(t *testing.T) {
 	dir, _ := filepath.Abs(".")
