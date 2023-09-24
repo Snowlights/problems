@@ -14,39 +14,53 @@ func init() {
 }
 
 func countPaths(n int, edges [][]int) (ans int64) {
+	fa := make([]int, n+1) // n+1
+	size := make([]int, n+1)
+	for i := range fa {
+		fa[i] = i
+		size[i] = 1
+	}
+	var find func(int) int
+	find = func(x int) int {
+		if fa[x] != x {
+			fa[x] = find(fa[x])
+		}
+		return fa[x]
+	}
+	sizeF := func(x int) int {
+		return size[find(x)]
+	}
+	merge := func(from, to int) {
+		from, to = find(from), find(to)
+		if from == to {
+			return
+		}
+		fa[from] = to
+		size[to] += size[from]
+	}
 	g := make([][]int, n+1)
 	for _, e := range edges {
 		x, y := e[0], e[1]
 		g[x] = append(g[x], y)
 		g[y] = append(g[y], x)
+		if np[x] && np[y] {
+			merge(x, y)
+		}
 	}
 
-	var cnt int
-	var dfs func(int, int)
-	dfs = func(x, fa int) {
-		if !np[x] {
-			return
-		}
-		cnt++ // 只统计非质数
-		for _, y := range g[x] {
-			if y != fa {
-				dfs(y, x)
-			}
-		}
-	}
 	for x := 1; x <= n; x++ {
 		if np[x] { // 跳过非质数
 			continue
 		}
-		sum := 0
-		for _, y := range g[x] { // 质数 x 把这棵树分成了若干个连通块
-			cnt = 0
-			dfs(y, -1) // 遍历 y 所在连通块，在不经过质数的前提下，统计有多少个非质数
-			// 这 cnt 个非质数与之前遍历到的 sum 个非质数，两两之间的路径只包含质数 x
-			ans += int64(cnt) * int64(sum)
-			sum += cnt
+		sum := 1
+		for _, to := range g[x] { // 质数 x 把这棵树分成了若干个连通块
+			// 求这个相邻的非质数
+			if np[to] {
+				// 原来的路径端点数量为 sum，新增路径数量为 size(v) * sum
+				ans += int64(sizeF(to) * sum)
+				sum += sizeF(to)
+			}
 		}
-		ans += int64(sum) // 从 x 出发的路径
 	}
 	return
 }
