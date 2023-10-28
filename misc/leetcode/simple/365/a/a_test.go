@@ -8,7 +8,7 @@ import (
 
 func Test_a(t *testing.T) {
 	targetCaseNum := 0 // -1
-	if err := leetcode.RunLeetCodeFuncWithFile(t, maximumTripletValue, "a.txt", targetCaseNum); err != nil {
+	if err := leetcode.RunLeetCodeFuncWithFile(t, maximumTripletValue, "b.txt", targetCaseNum); err != nil {
 		t.Fatal(err)
 	}
 }

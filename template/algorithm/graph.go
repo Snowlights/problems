@@ -2,7 +2,7 @@ package algorithm
 
 import (
 	"container/heap"
-	"fmt"
+	. "fmt"
 	"io"
 	"math/bits"
 )
@@ -353,7 +353,7 @@ func _() {
 		g := make([][]int, n)
 		for i := 1; i < n; i++ {
 			v, w := 0, 0
-			fmt.Fscan(in, &v, &w)
+			Fscan(in, &v, &w)
 			v--
 			w--
 			g[v] = append(g[v], w)
@@ -366,7 +366,7 @@ func _() {
 		qs := make([][]query, n)
 		for i := 0; i < q; i++ {
 			v, w := 0, 0
-			fmt.Fscan(in, &v, &w)
+			Fscan(in, &v, &w)
 			v--
 			w--
 
@@ -433,7 +433,119 @@ func _() {
 		return lca
 	}
 
-	_ = []interface{}{dijkstra, lcaBinarySearch, lcaRMQ, lcaTarjan}
+	// 割点（割顶） cut vertices / articulation points
+	// https://codeforces.com/blog/entry/68138
+	// https://oi-wiki.org/graph/cut/#_1
+	// low(v): 在不经过 v 父亲的前提下能到达的最小的时间戳
+	// 模板题 https://www.luogu.com.cn/problem/P3388
+	// LC928 https://leetcode-cn.com/problems/minimize-malware-spread-ii/
+	findCutVertices := func(n int, g [][]int, min func(int, int) int) (isCut []bool) {
+		isCut = make([]bool, n)
+		dfn := make([]int, n) // DFS 到结点 v 的时间（从 1 开始）
+		// low[v]: v 的儿子及其邻居的 dfn 的最小值
+		dfsClock := 0
+		var tarjan func(v, fa int) int
+		tarjan = func(v, fa int) int { // 无需考虑重边
+			dfsClock++
+			dfn[v] = dfsClock
+			lowV := dfsClock
+			childCnt := 0
+			for _, w := range g[v] {
+				if dfn[w] == 0 {
+					childCnt++
+					lowW := tarjan(w, v)
+					if lowW >= dfn[v] { // 以 w 为根的子树中没有反向边能连回 v 的祖先（可以连到 v 上，这也算割顶）
+						isCut[v] = true
+					}
+					lowV = min(lowV, lowW)
+				} else if w != fa { // （w!=fa 可以省略，但为了保证某些题目没有重复统计所以保留）   找到 v 的反向边 v-w，用 dfn[w] 来更新 lowV
+					lowV = min(lowV, dfn[w])
+				}
+			}
+			if fa == -1 && childCnt == 1 { // 特判：只有一个儿子的树根，删除后并没有增加连通分量的个数，这种情况下不是割顶
+				isCut[v] = false
+			}
+			return lowV
+		}
+		for v, timestamp := range dfn {
+			if timestamp == 0 {
+				tarjan(v, -1)
+			}
+		}
+
+		cuts := []int{}
+		for v, is := range isCut {
+			if is {
+				cuts = append(cuts, v) // v+1
+			}
+		}
+
+		return
+	}
+
+	// 桥（割边）
+	// https://oi-wiki.org/graph/cut/#_4
+	// https://algs4.cs.princeton.edu/41graph/Bridge.java.html
+	// 模板题 LC1192 https://leetcode-cn.com/problems/critical-connections-in-a-network/
+	//       https://codeforces.com/problemset/problem/1000/E
+	// 题目推荐 https://cp-algorithms.com/graph/bridge-searching.html#toc-tgt-2
+	// 与 MST 结合 https://codeforces.com/problemset/problem/160/D
+	// 与最短路结合 https://codeforces.com/problemset/problem/567/E
+	// https://codeforces.com/problemset/problem/118/E
+	// todo 构造 https://codeforces.com/problemset/problem/550/D
+	findBridges := func(in io.Reader, n, m int, min func(int, int) int) (isBridge []bool) {
+		type neighbor struct{ to, eid int }
+		g := make([][]neighbor, n)
+		type edge struct{ v, w int }
+		edges := make([]edge, m)
+		for i := 0; i < m; i++ {
+			var v, w int
+			Fscan(in, &v, &w)
+			v--
+			w--
+			g[v] = append(g[v], neighbor{w, i})
+			g[w] = append(g[w], neighbor{v, i})
+			edges[i] = edge{v, w}
+		}
+		isBridge = make([]bool, len(edges))
+		dfn := make([]int, len(g)) // 值从 1 开始
+		dfsClock := 0
+		var tarjan func(int, int) int
+		tarjan = func(v, fid int) int { // 使用 fid 而不是 fa，可以兼容重边的情况
+			dfsClock++
+			dfn[v] = dfsClock
+			lowV := dfsClock
+			for _, e := range g[v] {
+				if w := e.to; dfn[w] == 0 {
+					lowW := tarjan(w, e.eid)
+					if lowW > dfn[v] { // 以 w 为根的子树中没有反向边能连回 v 或 v 的祖先，所以 v-w 必定是桥
+						isBridge[e.eid] = true
+					}
+					lowV = min(lowV, lowW)
+				} else if e.eid != fid { // 找到 v 的反向边 v-w，用 dfn[w] 来更新 lowV
+					lowV = min(lowV, dfn[w])
+				}
+			}
+			return lowV
+		}
+		for v, timestamp := range dfn {
+			if timestamp == 0 {
+				tarjan(v, -1)
+			}
+		}
+
+		// EXTRA: 所有桥边的下标
+		bridgeEIDs := []int{}
+		for eid, b := range isBridge {
+			if b {
+				bridgeEIDs = append(bridgeEIDs, eid)
+			}
+		}
+
+		return
+	}
+
+	_ = []interface{}{dijkstra, lcaBinarySearch, lcaRMQ, lcaTarjan, findCutVertices, findBridges}
 }
 
 type vdPair struct {

@@ -32,7 +32,7 @@ func TestA(t *testing.T) {
 	//}
 
 	targetCaseNum := 0 // -1
-	if err := leetcode.RunLeetCodeFuncWithFile(t, minimumSwitchingTimes, "a.txt", targetCaseNum); err != nil {
+	if err := leetcode.RunLeetCodeFuncWithFile(t, minimumSwitchingTimes, "b.txt", targetCaseNum); err != nil {
 		t.Fatal(err)
 	}
 }
