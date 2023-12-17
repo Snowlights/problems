@@ -25,7 +25,6 @@ func TestCF487B(t *testing.T) {
 			`,
 			`-1`,
 		},
-
 	}
 	codeforces.AssertEqualStringCase(t, CF487B, testCases, 0)
 }

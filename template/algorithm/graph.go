@@ -545,7 +545,78 @@ func _() {
 		return
 	}
 
-	_ = []interface{}{dijkstra, lcaBinarySearch, lcaRMQ, lcaTarjan, findCutVertices, findBridges}
+	// 任意两点最短路 Floyd-Warshall  O(n^3)  本质是求 Min-plus matrix multiplication
+	// 传入邻接矩阵 dis
+	// dis[v][w] == inf 表示没有 v-w 边
+	// 带你发明 Floyd 算法！https://leetcode.cn/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/solution/dai-ni-fa-ming-floyd-suan-fa-cong-ji-yi-m8s51/
+	// https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm
+	// https://en.wikipedia.org/wiki/Min-plus_matrix_multiplication
+	// https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html#toc-tgt-5
+	//
+	// 模板题 https://www.luogu.com.cn/problem/B3647
+	// 传递闭包 https://www.luogu.com.cn/problem/B3611
+	// https://codeforces.com/problemset/problem/33/B
+	// https://codeforces.com/problemset/problem/1204/C
+	// LC1334 https://leetcode.cn/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
+	// LC1462 https://leetcode.cn/problems/course-schedule-iv/
+	// 动态加点 https://codeforces.com/problemset/problem/295/B
+	// 动态加边 LC2642 https://leetcode.cn/problems/design-graph-with-shortest-path-calculator/
+	// - https://codeforces.com/problemset/problem/25/C LC2646 https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/
+	// todo https://atcoder.jp/contests/abc243/tasks/abc243_e
+	// 传递闭包 UVa247 https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=4&page=show_problem&problem=183
+	// 注：求传递闭包时，若 i-k 不连通，则最内层循环无需运行
+	// 任意两点最大边权最小路径 UVa10048 https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=12&page=show_problem&problem=989
+	shortestPathFloydWarshall := func(dis [][]int) [][]int {
+		// dis[k][i][j] 表示「经过若干个编号不超过 k 的中间节点」时，从 i 到 j 的最短路长度，其中第一维可以压缩掉
+		// 为什么可以把第一维度去掉？dis[i][k] 和 dis[k][j] 不会被覆盖掉吗？
+		// 见算法导论第三版练习 25.2-4（网络上有习题解答）
+
+		// 初始化，注意 dis[i][i] = 0
+		//dis := make([][]int, n)
+		//for i := range dis {
+		//	dis[i] = make([]int, n)
+		//	for j := range dis[i] {
+		//		if j != i {
+		//			dis[i][j] = math.MaxInt / 2
+		//		}
+		//	}
+		//}
+		for k := range dis {
+			for i := range dis {
+				for j := range dis {
+					// 不选 k，选 k
+					dis[i][j] = min(dis[i][j], dis[i][k]+dis[k][j])
+				}
+			}
+		}
+
+		// 如果出现 dis[i][i] < 0 则说明有负环
+
+		// 动态加边
+		// https://codeforces.com/problemset/problem/25/C
+		// LC2642 https://leetcode.cn/problems/design-graph-with-shortest-path-calculator/
+		for i := range dis {
+			// 注意 from=i 或者 to=j 时，下面的 dis[i][from] 和 dis[to][j] 都需要 dis[i][i] 这样的值
+			// 所以初始化成 0 方便计算
+			dis[i][i] = 0
+		}
+		addEdge := func(from, to, wt int) {
+			// 无法让任何最短路变短
+			if wt >= dis[from][to] {
+				return
+			}
+			for i := range dis {
+				for j := range dis {
+					dis[i][j] = min(dis[i][j], dis[i][from]+wt+dis[to][j])
+				}
+			}
+		}
+		_ = addEdge
+
+		return dis
+	}
+
+	_ = []interface{}{dijkstra, lcaBinarySearch, lcaRMQ, lcaTarjan, findCutVertices, findBridges, shortestPathFloydWarshall}
 }
 
 type vdPair struct {
