@@ -1,0 +1,9 @@
+"abc"
+"abb"
+"ab"
+2
+
+"dac"
+"bac"
+"cac"
+-1

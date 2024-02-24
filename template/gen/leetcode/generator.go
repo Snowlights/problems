@@ -646,7 +646,7 @@ func handleProblems(session *grequests.Session, problems []*problem) error {
 }
 
 func copyTemplate(dir, problemDes string) error {
-	//const templateDir = "../problem.md"
+	//const templateDir = "../README.md"
 	//src, err := os.Open(templateDir)
 	//if err != nil {
 	//	return err

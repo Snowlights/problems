@@ -2,6 +2,27 @@ package _300_1400
 
 import "sort"
 
+// 1333
+func filterRestaurants(restaurants [][]int, veganFriendly, maxPrice, maxDistance int) []int {
+	sort.Slice(restaurants, func(i, j int) bool {
+		a, b := restaurants[i], restaurants[j]
+		return a[1] > b[1] || a[1] == b[1] && a[0] > b[0]
+	})
+	ans := make([]int, 0)
+	veg := func(v int) bool {
+		if veganFriendly == 1 {
+			return v == veganFriendly
+		}
+		return true
+	}
+	for _, r := range restaurants {
+		if veg(r[2]) && r[3] <= maxPrice && r[4] <= maxDistance {
+			ans = append(ans, r[0])
+		}
+	}
+	return ans
+}
+
 // 1337
 func kWeakestRows(mat [][]int, k int) []int {
 

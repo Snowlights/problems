@@ -15,8 +15,9 @@ import (
 
 var customTestCases = [][2]string{
 	{
-		``,
-		``,
+		`3
+		1 2 3`,
+		`4`,
 	},
 }
 

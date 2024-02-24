@@ -7,7 +7,7 @@ import (
 
 func Test_a(t *testing.T) {
 	targetCaseNum := 0 // -1
-	if err := leetcode.RunLeetCodeFuncWithFile(t, maximizeSum, "a.txt", targetCaseNum); err != nil {
+	if err := leetcode.RunLeetCodeFuncWithFile(t, maximizeSum, "b.txt", targetCaseNum); err != nil {
 		t.Fatal(err)
 	}
 }
