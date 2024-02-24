@@ -23,14 +23,14 @@ func CF1898B(_r io.Reader, _w io.Writer) {
 			Fscan(in, &a[i])
 		}
 		m, ans := a[n-1], 0
-		for i := n-2; i >= 0; i-- {
-			k := (a[i]-1)/m
+		for i := n - 2; i >= 0; i-- {
+			k := (a[i] - 1) / m
 			ans += k
-			m = a[i] / (k+1)
+			m = a[i] / (k + 1)
 		}
 		Fprintln(out, ans)
 	}
-	
+
 }
 
 func main() { CF1898B(os.Stdin, os.Stdout) }

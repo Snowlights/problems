@@ -48,7 +48,6 @@ func TestCF721C(t *testing.T) {
 			1 3 5 
 			`,
 		},
-		
 	}
 	codeforces.AssertEqualStringCase(t, CF721C, testCases, 0)
 }

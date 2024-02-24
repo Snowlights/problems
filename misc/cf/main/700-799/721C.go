@@ -15,7 +15,6 @@ func CF721C(_r io.Reader, _w io.Writer) {
 	out := bufio.NewWriter(_w)
 	defer out.Flush()
 
-
 	var n, m int
 	var maxT int32
 	Fscan(in, &n, &m, &maxT)
@@ -58,7 +57,7 @@ func CF721C(_r io.Reader, _w io.Writer) {
 		v = from[i][v]
 	}
 	Fprint(out, path...)
-	
+
 }
 
 func main() { CF721C(os.Stdin, os.Stdout) }

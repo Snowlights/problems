@@ -23,7 +23,6 @@ func TestCF1886C(t *testing.T) {
 			1`,
 			`abx`,
 		},
-		
 	}
 	codeforces.AssertEqualStringCase(t, CF1886C, testCases, 0)
 }

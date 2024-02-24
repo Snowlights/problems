@@ -47,7 +47,7 @@ func CF1886C(_r io.Reader, _w io.Writer) {
 		Fscan(in, &s, &pos)
 		Fprintf(out, "%c", f())
 	}
-	
+
 }
 
 func main() { CF1886C(os.Stdin, os.Stdout) }
