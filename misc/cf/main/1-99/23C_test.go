@@ -26,7 +26,6 @@ func TestCF23C(t *testing.T) {
 			YES
 			1`,
 		},
-		
 	}
 	codeforces.AssertEqualStringCase(t, CF23C, testCases, 0)
 }

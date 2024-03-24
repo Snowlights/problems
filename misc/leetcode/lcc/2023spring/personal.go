@@ -353,7 +353,7 @@ func getSchemeCount(_, _ int, g []string) int64 {
 				k = trans[j][1]
 				res += f(i+1, k)
 			} else {
-				panic(-1)
+
 			}
 			return
 		}

@@ -44,7 +44,6 @@ func TestCF1872G(t *testing.T) {
 			1 6
 			`,
 		},
-		
 	}
 	codeforces.AssertEqualStringCase(t, CF1872G, testCases, 0)
 }

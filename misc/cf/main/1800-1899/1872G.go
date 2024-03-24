@@ -50,7 +50,7 @@ func CF1872G(_r io.Reader, _w io.Writer) {
 		}
 		Fprintln(out, l+1, r+1)
 	}
-	
+
 }
 
 func main() { CF1872G(os.Stdin, os.Stdout) }

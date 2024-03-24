@@ -46,7 +46,7 @@ func CF23C(_r io.Reader, _w io.Writer) {
 			Fprintln(out, a[m-1].i)
 		}
 	}
-	
+
 }
 
 func main() { CF23C(os.Stdin, os.Stdout) }

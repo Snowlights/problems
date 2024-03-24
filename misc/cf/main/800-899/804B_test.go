@@ -1,7 +1,6 @@
 //go:build main
 // +build main
 
-
 package main
 
 import (

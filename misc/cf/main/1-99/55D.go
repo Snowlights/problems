@@ -83,5 +83,3 @@ func gcd(a, b int) int {
 func lcm(a, b int) int { return a / gcd(a, b) * b }
 
 func main() { CF55D(os.Stdin, os.Stdout) }
-
-

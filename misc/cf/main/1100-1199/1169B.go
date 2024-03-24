@@ -40,7 +40,7 @@ func CF1169B(_r io.Reader, _w io.Writer) {
 	} else {
 		Fprintln(out, "NO")
 	}
-	
+
 }
 
 func main() { CF1169B(os.Stdin, os.Stdout) }

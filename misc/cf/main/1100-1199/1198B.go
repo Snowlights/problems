@@ -17,7 +17,7 @@ func CF1198B(_r io.Reader, _w io.Writer) {
 
 	var n, op, x, v int
 	Fscan(in, &n)
-	a, changeTime := make([]int, n),  make([]int, n)
+	a, changeTime := make([]int, n), make([]int, n)
 	for i := range a {
 		Fscan(in, &a[i])
 	}
