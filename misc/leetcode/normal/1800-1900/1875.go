@@ -47,7 +47,7 @@ type Server struct {
 	index  int
 }
 
-//服务器队列
+// 服务器队列
 type server []Server
 
 func (s server) Len() int      { return len(s) }
@@ -58,7 +58,7 @@ func (s server) Less(i, j int) bool {
 func (s *server) Push(val interface{}) { *s = append(*s, val.(Server)) }
 func (s *server) Pop() interface{}     { ret := (*s)[len(*s)-1]; *s = (*s)[:len(*s)-1]; return ret }
 
-//执行队列
+// 执行队列
 type Exec struct {
 	endTime int
 	server  Server

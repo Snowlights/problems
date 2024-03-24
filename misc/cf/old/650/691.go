@@ -30,7 +30,7 @@ func CF691C(in io.Reader, out io.Writer) {
 	}
 	fmt.Fprint(w, s)
 	if e != 0 {
-		fmt.Fprint(w, "E", e)
+		fmt.Fprint(w, "e", e)
 	}
 
 }

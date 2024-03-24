@@ -1,6 +1,8 @@
 package _200_1300
 
-import "sort"
+import (
+	"sort"
+)
 
 // 1202
 func smallestStringWithSwaps(s string, pairs [][]int) string {
@@ -100,4 +102,26 @@ func smallestStringWithSwapsV2(s string, pairs [][]int) string {
 	}
 
 	return string(ans)
+}
+
+// 1222
+func queensAttacktheKing(queens [][]int, king []int) [][]int {
+	dir := [][]int{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}}
+	ans := [][]int{}
+	queenMap := make(map[[2]int]bool)
+	for _, v := range queens {
+		queenMap[[2]int{v[0], v[1]}] = true
+	}
+	for _, d := range dir {
+		s, e := king[0], king[1]
+		for 0 <= s && s < 8 && 0 <= e && e < 8 {
+			if queenMap[[2]int{s, e}] {
+				ans = append(ans, []int{s, e})
+				break
+			}
+			s, e = s+d[0], e+d[1]
+		}
+	}
+
+	return ans
 }

@@ -8,10 +8,10 @@ import (
 
 // https://codeforces.com/problemset/problem/292/E
 //
-//输入 n(≤1e5) 和 m (≤1e5)，两个长度都为 n 的数组 a 和 b（元素范围在 [-1e9,1e9] 内，下标从 1 开始）。
-//然后输入 m 个操作：
-//操作 1 形如 1 x y k，表示把 a 的区间 [x,x+k-1] 的元素拷贝到 b 的区间 [y,y+k-1] 上（输入保证下标不越界）。
-//操作 2 形如 2 x，输出 b[x]。
+// 输入 n(≤1e5) 和 m (≤1e5)，两个长度都为 n 的数组 a 和 b（元素范围在 [-1e9,1e9] 内，下标从 1 开始）。
+// 然后输入 m 个操作：
+// 操作 1 形如 1 x y k，表示把 a 的区间 [x,x+k-1] 的元素拷贝到 b 的区间 [y,y+k-1] 上（输入保证下标不越界）。
+// 操作 2 形如 2 x，输出 b[x]。
 func CF292E(in io.Reader, out io.Writer) {
 	r := bufio.NewReader(in)
 	w := bufio.NewWriter(out)

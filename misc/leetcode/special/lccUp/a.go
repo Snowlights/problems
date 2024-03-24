@@ -89,7 +89,7 @@ func ballGame(k int, g []string) (ans [][]int) {
 			di := p.di
 			x, y := p.x, p.y
 			b := g[x][y]
-			if b == 'E' {
+			if b == 'e' {
 				di = (di + 3) % 4
 			} else if b == 'W' {
 				di = (di + 1) % 4

@@ -10,8 +10,8 @@ import (
 
 // https://atcoder.jp/contests/abc210/tasks/abc210_d
 //
-//输入 n m (2≤n,m≤1000) c(≤1e9) 和一个 n 行 m 列的矩阵 a，元素范围 [1,1e9]。
-//对于两个不同位置 (i,j) 和 (i',j')，输出 a[i][j] + a[i'][j'] + c*(|i-i'|+|j-j'|) 的最小值。
+// 输入 n m (2≤n,m≤1000) c(≤1e9) 和一个 n 行 m 列的矩阵 a，元素范围 [1,1e9]。
+// 对于两个不同位置 (i,j) 和 (i',j')，输出 a[i][j] + a[i'][j'] + c*(|i-i'|+|j-j'|) 的最小值。
 func AtCoderABC210D(in io.Reader, out io.Writer) {
 	r := bufio.NewReader(in)
 	w := bufio.NewWriter(out)

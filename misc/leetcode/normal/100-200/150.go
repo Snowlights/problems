@@ -1,5 +1,21 @@
 package _00_200
 
+import "strings"
+
+// 161
+func reverseWords(s string) string {
+	var ans []string
+	for _, v := range strings.Split(strings.TrimSpace(s), " ") {
+		if v != "" {
+			ans = append(ans, v)
+		}
+	}
+	for i := 0; i < len(ans)/2; i++ {
+		ans[i], ans[len(ans)-1-i] = ans[len(ans)-1-i], ans[i]
+	}
+	return strings.Join(ans, " ")
+}
+
 // 152
 func maxProduct(nums []int) int {
 	maxF, minF, ans := nums[0], nums[0], nums[0]

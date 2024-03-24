@@ -21,7 +21,7 @@ import (
 //提示 3：DFS，统计 xor(1,i) 中 1 的个数，记作 c。
 //由于只有 1 和 0 异或才能是 1，这个比特位上的答案为 c * (n-c)。
 
-// E
+// e
 func AtCoderABC201E(in io.Reader, out io.Writer) {
 	r := bufio.NewReader(in)
 

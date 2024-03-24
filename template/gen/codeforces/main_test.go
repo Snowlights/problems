@@ -28,6 +28,7 @@ func Test(t *testing.T) {
 		tarCase := 0 // -1
 		codeforces.AssertEqualStringCase(t, run, customTestCases, tarCase)
 		t.Log("======= custom =======")
+		return
 	}
 
 	tarCase := 0 // -1

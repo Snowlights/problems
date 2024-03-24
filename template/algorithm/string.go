@@ -298,5 +298,143 @@ func _() {
 		_ = []interface{}{lessSub, compareSub, equalSub, longestDupSubstring, findAllSubstring}
 	}
 
-	_ = []interface{}{suffixArray}
+	// KMP (Knuth–Morris–Pratt algorithm)
+	// match[i] 为 s[:i+1] 的真前缀和真后缀的最长的匹配长度
+	// 特别地，match[n-1] 为 s 的真前缀和真后缀的最长的匹配长度
+	// 我在知乎上对 KMP 的讲解 https://www.zhihu.com/question/21923021/answer/37475572
+	// https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+	// https://oi-wiki.org/string/kmp/ todo 统计每个前缀的出现次数
+	// https://cp-algorithms.com/string/prefix-function.html
+	// https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/KMP.java.html
+	//
+	// 模板题 https://loj.ac/p/103 https://www.luogu.com.cn/problem/P3375
+	//       LC28 https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/
+	//       LC1392 https://leetcode-cn.com/problems/longest-happy-prefix/
+	// 最长回文前缀 LC214 https://leetcode.cn/problems/shortest-palindrome/
+	// LC1316 https://leetcode.cn/problems/distinct-echo-substrings/
+	// 构造 t+"#"+s https://codeforces.com/problemset/problem/25/E
+	// - LC2800 https://leetcode.cn/problems/shortest-string-that-contains-three-strings/
+	// https://codeforces.com/problemset/problem/432/D
+	// https://codeforces.com/problemset/problem/471/D
+	// 与 LCS 结合 https://codeforces.com/problemset/problem/346/B
+	// 与 DP 结合 https://codeforces.com/problemset/problem/1163/D
+	// 与计数 DP 结合 https://codeforces.com/problemset/problem/494/B
+	// https://codeforces.com/problemset/problem/1003/F
+	// http://acm.hdu.edu.cn/showproblem.php?pid=2087
+	// 最大匹配个数 https://codeforces.com/problemset/problem/615/C
+	// 与贝尔数（集合划分）结合 https://codeforces.com/problemset/problem/954/I
+	// https://oj.socoding.cn/p/1446 https://leetcode.cn/problems/find-all-good-strings/
+	// - https://github.com/tdzl2003/leetcode_live/blob/master/socoding/1446.md
+	calcMaxMatchLengths := func(s string) []int {
+		match := make([]int, len(s))
+		for i, c := 1, 0; i < len(s); i++ {
+			v := s[i]
+			for c > 0 && s[c] != v {
+				c = match[c-1]
+			}
+			if s[c] == v {
+				c++
+			}
+			match[i] = c
+		}
+		return match
+	}
+	// search pattern from text, return all start positions
+	kmpSearch := func(text, pattern string) (pos []int) {
+		match := calcMaxMatchLengths(pattern)
+		lenP := len(pattern)
+		c := 0
+		for i, v := range text {
+			for c > 0 && pattern[c] != byte(v) {
+				c = match[c-1]
+			}
+			if pattern[c] == byte(v) {
+				c++
+			}
+			if c == lenP {
+				pos = append(pos, i-lenP+1)
+				c = match[c-1] // 不允许重叠时 c = 0
+			}
+		}
+		return
+	}
+
+	// Z-function（扩展 KMP，Z-array）      exkmp
+	// z[i] = LCP(s, s[i:])   串与串后缀的最长公共前缀
+	// 参考 Competitive Programmer’s Handbook Ch.26
+	// https://oi-wiki.org/string/z-func/
+	// 可视化 https://personal.utdallas.edu/~besp/demo/John2010/z-algorithm.htm
+	// https://cp-algorithms.com/string/z-function.html
+	// https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/
+	//
+	// 模板题 https://judge.yosupo.jp/problem/zalgorithm
+	//       LC2223 https://leetcode.cn/problems/sum-of-scores-of-built-strings/ 2220
+	//       https://codeforces.com/edu/course/2/lesson/3/3/practice/contest/272263/problem/A
+	//       https://www.luogu.com.cn/problem/P5410
+	// todo 结论 https://codeforces.com/problemset/problem/535/D 1900
+	// DP https://codeforces.com/contest/1051/problem/E 2600
+	// 最小循环节（允许末尾截断）https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/A
+	// s 和 t 是否本质相同，shift 多少次 https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/B
+	//		即 strings.Index(s+s, t)
+	// 每个前缀的出现次数 https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/C
+	//		用 z[i] 来进行区间更新操作，实现时用一个差分数组即可
+	//		注：字符串倒过来就是每个后缀的出现次数
+	// 既是前缀又是后缀的子串个数 https://codeforces.com/problemset/problem/432/D
+	//		解法之一是 a[z[i]]++ 然后求 a 的后缀和
+	//		解法之二是对 z 排序二分，见我的代码
+	//		其他解法有 KMP+DP 或 SA，见 https://www.luogu.com.cn/problem/solution/CF432D
+	// 最长回文前缀 https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/D
+	//		构造 s+reverse(s)
+	// 判断是否存在 i 使得 s[i:]+reverse(s[:i]) == t https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/E
+	//		构造 t+s
+	// 最短的包含 s 和 t 的字符串 https://codeforces.com/edu/course/2/lesson/3/4/practice/contest/272262/problem/F
+	// 		构造 s+t 和 t+s
+	// 判断一个字符串 t 是否为 prefix+reverse(s)+suffix，其中 prefix+suffix=s https://atcoder.jp/contests/abc284/tasks/abc284_f
+	//      构造 t+reverse(t) 和 reverse(t)+t
+	calcZ := func(s string) []int {
+		n := len(s)
+		z := make([]int, n)
+		for i, l, r := 1, 0, 0; i < n; i++ {
+			if i <= r {
+				z[i] = min(z[i-l], r-i+1)
+			}
+			for i+z[i] < n && s[z[i]] == s[i+z[i]] {
+				l, r = i, i+z[i]
+				z[i]++
+			}
+		}
+		z[0] = n
+		return z
+	}
+	// 在 text 中查找 pattern 的所有（首字母）位置
+	// 技巧：把 pattern 拼在 text 前面（中间插入一个范围之外的字符），得到字符串 s，
+	//      只要 LCP(s, s[i:]) == len(pattern)，就说明 i 是一个匹配的位置
+	zSearch := func(text, pattern string) (pos []int) {
+		s := pattern + "#" + text
+		z := calcZ(s)
+		for i, l := range z[len(pattern)+1:] {
+			if l == len(pattern) {
+				pos = append(pos, i)
+			}
+		}
+		return
+	}
+	// 这个技巧还可以用来比较 text 的任意后缀 text[i:] 与 pattern 的字典序
+	// 等价于 strings.Compare(text[i:], pattern)
+	// 时间复杂度：求出 z 数组后，每次比较只需 O(1) 时间
+	// https://codeforces.com/contest/1051/problem/E
+	zCompare := func(text, pattern string, i int) int {
+		s := pattern + "#" + text
+		z := calcZ(s)
+		lcp := z[len(pattern)+1+i]
+		if lcp == len(pattern) { // 相等
+			return 0
+		}
+		if text[i+lcp] < pattern[lcp] {
+			return -1
+		}
+		return 1
+	}
+
+	_ = []interface{}{suffixArray, kmpSearch, zSearch, zCompare}
 }

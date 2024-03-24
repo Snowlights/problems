@@ -54,7 +54,7 @@ func partitionString(s string) int {
 	return ans
 }
 
-//3
+// 3
 func minGroups(intervals [][]int) int {
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]

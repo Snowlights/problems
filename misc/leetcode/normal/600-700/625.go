@@ -3,6 +3,7 @@ package _00_700
 import (
 	"container/heap"
 	"math"
+	"sort"
 )
 
 // 627
@@ -13,6 +14,39 @@ import (
 //        ELSE 'm'
 //    END;
 //
+
+// 630
+func scheduleCourse(courses [][]int) int {
+	sort.Slice(courses, func(i, j int) bool {
+		return courses[i][1] < courses[j][1]
+	})
+
+	hp, days := &hp2{}, 0
+	for _, c := range courses {
+		d := c[0]
+		if days+d <= c[1] {
+			days += d
+			heap.Push(hp, d)
+		} else if hp.Len() > 0 && hp.IntSlice[0] > d {
+			days = days - hp.IntSlice[0] + d
+			hp.IntSlice[0] = d
+			heap.Fix(hp, 0)
+		}
+	}
+
+	return hp.Len()
+}
+
+type hp2 struct{ sort.IntSlice }
+
+func (h hp2) Less(i, j int) bool  { return h.IntSlice[i] > h.IntSlice[j] }
+func (h *hp2) Push(v interface{}) { h.IntSlice = append(h.IntSlice, v.(int)) }
+func (h *hp2) Pop() interface{} {
+	a := h.IntSlice
+	v := a[len(a)-1]
+	h.IntSlice = a[:len(a)-1]
+	return v
+}
 
 // 632
 var (

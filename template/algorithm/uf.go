@@ -110,7 +110,7 @@ func moveRobot(start ufPoint, command string) ufPoint {
 			p = w.find(p)
 		case 'N':
 			p = n.find(p)
-		case 'E':
+		case 'e':
 			p = e.find(p)
 		default:
 			p = s.find(p)

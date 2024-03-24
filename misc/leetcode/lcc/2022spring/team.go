@@ -409,7 +409,7 @@ func buildBridge(num int, wood [][]int) int64 {
 
 type hp struct{ sort.IntSlice }
 
-//func (h hp) Less(i, j int) bool  { return h.IntSlice[i] > h.IntSlice[j] } // 加上这行变成最大堆
+// func (h hp) Less(i, j int) bool  { return h.IntSlice[i] > h.IntSlice[j] } // 加上这行变成最大堆
 func (h *hp) Push(v interface{}) { h.IntSlice = append(h.IntSlice, v.(int)) }
 func (h *hp) Pop() interface{} {
 	a := h.IntSlice

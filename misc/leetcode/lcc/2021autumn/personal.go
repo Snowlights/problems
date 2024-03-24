@@ -221,7 +221,7 @@ func trafficCommand(ds []string) (ans int) {
 			}
 		}
 	}
-	mp := [...]int{'E': 0, 'S': 1, 'W': 2, 'N': 3}
+	mp := [...]int{'e': 0, 'S': 1, 'W': 2, 'N': 3}
 
 	// 去，另来，另去
 	valid := [4][4][4]int{

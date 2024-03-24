@@ -1,7 +1,7 @@
 package _200_1300
 
 // 1254
-//0 表示陆地，用 1 表示海水：
+// 0 表示陆地，用 1 表示海水：
 func closedIsland(grid [][]int) int {
 	res := 0
 	m, n := len(grid), len(grid[0])

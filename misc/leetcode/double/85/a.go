@@ -139,7 +139,7 @@ func max(a, b int64) int64 {
 }
 
 // 并查集
-//maximumSegmentSum([]int{1,2,5,6,1}, []int{0,3,2,4,1})
+// maximumSegmentSum([]int{1,2,5,6,1}, []int{0,3,2,4,1})
 func maximumSegmentSumS2(nums []int, removeQueries []int) (ans []int64) {
 	n := len(nums)
 	fa := make([]int, n+1)
