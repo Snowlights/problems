@@ -28,7 +28,6 @@ func TestCF1327F(t *testing.T) {
 			`,
 			`33`,
 		},
-		
 	}
 	codeforces.AssertEqualStringCase(t, CF1327F, testCases, 0)
 }

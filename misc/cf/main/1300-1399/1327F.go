@@ -57,7 +57,7 @@ func CF1327F(_r io.Reader, _w io.Writer) {
 	}
 	ans = (ans%mod + mod) % mod
 	Fprint(out, ans)
-	
+
 }
 
 func main() { CF1327F(os.Stdin, os.Stdout) }

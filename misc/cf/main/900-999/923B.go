@@ -37,7 +37,6 @@ func CF923B(_r io.Reader, _w io.Writer) {
 		s += t
 	}
 
-
 }
 
 type hp2 struct{ sort.IntSlice }

@@ -104,7 +104,7 @@ func CF1334F(_r io.Reader, _w io.Writer) {
 		Fprintln(out, "YES")
 		Fprint(out, ans)
 	}
-	
+
 }
 
 func min(a, b int) int {

@@ -1,5 +1,29 @@
 package _400_1500
 
+import "strings"
+
+// 1456
+func maxVowels(s string, k int) int {
+	pre, ans := make([]int, len(s)+1), 0
+	for i, v := range s {
+		pre[i+1] = pre[i]
+		if strings.ContainsAny(string(v), "aeiou") {
+			pre[i+1]++
+		}
+		if i+1 >= k {
+			ans = max(ans, pre[i+1]-pre[i+1-k])
+		}
+	}
+	return ans
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 // 1462
 func checkIfPrerequisite(numCourses int, prerequisites [][]int, queries [][]int) []bool {
 	g := make([][]int, 105)

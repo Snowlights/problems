@@ -32,7 +32,7 @@ func CF990C(_r io.Reader, _w io.Writer) {
 		}
 		if mm == 0 || mm == c {
 			if c == 0 {
-				ans += cnt[-c] * 2 + 1
+				ans += cnt[-c]*2 + 1
 			} else {
 				ans += cnt[-c]
 			}
