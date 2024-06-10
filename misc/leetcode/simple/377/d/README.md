@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <strong>0</strong> 开始的字符串 <code>source</code> 和 <code>target</code> ，它们的长度均为 <code>n</code> 并且由 <strong>小写 </strong>英文字母组成。</p>
 
@@ -68,7 +68,7 @@
 	<li><code>1 <= cost[i] <= 10<sup>6</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 1. 把每个字符串转换成一个整数编号，这一步可以用**字典树**完成。见 [208. 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/)。
 2. 建图，从 $\textit{original}[i]$ 向 $\textit{changed}[i]$ 连边，边权为 $\textit{cost}[i]$。

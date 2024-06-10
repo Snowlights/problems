@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个正整数&nbsp;<code>n</code>&nbsp;，请你返回&nbsp;<code>n</code>&nbsp;的&nbsp;<strong>惩罚数</strong>&nbsp;。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>1 &lt;= n &lt;= 1000</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 判断 $[1,1000]$ 的每个数字 $i$ 是否为惩罚数，并预处理 $[1,i]$ 内的惩罚数的元素和 $\textit{preSum}$。  
 对于每个数字 $i$，把它转成字符串 $s$ 后，写一个回溯，枚举第一个子串、第二个子串、……，
@@ -79,7 +79,7 @@ func punishmentNumber(n int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：预处理 $\mathcal{O}(U^{1 + 2\log_{10} 2})\approx\mathcal{O}(U^{1.602})$，其中 $U=1000$。对于数字 $i^2$，它转成字符串后的长度为 $m=\lfloor1+2\log_{10} i\rfloor$，所以回溯需要 $\mathcal{O}(2^m)=\mathcal{O}(i^{2\log_{10} 2})$ 的时间，对其积分可知，整个预处理需要 $\mathcal{O}(U^{1 + 2\log_{10} 2})$ 的时间。
 - 空间复杂度：预处理 $\mathcal{O}(U)$。

@@ -65,8 +65,6 @@
 
 ### 思路
 
-### 思路
-
 ## 方法一：记忆化搜索
 
 看示例 3，$\textit{zero}=3,\ \textit{one}=3,\ \textit{limit}=2$。

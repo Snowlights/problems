@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个 <code>n</code> 个节点的无向无根树，节点编号从 <code>0</code> 到 <code>n - 1</code> 。给你整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> 表示树中节点 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间有一条边。再给你一个长度为 <code>n</code> 的数组 <code>coins</code> ，其中 <code>coins[i]</code> 可能为 <code>0</code> 也可能为 <code>1</code> ，<code>1</code> 表示节点 <code>i</code> 处有一个金币。</p>
 
@@ -48,19 +48,19 @@
 	<li><code>edges</code> 表示一棵合法的树。</li>
 </ul>
  
-### 思路  
+#### 思路  
 
-### 提示 1
+#### 提示 1
 
 去掉不包含金币的子树，访问其中任何一个点都毫无意义。  
 做法：从没有金币的叶子出发，跑拓扑排序。  
 注意，去掉这些子树后，某些原来不是叶子的节点会变成叶子。
 
-### 提示 2
+#### 提示 2
 
 只需要考虑有金币的的叶子，因为不在叶子上的金币**顺路**就能收集到。
 
-### 提示 3
+#### 提示 3
 
 从有金币的的叶子出发，再次跑拓扑排序。在拓扑排序的同时，标记每个点入队的时间 $\textit{time}$。  
 **注意是入队的时间，不是访问到这个节点的时间。**
@@ -138,7 +138,7 @@ func collectTheCoins(coins []int, edges [][]int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n)$，其中 $n$ 为 $\textit{coins}$ 的长度。
 - 空间复杂度：$O(n)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数数组&nbsp;<code>nums</code>&nbsp;和两个整数&nbsp;<code>cost1</code> 和&nbsp;<code>cost2</code>&nbsp;。你可以执行以下&nbsp;<strong>任一</strong>&nbsp;操作&nbsp;<strong>任意</strong>&nbsp;次：</p>
 
@@ -87,7 +87,7 @@
 	<li><code>1 &lt;= cost2 &lt;= 10<sup>6</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 为方便描述，将 $\textit{cost}_1$ 和 $\textit{cost}_2$ 简记为 $c_1$ 和 $c_2$。
 
@@ -306,7 +306,7 @@ func minCostToEqualizeArray(nums []int, c1 int, c2 int) int {
 
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <code>0</code> 开始的整数数组 <code>nums1</code> 和 <code>nums2</code> ，它们的长度都是偶数<code> n</code> 。</p>
 
@@ -45,7 +45,7 @@
 	<li><code>1 <= nums1[i], nums2[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 从「添加」的角度思考
 
@@ -97,7 +97,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums1}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，以及整数 <code>modulo</code> 和整数 <code>k</code> 。</p>
 
@@ -56,7 +56,7 @@
 	<li><code>0 <= k < modulo</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 对于本题，由于需要统计 $\textit{cnt}$，我们可以把满足 $\textit{nums}[i]\bmod \textit{modulo} = k$ 的 $\textit{nums}[i]$ 视作 $1$，不满足则视作 $0$。
 如此转换后，算出 $\textit{nums}$ 的前缀和数组 $s$，那么题目中的 $\textit{cnt}\bmod \textit{modulo} = k$ 等价于
@@ -91,7 +91,7 @@ func countInterestingSubarrays(nums []int, mod, k int) (ans int64) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

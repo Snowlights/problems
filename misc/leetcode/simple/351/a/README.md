@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。如果下标对 <code>i</code>、<code>j</code> 满足 <code>0 ≤ i < j < nums.length</code> ，如果 <code>nums[i]</code> 的 <strong>第一个数字</strong> 和 <code>nums[j]</code> 的 <strong>最后一个数字</strong> <strong>互质</strong> ，则认为 <code>nums[i]</code> 和 <code>nums[j]</code> 是一组 <strong>美丽下标对</strong> 。</p>
 
@@ -40,7 +40,7 @@ i = 0 和 j = 2 ：nums[0] 的第一个数字是 1 ，nums[1] 的最后一个数
 	<li><code>nums[i] % 10 != 0</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 设 $x=\textit{nums}[i]$。
 遍历 $\textit{nums}$ 的同时维护 $x$ 的最高位的个数 $\textit{cnt}$。枚举 $[1,9]$ 内的数字 $y$，如果与 $x\bmod 10$ 互质则答案加上 $\textit{cnt}[j]$。
@@ -70,7 +70,7 @@ func gcd(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n(k+\log U))$，其中 $n$ 为 $\textit{nums}$ 的长度，$k=10$，$U=\max(\textit{nums})$。GCD 的时间视作 $\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(k)$。

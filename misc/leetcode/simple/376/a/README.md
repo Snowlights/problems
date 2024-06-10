@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从<strong> 0 </strong>开始的二维整数矩阵 <code><font face="monospace">grid</font></code>，大小为 <code>n * n</code> ，其中的值在 <code>[1, n<sup>2</sup>]</code> 范围内。除了 <code>a</code> 出现 <strong>两次</strong>，<code>b</code> <strong>缺失</strong> 之外，每个整数都<strong> 恰好出现一次</strong> 。</p>
 
@@ -36,7 +36,7 @@
 	<li>除上述的两个之外，对于所有满足<code>1 <= x <= n * n</code> 的 <code>x</code> ，都恰好存在一对 <code>i, j</code> 满足 <code>0 <= i, j <= n - 1</code> 且 <code>grid[i][j] == x</code> 。</li>
 </ul>
 
-### 思路
+#### 思路
 
 哈希表模拟
 
@@ -61,7 +61,7 @@ func findMissingAndRepeatedValues(grid [][]int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^2)$，其中 $n$ 为 $\textit{grid}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n^2)$。

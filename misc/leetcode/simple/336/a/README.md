@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串数组 <code>words</code> 和两个整数：<code>left</code> 和 <code>right</code> 。</p>
 
@@ -42,7 +42,7 @@
 	<li><code>0 &lt;= left &lt;= right &lt; words.length</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 遍历 $[\textit{left},\textit{right}]$ 内的元素，按照要求判断。
 
@@ -57,7 +57,7 @@ func vowelStrings(words []string, left, right int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n)$，其中 $n$ 为 $\textit{words}$ 的长度。
 - 空间复杂度：$O(1)$。仅用到若干额外变量。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的二维整数数组 <code>nums</code> 表示汽车停放在数轴上的坐标。对于任意下标 <code>i</code>，<code>nums[i] = [start<sub>i</sub>, end<sub>i</sub>]</code> ，其中 <code>start<sub>i</sub></code> 是第 <code>i</code> 辆车的起点，<code>end<sub>i</sub></code> 是第 <code>i</code> 辆车的终点。</p>
 <p>返回数轴上被车 <strong>任意部分</strong> 覆盖的整数点的数目。</p>
@@ -23,7 +23,7 @@
 <li><code><font face="monospace">1 <= start<sub>i</sub> <= end<sub>i</sub> <= 100</font></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 之前在力扣上写过一篇文章：[【算法小课堂】差分数组](https://leetcode.cn/circle/discuss/FfMCgb/)。  
 根据这篇文章，可以用查封数组求出每个点被覆盖多少次。  
@@ -47,7 +47,7 @@ func numberOfPoints(nums [][]int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+\max{\textit{end}_i})$。其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(\max{\textit{end}_i})$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始、由 <strong>正整数</strong> 组成的数组 <code>nums</code>。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 考虑如下数组
 

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>你有一个下标从 <strong>0</strong> 开始、长度为 <strong>偶数</strong> 的整数数组 <code>nums</code> ，同时还有一个空数组 <code>arr</code> 。Alice 和 Bob 决定玩一个游戏，游戏中每一轮 Alice 和 Bob 都会各自执行一次操作。游戏规则如下：</p>
 
@@ -39,7 +39,7 @@
 	<li><code>nums.length % 2 == 0</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 排序交叉替换
 
@@ -53,7 +53,7 @@ func numberGame(nums []int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n \log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

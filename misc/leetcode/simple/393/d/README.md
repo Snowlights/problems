@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个数组 <code>nums</code> 和 <code>andValues</code>，长度分别为 <code>n</code> 和 <code>m</code>。</p>
 
@@ -74,7 +74,7 @@
 	<li><code>0 &lt;= andValues[j] &lt; 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 本题是标准的**划分型 DP**，见 [DP 题单](https://leetcode.cn/circle/discuss/tXLS3i/) 中的「§6.3 约束划分个数」。
 
@@ -139,7 +139,7 @@ func minimumValueSum(nums, andValues []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(nm\log U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$m$ 为 $\textit{andValues}$ 的长度，$U=\max(\textit{nums})$。由于每个状态只会计算一次，动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。本题状态个数等于 $\mathcal{O}(nm\log U)$，单个状态的计算时间为 $\mathcal{O}(1)$，所以动态规划的时间复杂度为 $\mathcal{O}(nm\log U)$。
 - 空间复杂度：$\mathcal{O}(nm\log U)$。

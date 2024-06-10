@@ -38,7 +38,7 @@ func isWinner(player1, player2 []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{player}_1$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

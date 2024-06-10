@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的二维整数数组 <code>nums</code> 。</p>
 
@@ -41,7 +41,7 @@
 	<li><code>1 &lt;= nums<span style="">[i][j]</span> &lt;= 4*10<sup>6</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 遍历两条对角线上的元素，如果是质数则更新答案的最大值。
 注意 $1$ 不是质数。
@@ -69,7 +69,7 @@ func diagonalPrime(nums [][]int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n\sqrt{U})$，其中 $n$ 为 $\textit{nums}$ 的长度，$U$ 为两条对角线上的最大值。
 - 空间复杂度：$O(1)$。仅用到若干额外变量。

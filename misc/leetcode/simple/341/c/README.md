@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code> ，你可以向其中任何位置插入 "a"、"b" 或 "c" 任意次，返回使 <code>word</code> <strong>有效</strong> 需要插入的最少字母数。</p>
 
@@ -36,7 +36,7 @@
 	<li><code>word</code> 仅由字母 "a"、"b" 和 "c" 组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 下文将 $\textit{word}$ 简记为 $s$。
 
@@ -72,7 +72,7 @@ func addMinimum(s string) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(n)$，其中 $n$ 为 $\textit{word}$ 的长度。
 - 空间复杂度：$O(1)$。仅用到若干额外变量。
@@ -95,7 +95,7 @@ func addMinimum(s string) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(n)$，其中 $n$ 为 $\textit{word}$ 的长度。
 - 空间复杂度：$O(1)$。仅用到若干额外变量。

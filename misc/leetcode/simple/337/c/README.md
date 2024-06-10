@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个由正整数组成的数组 <code>nums</code> 和一个 <strong>正</strong> 整数 <code>k</code> 。</p>
 
@@ -35,7 +35,7 @@
 	<li><code>1 &lt;= nums[i], k &lt;= 1000</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 在枚举 [78. 子集](https://leetcode.cn/problems/subsets/) 的基础上加个判断。  
 在选择 $x=\textit{nums}[i]$ 的时候，如果之前选过 $x-k$ 或 $x+k$，则不能选，否则可以选。  
@@ -64,7 +64,7 @@ func beautifulSubsets(nums []int, k int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(2^n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$O(n)$。用哈希表实现是 $O(n)$。

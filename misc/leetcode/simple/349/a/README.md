@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个整数数组 <code>nums</code> ，数组由 <strong>不同正整数</strong> 组成，请你找出并返回数组中 <strong>任一</strong> 既不是 <strong>最小值</strong> 也不是 <strong>最大值</strong> 的数字，如果不存在这样的数字，返回 <strong><code>-1</code></strong> 。</p>
 
@@ -37,13 +37,13 @@
 	<li><code>nums</code> 中的所有数字互不相同</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 ```go 
 
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$ 。

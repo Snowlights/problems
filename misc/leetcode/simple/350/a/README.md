@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>卡车有两个油箱。给你两个整数，<code>mainTank</code> 表示主油箱中的燃料（以升为单位），<code>additionalTank</code> 表示副油箱中的燃料（以升为单位）。</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 &lt;= mainTank, additionalTank &lt;= 100</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 如果 $\textit{mainTank}$ 有 $10^9$，那么方法一会超时。有没有更快的做法呢？
 
@@ -66,7 +66,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(\log\textit{mainTank})$。每次循环 $\textit{mainTank}$ 至少减为原来的 $\dfrac{1}{4}$。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

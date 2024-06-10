@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的字符串 <code>word</code> 和一个整数 <code>k</code> ，其中 <code>k</code> 是 <code>n</code> 的因数。</p>
 
@@ -93,7 +93,7 @@ font-size: 0.85rem;
 	<li><code>word</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 根据题意，我们只能选择首字母下标为 $0,k,2k,3k,\cdots,n-k$ 的长为 $k$ 的子串来操作（替换）。
 
@@ -118,7 +118,7 @@ func minimumOperationsToMakeKPeriodic(word string, k int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{word}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个<strong> 正整数 </strong>数组 <code>nums</code> 。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 \textit{nums}$ 中的奇数肯定不能参与或运算，
 这会导致或运算结果的最低位必然是 $1$。
@@ -62,7 +62,7 @@ func hasTrailingZeros(nums []int) bool {
 
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

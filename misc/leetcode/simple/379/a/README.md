@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从<strong> 0</strong> 开始的二维整数数组 <code>dimensions</code>。</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 <= dimensions[i][0], dimensions[i][1] <= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 设长宽分别为 $x$ 和 $y$。根据勾股定理，对角线长度的平方为
 
@@ -63,7 +63,7 @@ func areaOfMaxDiagonal(dimensions [][]int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{dimensions}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

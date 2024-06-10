@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个<span data-keyword="binary-array">二进制数组 </span><code>nums</code> 。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code> 。</li>
 </ul>
 
-### 思路
+#### 思路
 
 固定右端点、看作左端点最远在哪。
 

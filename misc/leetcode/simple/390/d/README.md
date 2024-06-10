@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个字符串数组&nbsp;<code>wordsContainer</code> 和&nbsp;<code>wordsQuery</code>&nbsp;。</p>
 
@@ -58,7 +58,7 @@
 	<li><code>wordsQuery[i].length</code>&nbsp;的和至多为&nbsp;<code>5 * 10<sup>5</sup></code>&nbsp;。</li>
 </ul>
 
-### 思路
+#### 思路
 
 **前置知识**：[208. 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/)。
 

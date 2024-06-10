@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个由 <strong>正整数 </strong>组成的数组 <code>nums</code> 。</p>
 
@@ -35,7 +35,7 @@
 	<li><code>1 <= nums[i] <= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 遍历 $\textit{nums}$，同时用哈希表统计每个元素的出现次数，
 并维护出现次数的最大值 $\textit{maxCnt}$：
@@ -60,7 +60,7 @@ func maxFrequencyElements(nums []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

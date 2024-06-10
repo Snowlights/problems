@@ -1,12 +1,12 @@
 ## 思路
 
-### 方法一：动态规划
+#### 方法一：动态规划
 
-### 前置知识：动态规划、记忆化搜索
+#### 前置知识：动态规划、记忆化搜索
 
 见 [动态规划入门：从记忆化搜索到递推](https://www.bilibili.com/video/BV1Xj411K7oF/)。
 
-### 记忆化搜索
+#### 记忆化搜索
 
 写一个递归函数 `{dfs}(i,j)`，返回并记录从 `(i,j)` 出发时的答案。
 
@@ -78,7 +78,7 @@ func max(a, b int) int { if b > a { return b }; return a }
 - 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。动态规划的时间复杂度 `=` 状态个数 `times` 单个状态的计算时间。本题中状态个数等于 `{O}(mn)`，单个状态的计算时间为 `{O}(1)`，因此时间复杂度为 `{O}(mn)`。
 - 空间复杂度：`{O}(mn)`。
 
-### 1:1 翻译成递推
+#### 1:1 翻译成递推
 
 根据视频中讲的，我们可以去掉递归中的「递」，只保留「归」的部分，即自底向上计算。
 
@@ -164,14 +164,14 @@ func min(a, b int) int { if b < a { return b }; return a }
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。动态规划的时间复杂度 `=` 状态个数 `times` 单个状态的计算时间。本题中状态个数等于 `{O}(mn)`，单个状态的计算时间为 `{O}(1)`，因此时间复杂度为 `{O}(mn)`。
 - 空间复杂度：`{O}(mn)`。
 
 > 注：利用滚动数组，空间可以进一步优化至 `O(m)`。
 
-### 相似题目：网格图 DP
+#### 相似题目：网格图 DP
 
 - [62. 不同路径](https://leetcode.cn/problems/unique-paths/)
 - [63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/)
@@ -180,7 +180,7 @@ func max(a, b int) int { if b > a { return b }; return a }
 - [931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/)
 - [2435. 矩阵中和能被 K 整除的路径](https://leetcode.cn/problems/paths-in-matrix-whose-sum-is-divisible-by-k/)
 
-### 方法二：BFS
+#### 方法二：BFS
 
 也可以用 BFS 做，每一轮向右搜索一列。
 
@@ -233,7 +233,7 @@ func min(a, b int) int { if b < a { return b }; return a }
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：`{O}(mn)`，其中 `m` 和 `n` 分别为 `{grid}` 的行数和列数。
 - 空间复杂度：`{O}(m)`。

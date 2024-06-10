@@ -1,12 +1,12 @@
 ## 思路
 
-### 前置知识：异或运算的性质
+#### 前置知识：异或运算的性质
 
 $a\oplus a = 0$。
 
 $a\oplus b = c$ 两边同时异或 $a$ 可以得到 $b = c\oplus a$。
 
-### 思路
+#### 思路
 
 如果知道 $\textit{original}[0]$，利用 $\textit{derived}[i]$ 可以推出其余 $\textit{original}[i]$ 的值，即
 

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串数组 <code>words</code> 。</p>
 
@@ -54,7 +54,7 @@ i = 2 且 j = 3 ，因为 isPrefixAndSuffix("ma", "mama") 为 true 。
 	<li><code>words[i]</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 方法一：Z 函数 + 字典树
 
@@ -115,7 +115,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(L)$，其中 $L$ 为所有 $\textit{words}[i]$ 的长度之和。
 - 空间复杂度：$\mathcal{O}(L)$。
@@ -153,7 +153,7 @@ func countPrefixSuffixPairs(words []string) (ans int64) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(L)$，其中 $L$ 为所有 $\textit{words}[i]$ 的长度之和。
 - 空间复杂度：$\mathcal{O}(L)$。

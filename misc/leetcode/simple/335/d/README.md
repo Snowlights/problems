@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>考试中有 <code>n</code> 种类型的题目。给你一个整数 <code>target</code> 和一个下标从 <strong>0</strong> 开始的二维整数数组 <code>types</code> ，其中 <code>types[i] = [count<sub>i</sub>, marks<sub>i</sub>] </code>表示第 <code>i</code> 种类型的题目有 <code>count<sub>i</sub></code> 道，每道题目对应 <code>marks<sub>i</sub></code> 分。</p>
 
@@ -56,7 +56,7 @@
 	<li><code>1 <= count<sub>i</sub>, marks<sub>i</sub> <= 50</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 分组背包模板题。
 定义 $f[i][j]$ 表示用前 $i$ 种题目恰好组成 $j$ 分的方案数。
@@ -75,7 +75,7 @@ $$
 
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(TS)$，其中 $T$ 为 $\textit{target}$，$S$ 为所有 $\textit{count}_i$ 之和。
 - 空间复杂度：$O(T)$。

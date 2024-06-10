@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的字符串&nbsp;<code>s</code>&nbsp;、字符串&nbsp;<code>a</code>&nbsp;、字符串&nbsp;<code>b</code>&nbsp;和一个整数&nbsp;<code>k</code>&nbsp;。</p>
 
@@ -50,7 +50,7 @@
 </ul>
 
 
-### 思路
+#### 思路
 
 #### KMP+二分查找
 
@@ -115,7 +115,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n \log n)$，$n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。
@@ -183,7 +183,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，$n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

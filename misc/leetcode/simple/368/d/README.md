@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串&nbsp;<code>s</code>&nbsp;和一个整数&nbsp;<code>k</code>&nbsp;，请你将&nbsp;<code>s</code> 分成&nbsp;<code>k</code>&nbsp;个<strong>&nbsp;子字符串</strong>&nbsp;，使得每个 <strong>子字符串</strong>&nbsp;变成&nbsp;<strong>半回文串</strong>&nbsp;需要修改的字符数目最少。</p>
 
@@ -49,7 +49,7 @@
 	<li><code>s</code>&nbsp;只包含小写英文字母。</li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 预处理
 
@@ -151,7 +151,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^3\log n)$，其中 $n$ 为 $s$ 的长度。时间主要在预处理上，有 $\mathcal{O}(n^2)$ 个子串，平均每个子串有 $\mathcal{O}(\log n)$ 个因子，每个因子需要 $\mathcal{O}(n)$ 的时间计算修改次数。
 - 空间复杂度：$\mathcal{O}(n^2)$。

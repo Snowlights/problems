@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个由 <strong>小写英文字母</strong> 组成的字符串 <code>s</code> ，你可以对其执行一些操作。在一步操作中，你可以用其他小写英文字母 <strong>替换</strong>&nbsp; <code>s</code> 中的一个字符。</p>
 
@@ -42,7 +42,7 @@
 	<li><code>s</code> 仅由小写英文字母组成</li>
 </ul>
 
-### 思路
+#### 思路
 
 贪心替换
 
@@ -72,7 +72,7 @@ func makeSmallestPalindrome(s string) (ans string) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

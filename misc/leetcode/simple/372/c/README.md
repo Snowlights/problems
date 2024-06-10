@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你三个整数&nbsp;<code>a</code>&nbsp;，<code>b</code>&nbsp;和&nbsp;<code>n</code>&nbsp;，请你返回&nbsp;<code>(a XOR x) * (b XOR x)</code>&nbsp;的&nbsp;<strong>最大值</strong>&nbsp;且 <code>x</code>&nbsp;需要满足 <code>0 &lt;= x &lt; 2<sup>n</sup></code>。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>0 &lt;= n &lt;= 50</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 先来看 $a$ 和 $b$ 均小于 $2^n$ 的情况。
 
@@ -130,7 +130,7 @@ func maximumXorProduct(A, B int64, n int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>threshold</code> 。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>1 <= threshold <= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 题目的约束实际上把数组划分成了若干段，每段都满足要求，且互不相交。
 
@@ -74,7 +74,7 @@ func longestAlternatingSubarray(a []int, threshold int) (ans int) {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。注意 $i$ 是全局变量，只会增加，不会减少。所以二重循环至多执行 $\mathcal{O}(n)$ 次。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

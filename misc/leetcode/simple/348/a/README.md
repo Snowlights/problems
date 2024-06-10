@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> ，重复执行下述操作 <strong>任意</strong> 次：</p>
 
@@ -40,7 +40,7 @@
 	<li><code>s</code> 仅由小写英文字母组成</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 hash去重字符返回大小
 
@@ -60,7 +60,7 @@ class Solution:
         return len(set(s))
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$。 $n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(26)$ 。

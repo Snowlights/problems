@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你两个下标从 <strong>0</strong> 开始的整数数组 <code>nums1</code> 和 <code>nums2</code> ，长度均为 <code>n</code> 。</p>
 
@@ -48,7 +48,7 @@ nums3 = [nums1[0], nums1[1]] =&gt; [1,1]
 	<li><code>1 &lt;= nums1[i], nums2[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 为方便后面翻译成递推，这里从右往左递归。
 定义 $\textit{dfs}(i,j)$ 表示以 $\textit{nums}_j[i]$ 结尾的最长非递减子数组的长度。
@@ -99,7 +99,7 @@ func maxNonDecreasingLength(nums1, nums2 []int) (ans int) {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}_1$ 的长度。动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。本题中状态个数等于 $\mathcal{O}(n)$，单个状态的计算时间为 $\mathcal{O}(1)$，所以动态规划的时间复杂度为 $\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

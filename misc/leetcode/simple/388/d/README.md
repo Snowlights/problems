@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个 <strong>正奇数</strong> 整数 <code>k</code> 。</p>
 
@@ -48,7 +48,7 @@
 	<li><code>k</code> 是奇数。</li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 题意补充
 
@@ -162,7 +162,7 @@ func maximumStrength(nums []int, k int) int64 {
 ```
 
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(k\cdot (n-k))$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

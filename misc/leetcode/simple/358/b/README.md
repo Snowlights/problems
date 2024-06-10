@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个 <strong>非空</strong> 链表的头节点 <code>head</code> ，表示一个不含前导零的非负数整数。</p>
 
@@ -29,7 +29,7 @@
 	<li>生成的输入满足：链表表示一个不含前导零的数字，除了数字 <code>0</code> 本身。</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 看成是 $\textit{head}$ 与 $\textit{head}$ 这两个链表相加。
 
@@ -70,7 +70,7 @@ func doubleIt(head *ListNode) *ListNode {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为链表的长度。
 - 空间复杂度：$\mathcal{O}(1)$。返回值不计入。

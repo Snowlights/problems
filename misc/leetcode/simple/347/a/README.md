@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个用字符串表示的正整数 <code>num</code> ，请你以字符串形式返回不含尾随零的整数<em> </em><code>num</code><em> </em>。</p>
 
@@ -28,7 +28,7 @@
 	<li><code>num</code> 不含前导零</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 直接去除字符串末尾的 $0$ 即可
 
@@ -38,7 +38,7 @@ func removeTrailingZeros(n string) (ans string) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$。

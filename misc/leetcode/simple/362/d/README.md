@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个长度都为 <code>n</code>&nbsp;的字符串&nbsp;<code>s</code> 和&nbsp;<code>t</code>&nbsp;。你可以对字符串 <code>s</code>&nbsp;执行以下操作：</p>
 <ul>
@@ -41,7 +41,7 @@
 <li><code>s</code> 和&nbsp;<code>t</code>&nbsp;都只包含小写英文字母。</li>
 </ul>
 
-### 思路
+#### 思路
 
 根据题意，我们可以把 $s$ 看成是一个首尾相连的字符串（循环字符串），只要 $s+s$ 中包含 $t$，那么可以从 $s$ 变成 $t$。  
 计算 $t$ 在循环字符串 $s$ 中的出现次数，记作 $c$，这可以用 KMP 等字符串匹配算法解决，即寻找 $t$ 在 $s+s$ 中的出现次数，注意当 $s=t$ 时要少统计一次。  
@@ -176,7 +176,7 @@ func numberOfWays(s, t string, k int64) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+\log k)$，其中 $n$ 为 $s$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

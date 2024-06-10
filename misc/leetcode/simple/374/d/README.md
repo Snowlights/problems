@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数&nbsp;<code>n</code>&nbsp;和一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>sick</code>&nbsp;，数组按 <strong>升序</strong>&nbsp;排序。</p>
 
@@ -50,7 +50,7 @@
 	<li><code>sick</code>&nbsp;按升序排列。</li>
 </ul>
 
-### 思路
+#### 思路
 
 首先考虑两个相邻感冒小朋友之间的序列有多少个。
 

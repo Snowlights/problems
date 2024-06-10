@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的数组 <code>nums</code> ，它包含 <strong>非负</strong> 整数，且全部为 <code>2</code> 的幂，同时给你一个整数 <code>target</code> 。</p>
 
@@ -52,7 +52,7 @@
 	<li><code>1 <= target < 2<sup>31</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 由于可以把一个数一分为二，所以整个数组可以全部变成 $1$。因此如果 $\textit{nums}$ 的元素和小于 $\textit{target}$，则无解，返回 $-1$。否则一定有解。
 然后从低位到高位贪心：
@@ -91,7 +91,7 @@ func minOperations(nums []int, target int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(\log \textit{target})$。

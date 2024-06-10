@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个正整数 <code>n</code> 和 <code>m</code> 。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>1 <= n, m <= 1000</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 设 $k = \left\lfloor\dfrac{n}{m}\right\rfloor$。
 $\textit{num}_2$ 是 $[1,n]$ 内的 $m$ 的倍数之和，即
@@ -83,7 +83,7 @@ func differenceOfSums(n int, m int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

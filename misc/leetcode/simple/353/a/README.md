@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你两个整数 <code>num</code> 和 <code>t</code> 。</p>
 
@@ -39,7 +39,7 @@
 	<li><code>1 &lt;= num, t &lt;= 50</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 显然 $\textit{num}+2t$ 是可达成数字。但对于更大的数，就在 $t$ 次操作内和 $\textit{num}$ 相等了，所以答案为 $\textit{num}+2t$
 
@@ -49,7 +49,7 @@ func theMaximumAchievableX(num, t int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

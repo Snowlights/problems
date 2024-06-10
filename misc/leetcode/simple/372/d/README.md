@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的正整数数组&nbsp;<code>heights</code>&nbsp;，其中&nbsp;<code>heights[i]</code>&nbsp;表示第 <code>i</code>&nbsp;栋建筑的高度。</p>
 
@@ -50,7 +50,7 @@
 	<li><code>0 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt;= heights.length - 1</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 
 ## 方法一：离线做法+最小堆
@@ -194,7 +194,7 @@ func leftmostBuildingQueriesSeg(heights []int, queries [][]int) []int {
 
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n + q\log n)$，其中 $n$ 为 $\textit{heights}$ 的长度，$q$ 为 $\textit{queries}$ 的长度。对于左子树的递归，时间是 $\mathcal{O}(\log n)$ 的（同单点更新）；对于右子树的递归，由于区间满足 $\textit{max}\le v$ 则不递归，否则只会向下递归，所以这部分的时间也是 $\mathcal{O}(\log n)$ 的，所以线段树二分的时间复杂度为 $\mathcal{O}(\log n)$。
 - 空间复杂度：$\mathcal{O}(n)$。返回值不计入。

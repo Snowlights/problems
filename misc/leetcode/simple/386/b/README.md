@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>在二维平面上存在 <code>n</code> 个矩形。给你两个下标从 <strong>0</strong> 开始的二维整数数组 <code>bottomLeft</code> 和 <code>topRight</code>，两个数组的大小都是 <code>n x 2</code> ，其中 <code>bottomLeft[i]</code> 和 <code>topRight[i]</code> 分别代表第 <code>i</code> 个矩形的<strong> 左下角 </strong>和 <strong>右上角 </strong>坐标。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>bottomLeft[i][1] &lt; topRight[i][1]</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 枚举两个矩形。  
 如果矩形有交集，那么交集一定是矩形。求出这个交集矩形的左下角和右上角。
@@ -96,7 +96,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^2)$，其中 $n$ 为 $\textit{bottomLeft}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个 <strong>二进制</strong> 字符串 <code>s</code> ，其中至少包含一个 <code>'1'</code> 。</p>
 
@@ -36,7 +36,7 @@
 	<li><code>s</code> 中至少包含一个 <code>'1'</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把一个 $1$ 放末尾，其余全部放在开头。
 
@@ -47,7 +47,7 @@ func maximumOddBinaryNumber(s string) string {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。其中 $n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

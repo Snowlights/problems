@@ -49,7 +49,7 @@ func firstCompleteIndex(arr []int, mat [][]int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(mn)$，其中 $m$ 和 $n$ 分别为 $\textit{mat}$ 的行数和列数。
 - 空间复杂度：$\mathcal{O}(m+n)$。

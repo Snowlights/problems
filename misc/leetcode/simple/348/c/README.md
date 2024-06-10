@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个整数 <code>n</code> 和一个下标从 <strong>0</strong> 开始的 <strong>二维数组</strong> <code>queries</code> ，其中 <code>queries[i] = [type<sub>i</sub>, index<sub>i</sub>, val<sub>i</sub>]</code> 。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>0 &lt;= val<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 - 如果对同一行反复操作，那么只有最后一次对这行的操作会计入答案。列同理。
 - 倒序操作 queries
@@ -84,6 +84,6 @@ class Solution:
         return ans
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 - 时间复杂度：$\mathcal{O}(q)$，其中 $q$ 为 $\textit{queries}$ 的长度。
 - 空间复杂度：$\mathcal{O}(\min\{q,n\})$。哈希表中至多有 $\mathcal{O}(n)$ 个数

@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>num</code> ，表示一个非负整数。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>num</code> 不含任何前导零</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 一个数能被 $25$ 整除，有如下五种情况：
 - 这个数是 $0$。
@@ -94,7 +94,7 @@ func minimumOperations(num string) int {
 func min(a, b int) int { if b < a { return b }; return a }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{num}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

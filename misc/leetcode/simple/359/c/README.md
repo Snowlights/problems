@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数 <code>n</code> 表示数轴上的房屋数量，编号从 <code>0</code> 到 <code>n - 1</code> 。</p>
 
@@ -44,7 +44,7 @@
 </ul>
 
 
-### 思路
+#### 思路
 
 定义 $f[i+1]$ 表示销售编号不超过 $i$ 的房屋的最大盈利。
 
@@ -77,7 +77,7 @@ func maximizeTheProfit(n int, offers [][]int) int {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$ 。

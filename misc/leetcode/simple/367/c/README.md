@@ -1,4 +1,4 @@
-### 题目
+#### 题目
              
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> ，以及整数 <code>indexDifference</code> 和整数 <code>valueDifference</code> 。</p>
 
@@ -57,7 +57,7 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 	<li><code>0 &lt;= valueDifference &lt;= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 不妨设 $i\le j - \textit{indexDifference}$。
 
@@ -98,7 +98,7 @@ func findIndices(nums []int, indexDifference, valueDifference int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

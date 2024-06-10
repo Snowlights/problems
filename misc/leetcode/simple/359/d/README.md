@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。</p>
 
@@ -42,7 +42,7 @@
 	<li><code>0 &lt;= k &lt;= nums.length</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把相同元素分组，相同元素的下标记录到哈希表（或者数组）$\textit{pos}$ 中。  
 遍历 $\textit{pos}$ 中的每个下标列表 $\textit{ps}$，用双指针处理：  
@@ -94,7 +94,7 @@ func longestEqualSubarray(nums []int, k int) (ans int) {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(nm)$。

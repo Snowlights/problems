@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个由正整数和 <code>0</code> 组成的数组 <code>nums1</code> 和 <code>nums2</code> 。</p>
 
@@ -36,7 +36,7 @@
 	<li><code>0 <= nums1[i], nums2[i] <= 10<sup>6</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 $0$ 看成 $1$，设 $s_1$ 为 $\textit{nums}_1$ 的元素和，
 $s_2$ 为 $\textit{nums}_2$ 的元素和。这是元素和的最小值。
@@ -88,7 +88,7 @@ func max(a, b int64) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+m)$，其中 $n$ 为 $\textit{nums}_1$ 的长度，$m$ 为 $\textit{nums}_2$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

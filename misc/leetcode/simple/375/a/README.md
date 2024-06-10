@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 、下标从<strong> 0 </strong>开始的整数数组 <code>batteryPercentages</code> ，表示 <code>n</code> 个设备的电池百分比。</p>
 <p>你的任务是按照顺序测试每个设备 <code>i</code>，执行以下测试操作：</p>
@@ -52,7 +52,7 @@
 	<li><code>0 <= batteryPercentages[i] <= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 用[差分数组]的思想可以做到 $\mathcal{O}(n)$，方法如下：
 1. 初始化 $\textit{dec}=0$，表示需要减一的次数。
@@ -71,7 +71,7 @@ func countTestedDevices(b []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{batteryPercentages}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

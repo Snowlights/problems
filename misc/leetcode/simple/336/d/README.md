@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>你有一台电脑，它可以 <strong>同时</strong> 运行无数个任务。给你一个二维整数数组 <code>tasks</code> ，其中 <code>tasks[i] = [start<sub>i</sub>, end<sub>i</sub>, duration<sub>i</sub>]</code> 表示第 <code>i</code> 个任务需要在 <strong>闭区间</strong> 时间段 <code>[start<sub>i</sub>, end<sub>i</sub>]</code> 内运行 <code>duration<sub>i</sub></code> 个整数时间点（但不需要连续）。</p>
 
@@ -41,19 +41,19 @@
 	<li><code>1 &lt;= duration<sub>i</sub> &lt;= end<sub>i</sub> - start<sub>i</sub> + 1 </code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 # 方法一：贪心+暴力
 
-### 提示 1
+#### 提示 1
 
 按照右端点排序。
 
-### 提示 2
+#### 提示 2
 
 对于 $\textit{tasks}[i]$ 来说，它右侧的任务要么和它没有交集，要么包含它的区间**后缀**。
 
-### 提示 3
+#### 提示 3
 
 遍历排序后的任务，先统计区间内的已有的电脑运行时间点，如果个数小于 $\textit{duration}$，则需要新增时间点。
 根据提示 2，尽量把新增的时间点安排在区间 $[\textit{start},\textit{end}]$ 的后缀上，这样下一个区间就能统计到更多已有的时间点。
@@ -81,7 +81,7 @@ func findMinimumTime(tasks [][]int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(nU)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=\max(\textit{end}_i)$。
 - 空间复杂度：$O(U)$。
@@ -178,7 +178,7 @@ func findMinimumTime(tasks [][]int) (ans int) {
 ```
 
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(n\log U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=\max(\textit{end}_i)$。
 - 空间复杂度：$O(U)$。
@@ -217,7 +217,7 @@ func findMinimumTime(tasks [][]int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$O(n)$

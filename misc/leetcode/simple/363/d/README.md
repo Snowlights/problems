@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>1</strong> 开始、由 <code>n</code> 个整数组成的数组。</p>
 
@@ -46,7 +46,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 方法一：
 
@@ -95,7 +95,7 @@ func max(a, b int64) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\sqrt{n})$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。
@@ -142,7 +142,7 @@ func max(a, b int64) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。循环次数约为 $\sqrt{n}\cdot(1/\sqrt{1} + 1/\sqrt{2} + ...)$，由 $f(x)=1/\sqrt{x}$ 的积分可知，$1/\sqrt{1} + 1/\sqrt{2} + ... = \mathcal{O}(\sqrt{n})$，所以总的循环次数为 $\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(1)$。

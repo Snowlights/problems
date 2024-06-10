@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的数组 <code>mountain</code> 。你的任务是找出数组&nbsp;<code>mountain</code> 中的所有 <strong>峰值</strong>。</p>
 
@@ -43,7 +43,7 @@ mountain[2] 也不可能是峰值，因为它不严格大于 mountain[3] 和 mou
 	<li><code>1 &lt;= mountain[i] &lt;= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 遍历下标在 $[1,n-2]$ 内的所有数，如果其大于其左右两侧相邻数字，则把 $i$ 加入答案。
 
@@ -58,7 +58,7 @@ func findPeaks(mountain []int) (ans []int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{mountain}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。返回值不计入。

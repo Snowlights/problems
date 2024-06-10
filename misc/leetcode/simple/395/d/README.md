@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数数组 <code>nums</code> 。数组 <code>nums</code> 的<strong> 唯一性数组</strong> 是一个按元素从小到大排序的数组，包含了 <code>nums</code> 的所有<span data-keyword="subarray-nonempty">非空子数组中</span>不同元素的个数。</p>
 
@@ -57,7 +57,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 提示 1：二分答案
 
@@ -118,7 +118,7 @@ func medianOfUniquenessArray(nums []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。二分 $\mathcal{O}(\log n)$ 次，每次会跑一个 $\mathcal{O}(n)$ 的滑动窗口。
 - 空间复杂度：$\mathcal{O}(n)$。

@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code> ，下标从 <strong>0</strong> 开始。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 对于一个质因子 $p$，设它在数组中的最左和最右的位置为 $\textit{left}$ 和 $\textit{right}$。  
 那么答案是不能在区间 $[\textit{left},\textit{right})$ 中的。注意区间右端点可能为答案。  
@@ -92,7 +92,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n\sqrt U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=\max(\textit{nums})$。
 - 空间复杂度：$O\left(n + \dfrac{U}{\log U}\right)$。$U$ 范围内的质数个数有 $O\left(\dfrac{U}{\log U}\right)$ 个。

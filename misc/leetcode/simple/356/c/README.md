@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 给你三个字符串 <code>a</code> ，<code>b</code> 和 <code>c</code> ， 你的任务是找到长度 <strong>最短</strong> 的字符串，且这三个字符串都是它的 <strong>子字符串</strong> 。
 <p>如果有多个这样的字符串，请你返回 <strong>字典序最小</strong> 的一个。</p>
@@ -36,7 +36,7 @@
 	<li><code>a</code> ，<code>b</code> ，<code>c</code> 只包含小写英文字母。</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 暴力枚举 $a,b,c$ 的全排列 $a',b',c'$，然后合并 $a',b'$ 得到最短字符串 $x$，再合并 $x,c'$ 得到最短字符串 $s$。
 可能有的同学觉得，$a',b'$ 合并一个较长的会不会更优？  
@@ -76,7 +76,7 @@ func minimumString(a, b, c string) (ans string) {
 func min(a, b int) int { if b < a { return b }; return a }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n^2)$，其中 $n$ 为 $a,b,c$ 的长度的最大值。
 - 空间复杂度：$\mathcal{O}(n)$

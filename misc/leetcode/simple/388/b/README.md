@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的数组 <code>happiness</code> ，以及一个<strong> 正整数 </strong><code>k</code> 。</p>
 
@@ -52,7 +52,7 @@
 	<li><code>1 <= k <= n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 首先，应当选 $\textit{happiness}$ 中最大的 $k$ 的数。
 这些数要按照什么顺序选呢？由于小的数减成 $0$ 就不再减少了，优先选大的更好。
@@ -73,7 +73,7 @@ func maximumHappinessSum(happiness []int, k int) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{happiness}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序和切片的开销。

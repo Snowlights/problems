@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p><code>n</code> 个人站成一排，按从 <code>1</code> 到 <code>n</code> 编号。</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 &lt;= time &lt;= 1000</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 到达端点需要 $n-1$ 时间。  
 设 $t=\textit{time}\bmod (n-1)$，分类讨论：
@@ -54,7 +54,7 @@ func passThePillow(n, time int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(1)$。
 - 空间复杂度：$O(1)$。仅用到若干变量。

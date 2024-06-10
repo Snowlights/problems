@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个由 <strong>正</strong> 整数组成的数组 <code>nums</code> 。</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 <= nums[i] <= 2000</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 经典滑窗
 
@@ -68,7 +68,7 @@ func countCompleteSubarrays(nums []int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$。

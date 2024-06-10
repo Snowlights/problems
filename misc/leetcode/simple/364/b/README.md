@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>maxHeights</code> 。</p>
 
@@ -63,7 +63,7 @@
 	<li><code>1 <= maxHeights[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 下面把 $\textit{maxHeights}$ 简记为 $a$。
 
@@ -118,7 +118,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{maxHeights}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

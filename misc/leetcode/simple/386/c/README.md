@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <strong>1</strong> 开始的整数数组 <code>nums</code> 和 <code>changeIndices</code> ，数组的长度分别为 <code>n</code> 和 <code>m</code> 。</p>
 
@@ -72,7 +72,7 @@
 	<li><code>1 <= changeIndices[i] <= n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 这题的题意很抽象，给大家形象地解释一下：
 
@@ -135,7 +135,7 @@ func earliestSecondToMarkIndices(nums, changeIndices []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(m\log m)$，其中 $m$ 为 $\textit{changeIndices}$ 的长度。二分的时候保证 $n\le m$，时间复杂度以 $m$ 为主。
 - 空间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度

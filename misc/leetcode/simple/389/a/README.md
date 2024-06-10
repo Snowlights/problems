@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>s</code> ，请你判断字符串 <code>s</code> 是否存在一个长度为 <code>2</code> 的子字符串，在其反转后的字符串中也出现。</p>
 
@@ -45,7 +45,7 @@
 	<li>字符串 <code>s</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 用一个 $26\times 26$ 的布尔数组（或哈希表）$\textit{vis}$ 记录是否遇到了 $\textit{vis}[x][y]$，其中 $x$ 和 $y$ 是一对相邻字母 $(s[i-1],s[i])$。
 
@@ -81,7 +81,7 @@ func isSubstringPresent(s string) bool {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n + |\Sigma|)$，其中 $n$ 为 $\textit{nums}$ 的长度，$|\Sigma|$ 为字符集合的大小，本题字符均为小写字母，所以 $|\Sigma|=26$。
 - 空间复杂度：$\mathcal{O}(|\Sigma|)$。

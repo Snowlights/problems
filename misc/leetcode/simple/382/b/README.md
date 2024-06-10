@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个<strong> 正整数 </strong>数组 <code>nums</code> 。</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 设数组的最大值为 $m$，当 $xge 2$ 时，我们有
 
@@ -86,7 +86,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log \log U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=\max(\textit{nums})$。\
 - 空间复杂度：$\mathcal{O}(n)$。

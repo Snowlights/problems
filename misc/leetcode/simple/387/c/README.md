@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始、大小为 <code>n x n</code> 的矩阵 <code>grid</code> ，其中 <code>n</code> 为奇数，且 <code>grid[r][c]</code> 的值为 <code>0</code> 、<code>1</code> 或 <code>2</code> 。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>n</code> 为奇数。</li>
 </ul>
 
-### 思路
+#### 思路
 
 统计 Y 中的元素出现次数，记到一个长为 $3$ 的数组 $\textit{cnt}_1$ 中。统计不在 Y 中的元素出现次数，记到一个长为 $3$ 的数组 $\textit{cnt}_2$ 中。
 计算最多可以保留多少个元素**不变**，设这个值为 $\textit{maxNotChange}$。
@@ -93,7 +93,7 @@ func minimumOperationsToWriteY(grid [][]int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^2 + k^2)$，其中 $n$ 为 $\textit{grid}$ 的长度，$k=3$。
 - 空间复杂度：$\mathcal{O}(k)$。

@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>arr</code> 的 <strong>不平衡数字</strong> 定义为，在 <code>sarr = sorted(arr)</code> 数组中，满足以下条件的下标数目：</p>
 
@@ -49,7 +49,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= nums.length</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 由于 $n$ 至多为 $1000$，我们可以从左到右枚举 $i$，然后从 $i+1$ 开始向右枚举 $j$。 一边枚举 $j$，一边维护不平衡度 $\textit{cnt}$：
 - 如果 $x=\textit{nums}[j]$ 之前出现过，那么子数组排序后必然会和另一个 $x$ 相邻，$\textit{cnt}$ 不变；
@@ -77,7 +77,7 @@ func sumImbalanceNumbers(nums []int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n^2)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0 </strong>开始的 <strong>正整数</strong> 数组 <code>nums</code> 和一个 <strong>正整数</strong> <code>limit</code> 。</p>
 
@@ -52,7 +52,7 @@
 	<li><code>1 &lt;= limit &lt;= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 $\textit{nums}[i]$ 及其下标 $i$ 绑在一起排序（也可以单独排序下标），然后把 $\textit{nums}$ 分成若干段，每一段都是递增的且相邻元素之差不超过 $\textit{limit}$，那么这一段可以随意排序。
 
@@ -80,7 +80,7 @@ func lexicographicallySmallestArray(nums []int, limit int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

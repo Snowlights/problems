@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>1</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> 。</p>
 
@@ -62,7 +62,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 将元素**离散化**成 $[1,m]$ 中的元素，其中 $m$ 为 $\textit{nums}$ 中的不同元素个数。  
 这可以对 $\textit{nums}$ 排序去重后，在数组中二分查找得到。  
@@ -153,7 +153,7 @@ func (f fenwick) queryOne(i int) int { return f.a[i] + f.sum(i) }
 func (f fenwick) addRange(l, r, val int) { f.add(l, val); f.add(r+1, -val) }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

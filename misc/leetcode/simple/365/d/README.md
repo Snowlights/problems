@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>现有一个有向图，其中包含 <code>n</code> 个节点，节点编号从 <code>0</code> 到 <code>n - 1</code> 。此外，该图还包含了 <code>n</code> 条有向边。</p>
 
@@ -45,7 +45,7 @@
 	<li><code>edges[i] != i</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 本题给出的图叫做**内向基环树**。
 之前写过一篇题解，介绍了处理基环树问题的一些通用技巧，请看 [内向基环树：拓扑排序+分类讨论](https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/solution/nei-xiang-ji-huan-shu-tuo-bu-pai-xu-fen-c1i1b/)  
@@ -119,7 +119,7 @@ func countPaths(n int, edges [][]int) (ans int64) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$。

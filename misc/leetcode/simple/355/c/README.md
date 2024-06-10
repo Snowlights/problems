@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的数组 <code>usageLimits</code> 。</p>
 
@@ -57,7 +57,7 @@
 	<li><code>1 &lt;= usageLimits[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 排序，再判断能否递增
 先排序，因为题目只关心最大组数
@@ -85,7 +85,7 @@ func maxIncreasingGroups(usageLimits []int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n\log n)$。
 - 空间复杂度：$\mathcal{O}(n)$ 。

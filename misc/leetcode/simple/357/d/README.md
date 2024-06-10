@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的二维整数数组 <code>items</code> 和一个整数 <code>k</code> 。</p>
 
@@ -59,7 +59,7 @@
 	<li><code>1 <= k <= n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 按照利润从大到小排序。先把前 $k$ 个项目选上。
 考虑选第 $k+1$ 个项目，为了选它，我们必须从前 $k$ 个项目中**移除**一个项目。由于已经按照利润从大到小排序，选这个项目不会让 $\textit{total\_profit}$ 变大，所以我们重点考虑能否让 $\textit{distinct\_categories}$ 变大。分类讨论：
@@ -104,7 +104,7 @@ func (h *hp) Pop() any   { a := h.IntSlice; v := a[len(a)-1]; h.IntSlice = a[:le
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{items}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

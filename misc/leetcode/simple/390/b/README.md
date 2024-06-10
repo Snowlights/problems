@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个<strong>正整数</strong> <code>k</code> 。最初，你有一个数组 <code>nums = [1]</code> 。</p>
 
@@ -53,7 +53,7 @@
 	<li><code>1 &lt;= k &lt;= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 方法一：贪心 + 枚举
 

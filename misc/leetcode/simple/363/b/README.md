@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> ，其中 <code>n</code> 是班级中学生的总数。班主任希望能够在让所有学生保持开心的情况下选出一组学生：</p>
 
@@ -47,7 +47,7 @@
 </ul>
 
 
-### 思路
+#### 思路
 
 为了方便判断，把 $\textit{nums}$ 从小到大排序。
 如果 $\textit{nums}[0] > 0$，那么所有 $\textit{nums}[i]$ 都是大于 $0$ 的，我们可以一个学生都不选。
@@ -69,7 +69,7 @@ func countWays(nums []int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。瓶颈在排序上。
 - 空间复杂度：$\mathcal{O}(1)$。

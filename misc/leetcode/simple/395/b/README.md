@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个整数数组 <code>nums1</code> 和 <code>nums2</code>。</p>
 
@@ -58,7 +58,7 @@
 </ul>
 
 
-### 思路
+#### 思路
 
 由于只移除两个元素，我们可以枚举 $\textit{nums}_1$ 中**保留**的最小元素是 $\textit{nums}_1[0]$ 还是 $\textit{nums}_1[1]$ 还是 $\textit{nums}_1[2]$。
 设 $\textit{diff} = \textit{nums}_2[0] - \textit{nums}_1[i]$，其中 $\textit{nums}_1[i]$ 是保留的最小元素。
@@ -87,7 +87,7 @@ func minimumAddedInteger(nums1, nums2 []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}_1$ 的长度。瓶颈在排序上。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序的栈开销。

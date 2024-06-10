@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。如果一对整数 <code>x</code> 和 <code>y</code> 满足以下条件，则称其为 <strong>强数对</strong> ：</p>
 
@@ -50,7 +50,7 @@
 	<li><code>1 <= nums[i] <= 2<sup>20</sup> - 1</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 一边遍历数组，一边记录每个 key 对应的最大的 $\textit{nums}[i]$。
 
@@ -79,7 +79,7 @@ func maximumStrongPairXor(nums []int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n + n\log U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=\max(\textit{nums})$，本题 $U=2^{20}-1$，也就是说 $\textit{nums}[i]$ 二进制长度不会超过 $20$。
 - 空间复杂度：$\mathcal{O}(n)$。

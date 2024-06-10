@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个字符串数组 <code>words</code> 和一个字符 <code>separator</code> ，请你按 <code>separator</code> 拆分 <code>words</code> 中的每个字符串。</p>
 
@@ -55,7 +55,7 @@
 	<li><code>separator</code> 是字符串 <code>&#34;.,|$#@&#34;</code> 中的某个字符（不包括引号）</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 拆分字符串判空
 
@@ -72,7 +72,7 @@ func splitWordsBySeparator(a []string, separator byte) (ans []string) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$ 。

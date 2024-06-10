@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你三个<strong> 正整数 </strong><code>n</code> 、<code>x</code> 和 <code>y</code> 。</p>
 
@@ -59,7 +59,7 @@
 	<li><code>1 <= x, y <= n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 分类讨论+直接计算
 
@@ -122,7 +122,7 @@ func countOfPairs(n, x, y int) []int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$。

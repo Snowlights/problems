@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。</p>
 
@@ -54,7 +54,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 统计每个数字的出现次数，记在哈希表 $\textit{cnt}$ 中。
 假设可以分成大小为 $k$ 和 $k+1$ 的组，现在需要算出每个 $\textit{cnt}[x]$ 最少可以分成多少组。
@@ -108,7 +108,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(\sqrt{n})$。哈希表中至多有 $\mathcal{O}(\sqrt{n})$ 个 key。

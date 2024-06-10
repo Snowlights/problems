@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。<code>nums</code> 的一个子数组如果满足以下条件，那么它是 <strong>不间断</strong> 的：</p>
 
@@ -45,7 +45,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 本题思路和 [1438. 绝对差不超过限制的最长连续子数组](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/) 类似。
 
@@ -102,7 +102,7 @@ func continuousSubarrays(a []int) int64 {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。注意至多维护 $3$ 个数，仅用到常量额外空间。

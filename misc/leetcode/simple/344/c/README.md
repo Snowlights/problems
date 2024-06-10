@@ -84,12 +84,12 @@ func colorTheArray(n int, queries [][]int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+q)$，其中 $q$ 为 $\textit{queries}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。
 
-### 思考题
+#### 思考题
 
 如果求的是最长连续同色长度要怎么做？
 

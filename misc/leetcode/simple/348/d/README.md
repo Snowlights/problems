@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你两个数字字符串 <code>num1</code> 和 <code>num2</code> ，以及两个整数 <code>max_sum</code> 和 <code>min_sum</code> 。如果一个整数 <code>x</code> 满足以下条件，我们称它是一个好整数：</p>
 
@@ -36,7 +36,7 @@
 	<li><code>1 &lt;= min_sum &lt;= max_sum &lt;= 400</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 数位dp
 
@@ -139,7 +139,7 @@ class Solution:
         return (f(num2) - f(num1) + mod + (min_sum <= sum(map(int, num1)) <= max_sum)) % mod
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(10nm)$，其中 $n$ 为 $\textit{nums}_2$ 的长度，$m=\min\{9n, \textit{maxSum}\}$。动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。本题中状态个数等于 $\mathcal{O}(nm)$，单个状态的计算时间为 $\mathcal{O}(10)$，因此时间复杂度为 $\mathcal{O}(10nm)$。
 - 空间复杂度：$\mathcal{O}(nm)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>如果元素 <code>x</code> 在长度为 <code>m</code> 的整数数组 <code>arr</code> 中满足 <code>freq(x) * 2 > m</code> ，那么我们称 <code>x</code> 是 <strong>支配元素</strong> 。其中 <code>freq(x)</code> 是 <code>x</code> 在数组 <code>arr</code> 中出现的次数。注意，根据这个定义，数组 <code>arr</code> <strong>最多</strong> 只会有 <strong>一个</strong> 支配元素。</p>
 
@@ -54,7 +54,7 @@
 	<li><code>nums</code> 有且只有一个支配元素。</li>
 </ul>
 
-### 思路
+#### 思路
 
 首先证明：分割出的两个数组的支配元素就是原数组的支配元素。
 设这两个数组的支配元素为 $y$（题目要求支配元素相同），那么对于第一个数组有
@@ -80,7 +80,7 @@ $$
 
 上式表明，$y$ 就是原数组的支配元素，证毕。
 
-### 算法
+#### 算法
 
 首先求出众数 $\textit{mode}$ 及其出现次数 $\textit{total}$。
 然后枚举 $i$，一边枚举一边统计 $\text{freq}_1(\textit{mode})$，那么 $\text{freq}_2(\textit{mode}) =\textit{total} -\text{freq}_1(\textit{mode})$。
@@ -113,7 +113,7 @@ func minimumIndex(nums []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。用摩尔投票法可以做到 $\mathcal{O}(1)$ 额外空间。

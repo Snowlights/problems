@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个<strong>下标从 0 开始</strong>且大小为 <code>m x n</code> 的整数矩阵 <code>mat</code> 和一个整数 <code>k</code> 。请你将矩阵中的<strong> 奇数</strong> 行循环 <strong>右</strong> 移 <code>k</code> 次，<strong>偶数</strong> 行循环 <strong>左</strong> 移 <code>k</code> 次。</p>
 
@@ -47,7 +47,7 @@
 	<li><code>1 &lt;= k &lt;= 50</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 由于循环左移 $n$ 次等价于循环左移 $0$ 次，左移 $n+1$ 次等价于循环左移 $1$ 次，……，所以可以先把 $k$ 模上 $m$。
 
@@ -74,7 +74,7 @@ func areSimilar(mat [][]int, k int) bool {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(mn)$，其中 $m$ 和 $n$ 分别为 $\textit{mat}$ 的行数和列数。
 - 空间复杂度：$\mathcal{O}(n)$ 或 $\mathcal{O}(1)$。

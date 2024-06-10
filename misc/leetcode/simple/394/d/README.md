@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个 <code>n</code>&nbsp;个节点的无向带权图，节点编号为 <code>0</code>&nbsp;到 <code>n - 1</code>&nbsp;。图中总共有 <code>m</code>&nbsp;条边，用二维数组&nbsp;<code>edges</code>&nbsp;表示，其中&nbsp;<code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>, w<sub>i</sub>]</code>&nbsp;表示节点 <code>a<sub>i</sub></code> 和&nbsp;<code>b<sub>i</sub></code>&nbsp;之间有一条边权为&nbsp;<code>w<sub>i</sub></code>&nbsp;的边。</p>
 
@@ -58,7 +58,7 @@
 	<li>图中没有重边。</li>
 </ul>
 
-### 思路
+#### 思路
 
 首先用 Dijkstra 算法（堆优化版本）计算出起点 $0$ 到所有节点的最短路长度 $\textit{dis}$。
 如果 $\textit{dis}[n-1]=\infty$，说明无法从起点 $0$ 到终点 $n-1$，答案全为 $\textit{false}$。
@@ -70,7 +70,7 @@ $$
 
 则说明 $x\textit{-}y$ 这条边在从 $0$ 到 $n-1$ 的最短路上。
 
-### 答疑
+#### 答疑
 
 **问**：为什么在求出最短路后，不能从起点 $0$ 出发去寻找在最短路上的边？
 **答**：从起点 $0$ 出发，当发现 $\textit{dis}[x] + w = \textit{dis}[y]$ 时，这仅仅意味着 $x\textit{-}y$ 这条边在从 $0$ 出发的最短路上，
@@ -166,7 +166,7 @@ func (h *vdHeap) push(v vdPair)        { heap.Push(h, v) }
 func (h *vdHeap) pop() vdPair          { return heap.Pop(h).(vdPair) }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n + m\log m)$，其中 $m$ 为 $\textit{edges}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n+m)$。

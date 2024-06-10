@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数数组 <code>nums</code>。</p>
 
@@ -36,7 +36,7 @@
 	<li>输入保证 <code>nums</code> 中至少有一个素数。</li>
 </ul>
 
-### 思路
+#### 思路
 
 ``` go 
 func isPrime(n int) bool {

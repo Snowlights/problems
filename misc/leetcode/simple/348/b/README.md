@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数排列 <code>nums</code> 。</p>
 
@@ -52,7 +52,7 @@
 	<li><code>nums</code> 是一个 <strong>排列</strong></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 记录 $1$ 和 $n$ 所在的位置为 $first$ 和 $last$ :  
 - 如果 $1$ 的位置比 $n$ 的位置左，$1$ 移动 $first$ 步， $n$ 移动 $n-1-last$步
@@ -87,7 +87,7 @@ class Solution:
         return p + n - 1 - q - (p > q)
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：${O}\mathcal(n)$。 $n$ 为 $\textit{a}$ 长度。
 - 空间复杂度：${O}\mathcal(1)$。 仅用到部分变量

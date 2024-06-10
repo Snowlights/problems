@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串&nbsp;<code>word</code>&nbsp;和一个整数 <code>k</code>&nbsp;。</p>
 
@@ -41,7 +41,7 @@
 	<li><code>1 &lt;= k &lt;= word.length</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 「相邻字母相差至多为 $2$」这个约束把 $\textit{word}$ 划分成了多个子串 $s$，每个子串分别处理。可以用 [分组循环](https://leetcode.cn/problems/longest-even-odd-subarray-with-threshold/solution/jiao-ni-yi-ci-xing-ba-dai-ma-xie-dui-on-zuspx/) 找到每个子串 $s$。
 
@@ -90,7 +90,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n|\Sigma|^2)$，其中 $n$ 为 $\textit{word}$ 的长度，$|\Sigma|$ 为字符集合的大小，本题中字符均为小写英文字母，所以 $|\Sigma|=26$。
 - 空间复杂度：$\mathcal{O}(|\Sigma|)$。忽略切片开销。

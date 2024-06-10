@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个正整数 <code>arrivalTime</code> 表示列车正点到站的时间（单位：小时），另给你一个正整数 <code>delayedTime</code> 表示列车延误的小时数。</p>
 
@@ -30,7 +30,7 @@
 	<li><code>1 &lt;= delayedTime &lt;= 24</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 模拟即可
 
@@ -40,7 +40,7 @@ func findDelayedArrivalTime(arrivalTime, delayedTime int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

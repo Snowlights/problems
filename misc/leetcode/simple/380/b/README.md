@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>s</code> 、字符串 <code>a</code> 、字符串 <code>b</code> 和一个整数 <code>k</code> 。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>s</code>、<code>a</code>、和 <code>b</code> 只包含小写英文字母。</li>
 </ul>
 
-### 思路
+#### 思路
 
 #### KMP+二分查找
 
@@ -116,7 +116,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n \log n)$，$n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。
@@ -184,7 +184,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，$n$ 为 $\textit{s}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

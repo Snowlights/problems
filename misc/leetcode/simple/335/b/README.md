@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一棵二叉树的根节点 <code>root</code> 和一个正整数 <code>k</code> 。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>1 &lt;= k &lt;= n</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 BFS 二叉树，记录每一层的节点值之和，排序后取第 $k$ 大（也可以用快速选择）。
 
@@ -76,7 +76,7 @@ func kthLargestLevelSum(root *TreeNode, k int) int64 {
 
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n\log n)$，其中 $n$ 为二叉树的节点个数。
 - 空间复杂度：$O(n)$。

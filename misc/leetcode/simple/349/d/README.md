@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你两个长度为 <code>n</code> 、下标从 <strong>0</strong> 开始的整数数组 <code>nums1</code> 和 <code>nums2</code> ，另给你一个下标从 <strong>1</strong> 开始的二维数组 <code>queries</code> ，其中 <code>queries[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> 。</p>
 
@@ -49,7 +49,7 @@
 	<li><code>1 &lt;= x<sub>i</sub>, y<sub>i</sub> &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 为方便处理，可以先把 $\textit{nums}_1$ 和询问中的 $x_i$ 排序。
 
@@ -115,7 +115,7 @@ func maximumSumQueries(a []int, b []int, qs [][]int) (ans []int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n + q\log n)$，其中 $n$ 为 $\textit{nums}_1$ 的长度，$q$ 为 $\textit{queries}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。返回值不计。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个整数 <code>n</code> 和 <code>k</code> 。</p>
 
@@ -34,7 +34,7 @@
 	<li><code>1 &lt;= n, k &lt;= 50</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 对于 $[1,k-1]$ 内的数字：
 - $1$ 和 $k-1$ 只能选其中一个；
@@ -71,7 +71,7 @@ func minimumSum(n, k int) int {
 func min(a, b int) int { if b < a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> ，和一个整数 <code>k</code> 。</p>
 
@@ -65,7 +65,7 @@
 	<li><code>0 <= k <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 写法一：记忆化搜索
 
@@ -134,7 +134,7 @@ func minIncrementOperations(nums []int, k int) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

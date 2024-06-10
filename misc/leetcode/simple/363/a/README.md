@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。</p>
 
@@ -48,7 +48,7 @@
 	<li><code>0 &lt;= k &lt;= 10</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把所有满足下标的二进制中的 $1$ 的个数等于 $k$ 的 $\textit{nums}[i]$ 加起来，就是答案。
 
@@ -64,7 +64,7 @@ func sumIndicesWithKSetBits(nums []int, k int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(\max{\textit{end}_i})$。

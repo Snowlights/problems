@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数 <code>k</code> 和一个整数 <code>x</code> 。</p>
 
@@ -48,7 +48,7 @@
 	<li><code>1 <= x <= 8</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 ## 方法一：二分答案 + 数位 DP
 
@@ -124,7 +124,7 @@ func countDigitOne(n, x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}((x + \log k)^3)$。$\textit{num}$ 的二进制长度为 $\mathcal{O}(x + \log k)$。由于每个状态只会计算一次，动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。本题状态个数等于 $\mathcal{O}((x + \log k)^2)$，单个状态的计算时间为 $\mathcal{O}(1)$，所以动态规划的时间复杂度为 $\mathcal{O}((x + \log k)^2)$。再算上 $\mathcal{O}(x + \log k)$ 的二分次数，总的时间复杂度为 $\mathcal{O}((x + \log k)^3)$。
 - 空间复杂度：$\mathcal{O}((x + \log k)^2)$。

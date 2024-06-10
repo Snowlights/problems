@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>袋子中装有一些物品，每个物品上都标记着数字 <code>1</code> 、<code>0</code> 或 <code>-1</code> 。</p>
 
@@ -40,7 +40,7 @@
 	<li><code>0 &lt;= k &lt;= numOnes + numZeros + numNegOnes</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 贪心，按照 $1,0,-1$ 的顺序选：
 - 先选 $1$，如果 $k\le \textit{numOnes}$ 那么答案就是 $k$。
@@ -55,7 +55,7 @@ $$
 
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$。

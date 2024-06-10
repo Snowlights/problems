@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code>。如果 <code>word</code> 中同时出现某个字母 <code>c</code> 的小写形式和大写形式，并且<strong> 每个 </strong>小写形式的 <code>c</code> 都出现在第一个大写形式的 <code>c</code> 之前，则称字母 <code>c</code> 是一个 <strong>特殊字母</strong> 。</p>
 
@@ -51,7 +51,7 @@
 	<li><code>word</code> 仅由小写和大写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 状态机
 

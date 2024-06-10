@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>1</strong> 开始、包含<strong> 不同 </strong>整数的数组 <code>nums</code> ，数组长度为 <code>n</code> 。</p>
 
@@ -47,7 +47,7 @@
 	<li><code>nums</code>中的所有元素都互不相同。</li>
 </ul>
 
-### 思路
+#### 思路
 
 按照题意模拟
 
@@ -65,7 +65,7 @@ func resultArray(nums []int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}[i]$ 的长。
 - 空间复杂度：$\mathcal{O}(n)$。

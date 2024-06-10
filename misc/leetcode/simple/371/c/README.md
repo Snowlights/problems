@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <strong>0</strong> 开始的整数数组 <code>nums1</code> 和 <code>nums2</code> ，这两个数组的长度都是 <code>n</code> 。</p>
 
@@ -63,7 +63,7 @@
 	<li><code>1 <= nums2[i] <= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 总共就两种情况：
 
@@ -107,7 +107,7 @@ func min(a ...int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{values}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code> 和一个整数 <code>k</code>。</p>
 
@@ -50,7 +50,7 @@
 	<li><code>word</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 **定理**：必然有一种字母是不需要删除的。
 
@@ -89,7 +89,7 @@ func minimumDeletions(word string, k int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n + |\Sigma|^2)$，其中 $n$ 为 $\textit{word}$ 的长度，$|\Sigma|$ 为字符集合的大小，本题字符均为小写字母，所以 $|\Sigma|=26$。
 - 空间复杂度：$\mathcal{O}(|\Sigma|)$。

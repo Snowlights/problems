@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>你有 <code>n</code> 颗处理器，每颗处理器都有 <code>4</code> 个核心。现有 <code>n * 4</code> 个待执行任务，每个核心只执行 <strong>一个</strong> 任务。</p>
 
@@ -41,7 +41,7 @@
 	<li><code>tasks.length == 4 * n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 一颗处理器完成它的 $4$ 个任务，完成的时间取决于这 $4$ 个任务中的 $\textit{tasks}$ 的最大值。
 直觉上来说，最早空闲时间越大的处理器，处理 $\textit{tasks}$ 越小的任务，那么完成时间越早。
@@ -88,7 +88,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{processorTime}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序的栈开销。Python 忽略切片开销。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你四个整数 <code>sx</code>、<code>sy</code>、<code>fx</code>、<code>fy</code>&nbsp; 以及一个 <strong>非负整数</strong> <code>t</code> 。</p>
 <p>在一个无限的二维网格中，你从单元格 <code>(sx, sy)</code> 开始出发。每一秒，你 <strong>必须</strong> 移动到任一与之前所处单元格相邻的单元格中。</p>
@@ -26,7 +26,7 @@
 <li><code>0 &lt;= t &lt;= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 由于可以往 $8$ 个方向走，那么最快可以在  
 
@@ -60,7 +60,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$。

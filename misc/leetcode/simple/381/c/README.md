@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code>，由 <strong>不同 </strong>小写英文字母组成。</p>
 
@@ -69,7 +69,7 @@
 	<li><code>word</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 统计每个字母的出现次数，按照出现次数从大到小排序。
 根据 [排序不等式](https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E4%B8%8D%E7%AD%89%E5%BC%8F/7775728)，出现次数前 $8$ 大的字母， 只需要按一次；出现次数前 $9$ 到 $16$ 大的字母，需要按两次；依此类推。
@@ -90,7 +90,7 @@ func minimumPushes(word string) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+|\Sigma|\log |\Sigma|)$，其中 $n$ 为 $\textit{word}$ 的长度，$|\Sigma|$ 为字符集合的大小，本题中字符均为小写字母，所以 $|\Sigma|=26$。
 - 空间复杂度：$O(|\Sigma|)$。

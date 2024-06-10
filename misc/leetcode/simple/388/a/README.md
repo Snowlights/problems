@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的数组 <code>apple</code> 和另一个长度为 <code>m</code> 的数组 <code>capacity</code> 。</p>
 
@@ -38,7 +38,7 @@
 	<li>输入数据保证可以将包裹中的苹果重新分装到箱子中。</li>
 </ul>
 
-### 思路
+#### 思路
 
 题目说，同一个包裹中的苹果可以分装到不同的箱子中。
 那么按照容量从大到小选择箱子装苹果，直到所有苹果均装入箱子为止。
@@ -68,7 +68,7 @@ func minimumBoxes(apple []int, capacity []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+m\log m)$，其中 $n$ 为 $\textit{apple}$ 的长度，$m$ 为 $\textit{capacity}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序的栈开销。

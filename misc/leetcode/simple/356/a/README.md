@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>公司里共有 <code>n</code> 名员工，按从 <code>0</code> 到 <code>n - 1</code> 编号。每个员工 <code>i</code> 已经在公司工作了 <code>hours[i]</code> 小时。</p>
 
@@ -40,7 +40,7 @@
 	<li><code>0 &lt;= hours[i], target &lt;= 10<sup>5</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 简单一次遍历
 
@@ -55,7 +55,7 @@ func numberOfEmployeesWhoMetTarget(hours []int, tar int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

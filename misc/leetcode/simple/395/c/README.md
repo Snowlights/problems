@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个整数 <code>n</code> 和 <code>x</code> 。你需要构造一个长度为 <code>n</code> 的 <strong>正整数 </strong>数组 <code>nums</code> ，对于所有 <code>0 &lt;= i &lt; n - 1</code> ，满足 <code>nums[i + 1]</code><strong> 大于 </strong><code>nums[i]</code> ，并且数组 <code>nums</code> 中所有元素的按位 <code>AND</code> 运算结果为 <code>x</code> 。</p>
 
@@ -38,7 +38,7 @@
 	<li><code>1 &lt;= n, x &lt;= 10<sup>8</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 从集合的视角看，$x$ 是每个 $\textit{nums}[i]$ 的**子集**。换句话说，$\textit{nums}[i]$ 一定是 $x$ 的**超集**。
 例如 $x = 100100$，那么 $\textit{nums}[i]$ 一定在如下序列中：

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始、大小为 <code>m x n</code> 的网格 <code>image</code> ，表示一个灰度图像，其中 <code>image[i][j]</code> 表示在范围 <code>[0..255]</code> 内的某个像素强度。另给你一个<strong> 非负 </strong>整数 <code>threshold</code> 。</p>
 
@@ -49,7 +49,7 @@
 	<li><code>0 <= threshold <= 255</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 1. 遍历所有 $3 \times 3$ 的子网格。
 2. 遍历网格内的所有左右相邻格子和上下相邻格子，如果存在差值超过 $\textit{threshold}$ 的情况，则枚举下一个子网格。
@@ -122,7 +122,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(Amn)$，其中 m 和 n 分别为 $\textit{a}$ 的行数和列数，A=9 表示子网格大小。
 - 空间复杂度：$O(mn)$。

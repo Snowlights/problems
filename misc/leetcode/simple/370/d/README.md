@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;。</p>
 
@@ -57,7 +57,7 @@ nums[3] - nums[0] &gt;= 3 - 0 。
 	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 定义 $b[i] = \textit{nums}[i] - i$，问题变成从 $b$ 中选出一个非降子序列，求对应的 $\textit{nums}$ 的元素和的最大值。  
 如果 $i$ 是子序列最后一个数的下标，考虑倒数第二个数的下标 $j$，如果 $b[j]\le b[i]$，那么就找到了一个子问题：
@@ -129,7 +129,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

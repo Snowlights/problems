@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，它包含 <code>n</code> 个 <strong>互不相同</strong> 的正整数。如果 <code>nums</code> 的一个排列满足以下条件，我们称它是一个特别的排列：</p>
 
@@ -33,7 +33,7 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 定义 $\textit{dfs}(i,j)$ 表示当前可以选的下标集合为 $i$，上一个选的数的下标是 $j$ 时，可以构造出多少个特别排列。
 
@@ -87,7 +87,7 @@ func specialPerm(a []int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n^22^n)$，其中 $n$ 为 $\textit{nums}$ 的长度。动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。本题中状态个数等于 $\mathcal{O}(n2^n)$，单个状态的计算时间为 $\mathcal{O}(n)$，因此时间复杂度为 $\mathcal{O}(n^22^n)$。
 - 空间复杂度：$\mathcal{O}(n2^n)$。

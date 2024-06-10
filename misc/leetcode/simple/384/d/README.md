@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始长度为 <code>n</code>&nbsp;的整数数组&nbsp;<code>nums</code>&nbsp;，和一个下标从 <code>0</code>&nbsp;开始长度为 <code>m</code>&nbsp;的整数数组&nbsp;<code>pattern</code>&nbsp;，<code>pattern</code>&nbsp;数组只包含整数&nbsp;<code>-1</code>&nbsp;，<code>0</code>&nbsp;和&nbsp;<code>1</code>&nbsp;。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>-1 &lt;= pattern[i] &lt;= 1</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 $\textit{nums}$ 的相邻元素，根据题目规定的大小关系，转换成 $1,0,-1$，得到一个长为 $n-1$ 的数组 $b$。  
 问题相当于问 $b$ 中有多少个连续子数组等于 $\textit{pattern}$。\n\n这是一个标准的字符串匹配问题（本题匹配的是数字不是字符），可以用 KMP 或者 Z 函数解决。
@@ -84,7 +84,7 @@ func countMatchingSubarrays(nums, pattern []int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(m)$，其中 $m$ 为 $\textit{pattern}$ 的长度。
@@ -123,7 +123,7 @@ func countMatchingSubarrays(nums, pattern []int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <strong>0</strong> 开始的字符串 <code>source</code> 和 <code>target</code> ，它们的长度均为 <code>n</code> 并且由 <strong>小写 </strong>英文字母组成。</p>
 
@@ -59,7 +59,7 @@
 	<li><code>original[i] != changed[i]</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 建图，从 $\textit{original}[i]$ 向 $\textit{changed}[i]$ 连边，边权为 $\textit{cost}[i]$。
 然后用 Floyd 算法求图中任意两点最短路，得到 $\textit{dis}$ 矩阵，这里得到的 $\textit{dis}[i][j]$ 表示字母 $i$ 通过若干次替换操作变成字母 $j$ 的最小成本。
@@ -110,7 +110,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+m+|\Sigma|^3)$，其中 $n$ 为 $\textit{source}$ 的长度，$m$ 为 $\textit{cost}$ 的长度，$|\Sigma|$ 为字符集合的大小，本题中字符均为小写字母，所以 $|\Sigma|=26$。
 - 空间复杂度：$\mathcal{O}(|\Sigma|^2)$。

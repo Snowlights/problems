@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0 </strong>开始的整数数组 <code>coins</code>，表示可用的硬币的面值，以及一个整数 <code>target</code> 。</p>
 
@@ -46,7 +46,7 @@
 	<li><code>1 &lt;= coins[i] &lt;= target</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 为方便描述，把 $0$ 也算作可以得到的数。
 
@@ -76,7 +76,7 @@ func minimumAddedCoins(coins []int, target int) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n + \log \textit{target})$，其中 $n$ 为 $\textit{coins}$ 的长度。$s$ 至多翻倍 $\mathcal{O}(\log \textit{target})$ 次。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序的栈开销。

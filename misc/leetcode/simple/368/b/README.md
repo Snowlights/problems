@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。</p>
 
@@ -52,7 +52,7 @@
 	<li><code>1 <= nums[i] <= 10<sup>8</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 遇到这种三元组的题目，一个通常的做法是枚举中间的数。
 
@@ -98,7 +98,7 @@ func minimumSum(nums []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

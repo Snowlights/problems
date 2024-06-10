@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数数组 <code>nums</code> 和一个 <strong>正整数</strong> <code>k</code> 。</p>
 
@@ -34,7 +34,7 @@
 	<li><code>1 &lt;= k &lt;= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 本题算法如下：
 1. 设 $\textit{mx} = \max(\textit{nums})$。
@@ -71,7 +71,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

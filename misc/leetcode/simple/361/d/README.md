@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>现有一棵由 <code>n</code> 个节点组成的无向树，节点按从 <code>0</code> 到 <code>n - 1</code> 编号。给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [u<sub>i</sub>, v<sub>i</sub>, w<sub>i</sub>]</code> 表示树中存在一条位于节点 <code>u<sub>i</sub></code> 和节点 <code>v<sub>i</sub></code> 之间、权重为 <code>w<sub>i</sub></code> 的边。</p>
 
@@ -53,7 +53,7 @@
 	<li><code>0 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt; n</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 对于本题，由于 $1\le w_i \le 26$，我们可以在倍增的同时，维护从节点 $x$ 到 $x$ 的第 $2^i$ 个祖先节点这条路径上的每种边权的个数。  
 对于每个询问，在计算 $a$ 和 $b$ 的最近公共祖先的同时，也同样地维护从 $a$ 到 $b$ 路径上的每种边权的个数 $\textit{cnt}$。  
@@ -164,7 +164,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}((n+q)\log n)$，其中 $n$ 为 $\textit{edges}$ 的长度，$q$ 为 $\textit{queries}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n\log n)$。返回值的长度不计入。

@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>一场比赛中共有 <code>n</code> 支队伍，按从 <code>0</code> 到&nbsp; <code>n - 1</code> 编号。每支队伍也是 <strong>有向无环图（DAG）</strong> 上的一个节点。</p>
 
@@ -54,7 +54,7 @@
 	<li>生成的输入满足：如果 <code>a</code> 队比 <code>b</code> 队强，<code>b</code> 队比 <code>c</code> 队强，那么 <code>a</code> 队比 <code>c</code> 队强</li>
 </ul>
 
-### 思路
+#### 思路
 
 本质上是看是否恰好有一个入度为 $0$ 的点。\n\n对每个节点，判断它是否出现在 $\textit{edges}[i][1]$ 中。  
 如果恰好有一个节点没有出现，说明没有可以击败它的队伍，返回这个节点的编号。否则返回 $-1$。
@@ -78,7 +78,7 @@ func findChampion(n int, edges [][]int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n+m)$，其中 $n$ 为 $\textit{edges}$ 的长度，。
 - 空间复杂度：$\mathcal{O}(n)$。

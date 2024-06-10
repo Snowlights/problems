@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>s</code> ，请找出满足每个字符最多出现两次的最长子字符串，并返回该<span data-keyword="substring">子字符串</span>的<strong> 最大 </strong>长度。</p>
 
@@ -38,7 +38,7 @@
 	<li><code>s</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 本题相当于把 [3. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/) 中的「出现次数不超过 $1$」改成「出现次数不超过 $2$」，
 

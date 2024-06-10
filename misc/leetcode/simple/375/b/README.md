@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0 </strong>开始的二维数组 <code>variables</code> ，其中 <code>variables[i] = [a<sub>i</sub>, b<sub>i</sub>, c<sub>i,</sub> m<sub>i</sub>]</code>，以及一个整数 <code>target</code> 。</p>
 
@@ -46,7 +46,7 @@
 	<li><code><font face="monospace">0 <= target <= 10<sup>3</sup></font></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 模拟+快速幂
 
@@ -73,7 +73,7 @@ func getGoodIndices(variables [][]int, target int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log U)$，其中 $n$ 为 $\textit{variables}$ 的长度，$U$ 为 $b_i$ 和 $c_i$ 的最大值，本题为 $10^3$。
 - 空间复杂度：$\mathcal{O}(1)$。返回值不计入。

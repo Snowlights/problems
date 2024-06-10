@@ -1,4 +1,4 @@
-### 题目
+#### 题目
               
 <p>给你一个整数数组 <code>coins</code> 表示不同面额的硬币，另给你一个整数 <code>k</code> 。</p>
 
@@ -70,7 +70,7 @@
 	<li><code>coins</code> 包含两两不同的整数。</li>
 </ul>
 
-### 思路
+#### 思路
 
 由于 $k$ 越大答案越大，有单调性，可以**二分答案**。不了解二分答案的同学请看 [一图掌握二分答案！四种写法！](https://leetcode.cn/problems/h-index-ii/solution/tu-jie-yi-tu-zhang-wo-er-fen-da-an-si-ch-d15k/)
 

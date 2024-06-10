@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组<code>nums</code> 。每次操作中，你可以：</p>
 
@@ -46,7 +46,7 @@
 	<li><code>0 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 下文中 $\oplus$ 表示异或运算  
 对于数组 $\textit{nums}$，定义它的前缀异或和 $\textit{s}[0]=0$，$\textit{s}[i+1] = \bigoplus\limits_{j=0}^{i}\textit{nums}[j]$。  
@@ -62,19 +62,19 @@ $$
 > 注：为方便计算，常用左闭右开区间 $[\textit{left},\textit{right})$ 来表示从 $\textit{nums}[\textit{left}]$ 到 $\textit{nums}[\textit{right}-1]$ 的子数组，此时子数组的异或和为 $\textit{s}[\textit{right}] \oplus \textit{s}[\textit{left}]$。
 > 注 2：$s[0]=0$ 表示一个空数组的异或和。为什么要额外定义它？想一想，如果要计算的子数组恰好是一个前缀（从 $\textit{nums}[0]$ 开始），你要用 $s[\textit{right}]$ 异或谁呢？通过定义 $s[0]=0$，任意子数组（包括前缀）都可以表示为两个前缀异或和的异或。
 
-### 提示 1
+#### 提示 1
 
 由于每次操作的都是同一个比特位，可以把每一位单独看。
 
-### 提示 2
+#### 提示 2
 
 每次都去掉两个 $1$，要是美丽子数组，需要子数组内这个比特位的 $1$ 的个数是偶数。
 
-### 提示 3
+#### 提示 3
 
 由于 $1\oplus 1=0$，把所有比特位合起来看，美丽子数组这等价于子数组的异或和等于 $0$。
 
-### 提示 4
+#### 提示 4
 
 利用前缀异或和 $s$，问题相当于在求 $s$ 中有多少对 $s[\textit{left}]$ 和 $s[\textit{right}]$ 满足 $s[\textit{right}]\oplus s[\textit{left}] = 0$，即 $s[\textit{right}]= s[\textit{left}]$，因为异或为 $0$ 的两个数字必然相等。
 
@@ -97,7 +97,7 @@ func beautifulSubarrays(nums []int) (ans int64) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$O(n)$。

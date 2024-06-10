@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个整数 <code>numBottles</code> 和 <code>numExchange</code> 。</p>
 
@@ -39,7 +39,7 @@
 	<li><code>1 &lt;= numExchange &lt;= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 模拟
 

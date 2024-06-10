@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个 <strong>非负</strong> 整数 <code>k</code> 。</p>
 
@@ -47,7 +47,7 @@
 	<li><code>0 <= nums[i], k <= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 由于选的是子序列，且子序列的元素都相等，所以**元素顺序对答案没有影响**，可以先对数组**排序**。
 由于替换操作替换的是一个连续范围内的数，所以排序后，选出的子序列必然也是一段**连续子数组**。
@@ -71,7 +71,7 @@ func maximumBeauty(nums []int, k int) (ans int) {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - =时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。瓶颈在排序上。
 - 空间复杂度：$\mathcal{O}(1)$。忽略排序的栈开销，仅用到若干额外变量。

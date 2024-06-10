@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个整数 <code>n</code> 。如果两个整数 <code>x</code> 和 <code>y</code> 满足下述条件，则认为二者形成一个质数对：</p>
 
@@ -37,7 +37,7 @@
 	<li><code>1 &lt;= n &lt;= 10<sup>6</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 暴力枚举质数 $x$ 和 $y=n-x$ 了，如果 $x\le y$ 且 $y$ 是质数，那么就把 $[x,y]$ 加入答案。
 
@@ -74,7 +74,7 @@ func findPrimePairs(n int) (ans [][]int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}\left(\dfrac{n}{\log n}\right)$。$n$ 以内有 $\mathcal{O}\left(\dfrac{n}{\log n}\right)$ 个质数。
 - 空间复杂度：$\mathcal{O}(1)$。返回值不计入。

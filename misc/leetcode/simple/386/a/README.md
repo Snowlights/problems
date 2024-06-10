@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <strong>偶数 </strong>的整数数组 <code>nums</code> 。你需要将这个数组分割成 <code>nums1</code> 和 <code>nums2</code> 两部分，要求：</p>
 
@@ -38,7 +38,7 @@
 	<li><code>1 <= nums[i] <= 100</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 根据题意，如果 $\textit{nums}[i]$ 的出现次数超过 2，则无法分割，否则可以分割。
 
@@ -55,7 +55,7 @@ func isPossibleToSplit(nums []int) bool {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{nums}[i]$ 的长。
 - 空间复杂度：$\mathcal{O}(n)$。

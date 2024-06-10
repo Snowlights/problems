@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个长度为 <code>n</code> 下标从 <strong>0</strong> 开始的整数数组 <code>receiver</code> 和一个整数 <code>k</code> 。</p>
 
@@ -126,7 +126,7 @@
 	<li><code>1 &lt;= k &lt;= 10<sup>10</sup></code></li>
 </ul>
  
-### 思路
+#### 思路
 
 利用倍增算法，预处理每个节点 $x$ 的第 $2^i$ 个祖先节点，以及从 $x$ 的父节点到 $x$ 的第 $2^i$ 个祖先节点的节点编号之和。
 最后枚举起点 $x$，一边向上跳一边累加节点编号。
@@ -165,7 +165,7 @@ func getMaxFunctionValue(receiver []int, K int64) int64 {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n\log k)$，其中 $n$ 为 $\textit{receiver}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n\log k)$。

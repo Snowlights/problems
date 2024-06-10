@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个下标从 <strong>1</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code> 和&nbsp;<code>changeIndices</code>&nbsp;，数组的长度分别为&nbsp;<code>n</code> 和&nbsp;<code>m</code>&nbsp;。</p>
 
@@ -72,7 +72,7 @@
 	<li><code>1 &lt;= changeIndices[i] &lt;= n</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 这题的题意很抽象，给大家形象地解释一下：  
 你有 $n$ 门课程需要考试，第 $i$ 门课程需要用 $\textit{nums}[i]$ 天复习。同一天只能复习一门课程（**慢速**复习）。  
@@ -161,7 +161,7 @@ func (h *hp) Push(v any)        { *h = append(*h, v.(pair)) }
 func (h *hp) Pop() any          { a := *h; v := a[len(a)-1]; *h = a[:len(a)-1]; return v }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(m\log (mn))$，其中 $n$ 为 $\textit{nums}$ 的长度，$m$ 为 $\textit{changeIndices}$ 的长度。二分的时候保证 $n\le m$，时间复杂度以 $m$ 为主。注意堆中至多有 $n$ 个元素。
 - 空间复杂度：$\mathcal{O}(n)$。

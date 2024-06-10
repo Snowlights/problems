@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串数组&nbsp;<code>words</code> 和一个字符串 <code>s</code> ，请你判断 <code>s</code> 是不是 <code>words</code> 的 <strong>首字母缩略词</strong> 。</p>
 
@@ -46,7 +46,7 @@
 	<li><code>words[i]</code> 和 <code>s</code> 由小写英文字母组成</li>
 </ul>
 
-### 思路
+#### 思路
 
 如果 $\textit{words}$ 长度和 $s$ 长度不同，直接返回 `false`。
 如果存在 $\textit{words}[i][0] \ne s[i]$，也返回 `false`。否则返回 `true`。
@@ -65,7 +65,7 @@ func isAcronym(words []string, s string) bool {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

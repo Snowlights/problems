@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你两个正整数：<code>n</code> 和 <code>target</code> 。</p>
 
@@ -51,7 +51,7 @@ nums = [1,3,4] 是美丽数组。
 	<li><code>1 <= target <= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 $\textit{target}$ 记作 $k$。对于 $[1,k-1]$ 内的数字：
 
@@ -96,7 +96,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$ 。

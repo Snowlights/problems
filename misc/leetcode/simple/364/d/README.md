@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一棵 <code>n</code> 个节点的无向树，节点编号为 <code>1</code> 到 <code>n</code> 。给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [u<sub>i</sub>, v<sub>i</sub>]</code> 表示节点 <code>u<sub>i</sub></code> 和 <code>v<sub>i</sub></code> 在树中有一条边。</p>
 
@@ -59,7 +59,7 @@
 	<li>输入保证 <code>edges</code> 形成一棵合法的树。</li>
 </ul>
 
-### 思路
+#### 思路
 
 ![w364D-c.png](https://pic.leetcode.cn/1695525563-NYpzGx-w364D-c.png)
 
@@ -129,7 +129,7 @@ func countPaths(n int, edges [][]int) (ans int64) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(n)$。

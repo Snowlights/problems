@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code>，由 <strong>不同 </strong>小写英文字母组成。</p>
 
@@ -57,7 +57,7 @@
 	<li><code>word</code> 中的所有字母互不相同。</li>
 </ul>
 
-### 思路
+#### 思路
 
 由于各个字母互不相同，所以均匀分配到这 $8$ 个按键。
 设字符串长度为 $n$，$k=\left\lfloor\dfrac{n}{8}\right\rfloor$，
@@ -91,7 +91,7 @@ func minimumPushes(word string) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(1)$。

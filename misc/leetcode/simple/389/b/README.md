@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>s</code> 和一个字符 <code>c </code>。返回在字符串 <code>s</code> 中并且以 <code>c</code> 字符开头和结尾的<span data-keyword="substring-nonempty">非空子字符串</span>的总数。</p>
 
@@ -33,7 +33,7 @@
 	<li><code>s</code> 和 <code>c</code> 均由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 设 $s$ 中有 $k$ 个 $c$。
 
@@ -52,7 +52,7 @@ func countSubstrings(s string, c byte) int64 {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $s$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。

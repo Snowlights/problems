@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code> ，请你求出每个长度为 <code>k</code> 的子数组的 <b>美丽值</b> 。</p>
 
@@ -56,7 +56,7 @@
 	<li><code>-50 <= nums[i] <= 50 </code></li>
 </ul>
 
-### 思路
+#### 思路
 
 滑动窗口。由于值域很小，所以借鉴**计数排序**，用一个 $\textit{cnt}$ 数组维护窗口内每个数的出现次数。然后遍历 $\textit{cnt}$ 去求第 $x$ 小的数。
 什么是第 $x$ 小的数？
@@ -86,7 +86,7 @@ func getSubarrayBeauty(nums []int, k, x int) []int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(nU)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U=50$。
 - 空间复杂度：$\mathcal{O}(U)$。

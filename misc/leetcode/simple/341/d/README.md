@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>现有一棵无向、无根的树，树中有 <code>n</code> 个节点，按从 <code>0</code> 到 <code>n - 1</code> 编号。给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> 表示树中节点 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间存在一条边。</p>
 
@@ -51,17 +51,17 @@
 	<li><code>0 &lt;= start<sub>i</sub>, end<sub>i</sub> &lt;= n - 1</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 ## 方法一：暴力 DFS 每条路径
 
-### 提示 1
+#### 提示 1
 
 如果知道每个点总共被经过多少次，就可以仿照 [337. 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/) 计算答案了（下面会细说）。  
 注意到数据范围比较小，可以对每个 $\textit{trips}[i]$ 都跑一遍 DFS，把从 $\textit{start}$ 到 $\textit{end}$ 的路径上的点 $x$ 的经过次数 $\textit{cnt}[x]$ 都加一。
 这一技巧在之前的双周赛中出现过，见 [2467. 树上最大得分和路径](https://leetcode.cn/problems/most-profitable-path-in-a-tree/)。
 
-### 提示 2
+#### 提示 2
 
 既然知道了每个点会被经过多少次，把 $\textit{price}[i]$ 更新成 $\textit{price}[i]\cdot \textit{cnt}[i]$，问题就变成计算减半后的 $\textit{price}[i]$ 之和的最小值。  
 随便选一个节点出发 DFS，比如节点 $0$。对于节点 $x$ 及其儿子 $y$，分类讨论：
@@ -124,7 +124,7 @@ func minimumTotalPrice(n int, edges [][]int, price []int, trips [][]int) int {
 func min(a, b int) int { if a > b { return b }; return a }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(nm)$，其中 $m$ 为 $\textit{trips}$ 的长度。
 - 空间复杂度：$O(n)$。
@@ -226,7 +226,7 @@ func minimumTotalPrice(n int, edges [][]int, price []int, trips [][]int) int {
 func min(a, b int) int { if a > b { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$O(n+m\alpha)$，其中 $m$ 为 $\textit{trips}$ 的长度，$\alpha$ 为并查集的常数，可视作 $O(1)$。
 - 空间复杂度：$O(n+m)

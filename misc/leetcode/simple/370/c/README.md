@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>有一棵 <code>n</code>&nbsp;个节点的无向树，节点编号为 <code>0</code>&nbsp;到 <code>n - 1</code>&nbsp;，根节点编号为 <code>0</code>&nbsp;。给你一个长度为 <code>n - 1</code>&nbsp;的二维整数数组&nbsp;<code>edges</code>&nbsp;表示这棵树，其中&nbsp;<code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code>&nbsp;表示树中节点&nbsp;<code>a<sub>i</sub></code>&nbsp;和&nbsp;<code>b<sub>i</sub></code>&nbsp;有一条边。</p>
 
@@ -59,7 +59,7 @@
 	<li>输入保证&nbsp;<code>edges</code>&nbsp;构成一棵合法的树。</li>
 </ul>
 
-### 思路
+#### 思路
 
 正难则反，先把所有 $\textit{values}[i]$ 加到答案中，然后考虑哪些 $\textit{values}[i]$ 不能选（撤销，不加入答案）。  
 设当前节点为 $x$，计算以 $x$ 为根的子树是健康时，失去的最小分数。那么答案就是 $\textit{values}$ 的元素和，减去「以 $0$ 为根的子树是健康时，**失去**的最小分数」。  
@@ -107,7 +107,7 @@ func min(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $\textit{values}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$

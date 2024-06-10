@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串&nbsp;<code>s</code>&nbsp;和一个整数&nbsp;<code>k</code>。</p>
 
@@ -73,7 +73,7 @@ s 变为 "xayz"。
 	<li><code>1 &lt;= k &lt;= 26</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 定义 $\textit{dfs}(i,\textit{mask}, \textit{changed})$ 表示当前遍历到 $s[i]$，
 当前这一段的字符集合是 $\textit{mask}$，是否已经修改了字符（$\textit{changed}$）， 后续可以得到的最大分割数。
@@ -146,7 +146,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n|\Sigma|^2)$，其中 $n$ 为 $\textit{nums}$ 的长度。 由于每个状态只会计算一次，动态规划的时间复杂度 $=$ 状态个数 $\times$ 单个状态的计算时间。分类讨论：
   - 如果 $\textit{mask}$ 之前没有修改，这样的状态有 $\mathcal{O}(n|\Sigma|)$ 个，单个状态的计算时间为 $\mathcal{O}(|\Sigma|)$，即枚举修改的时间。

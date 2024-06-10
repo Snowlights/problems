@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串数组 <code>words</code> ，数组的长度为 <code>n</code> ，且包含下标从 <strong>0</strong> 开始的若干字符串。</p>
 
@@ -58,7 +58,7 @@ words 中有一个回文 "a" 。
 	<li><code>words[i]</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 #### 提示 1
 
@@ -96,7 +96,7 @@ func maxPalindromesAfterOperations(words []string) (ans int) {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(L+n\log n)$，其中 $L$ 为字符串的长度之和，$n$ 为 $\textit{words}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。利用位运算可以做到 $\mathcal{O}(1)$ 额外空间（忽略排序的栈开销）。

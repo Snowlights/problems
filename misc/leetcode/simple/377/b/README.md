@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>有一个大型的 <code>(m - 1) x (n - 1)</code> 矩形田地，其两个对角分别是 <code>(1, 1)</code> 和 <code>(m, n)</code> ，田地内部有一些水平栅栏和垂直栅栏，分别由数组 <code>hFences</code> 和 <code>vFences</code> 给出。</p>
 
@@ -44,7 +44,7 @@
 	<li><code>hFences</code> 和 <code>vFences</code> 中的元素是唯一的。</li>
 </ul>
 
-### 思路
+#### 思路
 
 暴力枚举横向栅栏和纵向栅栏每两个栅栏之间的距离，计算最大值
 
@@ -89,7 +89,7 @@ func abs(x int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(h^2 + v^2)$，其中 $h$ 为 $\textit{hFences}$ 的长度，其中 $v$ 为 $\textit{vFences}$ 的长度。
 - 空间复杂度：$\mathcal{O}(h^2 + v^2)$。

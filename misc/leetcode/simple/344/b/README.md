@@ -108,7 +108,7 @@ func (f FrequencyTracker) HasFrequency(frequency int) bool {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：所有操作均为 $\mathcal{O}(1)$。
 - 空间复杂度：$\mathcal{O}(q)$。其中 $q$ 为操作次数。

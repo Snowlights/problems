@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你两个正整数 <code>low</code> 和 <code>high</code> 。</p>
 
@@ -30,7 +30,7 @@
 	<li><code>1 &lt;= low &lt;= high &lt;= 10<sup>4</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 枚举即可
 
@@ -58,7 +58,7 @@ func countSymmetricIntegers(low int, high int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}((\textit{high} - \textit{low})\log \textit{high})$。
 - 空间复杂度：$\mathcal{O}(\log \textit{high})$。

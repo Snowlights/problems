@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>边界上有一只蚂蚁，它有时向 <strong>左 </strong>走，有时向 <strong>右 </strong>走。</p>
 
@@ -53,7 +53,7 @@
 	<li><code>nums[i] != 0</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 计算前缀和中0出现的次数
 
@@ -70,7 +70,7 @@ func returnToBoundaryCount(nums []int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$。
 - 空间复杂度：$\mathcal{O}(1)$。

@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个正整数数组 <code>nums</code> 。</p>
 
@@ -49,7 +49,7 @@
 	<li><code>1 &lt;= nums[i], queries[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 ![t3.png](https://pic.leetcode.cn/1679808210-FVsAou-t3.png)
 
@@ -72,7 +72,7 @@ func minOperations(nums, queries []int) []int64 {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O((n+q)\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度，$q$ 为 $\textit{queries}$ 的长度。
 - 空间复杂度：$O(n)$。返回值不计入。

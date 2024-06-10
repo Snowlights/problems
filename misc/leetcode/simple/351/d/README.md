@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>现有 <code>n</code> 个机器人，编号从 <strong>1</strong> 开始，每个机器人包含在路线上的位置、健康度和移动方向。</p>
 
@@ -53,7 +53,7 @@
 	<li><code>positions</code> 中的所有值互不相同</li>
 </ul>
  
-### 思路  
+#### 思路  
 
 本题思路和 [735. 行星碰撞](https://leetcode.cn/problems/asteroid-collision/) 是一样的。
 用列表 $\textit{toLeft}$ 维护向左的机器人，用栈 $\textit{st}$ 维护向右的机器人。
@@ -131,7 +131,7 @@ func survivedRobotsHealths(positions []int, healths []int, directions string) (a
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{positions}$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$。

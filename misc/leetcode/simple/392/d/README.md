@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个 <code>n</code>&nbsp;个节点的带权无向图，节点编号为 <code>0</code>&nbsp;到 <code>n - 1</code>&nbsp;。</p>
 
@@ -60,7 +60,7 @@
 	<li><code>0 &lt;= s<sub>i</sub>, t<sub>i</sub> &lt;= n - 1</code></li>
 </ul>
 
-### 思路
+#### 思路
 
 分类讨论：
 - $s=t$，不移动即可，答案是 $0$。

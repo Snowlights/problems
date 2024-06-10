@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个字符串 <code>word</code> 和一个字符串数组 <code>forbidden</code> 。</p>
 
@@ -37,17 +37,17 @@
 	<li><code>forbidden[i]</code> 只包含小写英文字母。</li>
 </ul>
 
-### 思路
+#### 思路
 
-### 提示 1
+#### 提示 1
 
 $\textit{forbidden}[i]$ 的长度不超过 $10$。
 
-### 提示 2
+#### 提示 2
 
 [同向双指针]。
 
-### 提示 3
+#### 提示 3
 
 初始化子串左端点 $\textit{left}=0$，枚举子串右端点 $\textit{right}$。
 对于示例 2，只要 $\textit{right}\ge 1$，那么合法子串是不能包含 $\texttt{le}$ 的，所以左端点 $\textit{left}$ 必须向右移，不可能再回到 $0$（否则就包含 $\texttt{le}$ 了）。
@@ -80,7 +80,7 @@ func longestValidSubstring(word string, forbidden []string) (ans int) {
 func max(a, b int) int { if b > a { return b }; return a }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(L+nM^2)$，其中 $L$ 为所有 $\textit{forbidden}[i]$ 的长度之和，$n$ 为 $\textit{word}$ 的长度，$M=10$ 表示 $\textit{forbidden}[i]$ 的最长长度。请注意，在哈希表中查询一个长为 $M$ 的字符串的时间是 $\mathcal{O}(M)$，每次移动右指针会执行至多 $M$ 次这样的查询。
 - 空间复杂度：$\mathcal{O}(L)$。

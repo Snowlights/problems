@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个二进制字符串 <code>s</code> 和一个正整数 <code>k</code> 。</p>
 
@@ -64,7 +64,7 @@
 </ul>
 
 
-### 思路
+#### 思路
 
 ## 方法一：枚举
 
@@ -96,7 +96,7 @@ func shortestBeautifulSubstring(s string, k int) string {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^3)$，其中 $n$ 为 $s$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$ 或 $\mathcal{O}(1)$。字符串切片需要 $\mathcal{O}(n)$ 的空间，Go 除外。
@@ -132,7 +132,7 @@ func shortestBeautifulSubstring(s string, k int) string {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n^2)$，其中 $n$ 为 $s$ 的长度。
 - 空间复杂度：$\mathcal{O}(n)$ 或 $\mathcal{O}(1)$。字符串切片需要 $\mathcal{O}(n)$ 的空间，Go 除外。

@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> ，数组长度为 <code>n</code> 。</p>
 
@@ -45,7 +45,7 @@
 	<li><code>nums.length == n</code></li>
 </ul>
  
-### 思路  
+#### 思路  
 
 设 $\textit{pre}$ 是上一个减完后的数字，$x=\textit{nums}[i]$ 为当前数字。  
 设 $p$ 是满足 $x-p>\textit{pre}$ 的最大质数，换言之，$p$ 是小于 $x-\textit{pre}$ 的最大质数， 这可以预处理质数列表后，用二分查找得到。
@@ -78,7 +78,7 @@ func primeSubOperation(nums []int) bool {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$O(n\log U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U$ 为 $1000$ 以内的质数个数。
 - 空间复杂度：$O(1)$。忽略预处理的空间，仅用到若干额外变量。

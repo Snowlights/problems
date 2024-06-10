@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>节点 <code>0</code> 处现有一棵由 <code>n</code> 个节点组成的无向树，节点编号从 <code>0</code> 到 <code>n - 1</code> 。给你一个长度为 <code>n - 1</code> 的二维 <strong>整数</strong> 数组 <code>edges</code> ，其中 <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> 表示在树上的节点 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间存在一条边。另给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的数组 <code>coins</code> 和一个整数 <code>k</code> ，其中 <code>coins[i]</code> 表示节点 <code>i</code> 处的金币数量。</p>
 
@@ -51,7 +51,7 @@
 	<li><code><font face="monospace">0 &lt;= k &lt;= 10<sup>4</sup></font></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 `floor(coins[i] / 2)` 看成右移操作。  
 一个数最多右移多少次，就变成 $0$ 了？在本题的数据范围下，这至多是 $14$ 次。  
@@ -110,7 +110,7 @@ func max(a, b int) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log U)$，其中 $n$ 为 $\textit{coins}$ 的长度，$U=\max(\textit{coins})$。
 - 空间复杂度：$\mathcal{O}(n\log U)$。

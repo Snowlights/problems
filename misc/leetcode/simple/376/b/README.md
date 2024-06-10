@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个长度为 <code>n</code> 的整数数组 <code>nums</code>，以及一个正整数 <code>k</code> 。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>1 <= k <= 10<sup>5</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 注意本题的子数组不要求是连续的。
 
@@ -69,7 +69,7 @@ func divideArray(nums []int, k int) [][]int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n\log n)$，其中 $n$ 为 $\textit{nums}$ 的长度。
 - 空间复杂度：$\mathcal{O}(1)$。返回值不计入。

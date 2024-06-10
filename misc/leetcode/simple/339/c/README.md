@@ -1,4 +1,4 @@
-### 题目  
+#### 题目  
 
 <p>有两只老鼠和 <code>n</code> 块不同类型的奶酪，每块奶酪都只能被其中一只老鼠吃掉。</p>
 
@@ -43,7 +43,7 @@
 	<li><code>0 &lt;= k &lt;= n</code></li>
 </ul>
  
-### 思路 
+#### 思路 
 
 ## 思考
 
@@ -77,7 +77,7 @@ func miceAndCheese(reward1, reward2 []int, k int) (ans int) {
 }
 ```
 
-### 复杂度分析  
+#### 复杂度分析  
 
 - 时间复杂度：$\mathcal{O}(n\log n)$ 或 $\mathcal{O}(n)$，其中 $n$ 为 $\textit{reward}_1$ 的长度。快速选择可以做到 $\mathcal{O}(n)$
 - 空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。

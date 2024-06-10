@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你一个整数数组&nbsp;<code>nums</code>&nbsp;和一个 <strong>非负</strong>&nbsp;整数&nbsp;<code>k</code>&nbsp;。</p>
 
@@ -50,7 +50,7 @@
 	<li><code>1 &lt;= k &lt;= 10<sup>9</sup></code></li>
 </ul>
 
-### 思路
+#### 思路
 
 把 $\textit{nums}$ 从小到大排序后，中位数为 $\textit{nums}[m]$，其中 $m=\left\lfloor\dfrac{n}{2}\right\rfloor$，$n$ 为 $\textit{nums}$ 的长度。
 

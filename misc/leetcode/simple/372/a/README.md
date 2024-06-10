@@ -1,4 +1,4 @@
-### 题目
+#### 题目
 
 <p>给你三个字符串 <code>s1</code>、<code>s2</code> 和 <code>s3</code>。 你可以根据需要对这三个字符串执行以下操作 <strong>任意次数</strong> <!-- notionvc: b5178de7-3318-4129-b7d9-726b47e90621 -->。</p>
 
@@ -32,7 +32,7 @@
 	<li><code>s1</code>、<code>s2</code> 和 <code>s3</code> 仅由小写英文字母组成。</li>
 </ul>
 
-### 思路
+#### 思路
 
 设 $\textit{lcp}$ 为三个字符串的最长公共前缀的长度。
 
@@ -54,7 +54,7 @@ func findMinimumOperations(s1, s2, s3 string) int {
 }
 ```
 
-### 复杂度分析
+#### 复杂度分析
 
 - 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为三个字符串中的最短字符串的长度。
 - 空间复杂度：$\mathcal{O}(1)$。
