@@ -1,0 +1,11 @@
+"bcca"
+"abc"
+1
+
+"abcabc"
+"abc"
+10
+
+"abcabc"
+"aaabc"
+0
