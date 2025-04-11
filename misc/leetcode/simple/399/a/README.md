@@ -127,7 +127,7 @@ func numberOfPairs(nums1, nums2 []int, k int) (ans int64) {
 
 #### 复杂度分析
 
-- 时间复杂度：$\mathcal{O}(n+m + (U/k)\log m)$，其中 $n$ 是 $\textit{nums}_1$ 的长度，$m$ 是 $\textit{nums}_2$ 的长度，$U=\max(\textit{nums}_1)$。复杂度根据调和级数可得。详细解释请看 [视频讲解](https://www.bilibili.com/video/BV17t421N7L6/)。
+- 时间复杂度：$\mathcal{O}(n+m + (U/k)\log m)$，其中 $n$ 是 $\textit{nums}_1$ 的长度，$m$ 是 $\textit{nums}_2$ 的长度，$U=\max(\textit{nums}_1)$。复杂度根据调和级数可得。
 - 空间复杂度：$\mathcal{O}(n+m)$。
 
 ## 分类题单

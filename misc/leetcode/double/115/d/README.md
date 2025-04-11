@@ -115,9 +115,9 @@ $$
 
 这样就可以 $\mathcal{O}(1)$ 地算出每个 $f[i][j]$ 了。
 
-代码实现时，可以用滚动数组优化，具体请看上面贴的背包问题的视频。
+代码实现时，可以用滚动数组优化。
 
-```go [sol-Go]
+```
 func countSubMultisets(nums []int, l, r int) (ans int) {
 	const mod = 1_000_000_007
 	total := 0

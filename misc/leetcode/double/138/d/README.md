@@ -114,7 +114,6 @@ $$
 
 排序后，按照顺序消灭敌人。用一个变量 $s$ 维护从一开始到击败当前敌人，所经过的秒数。把 $s\cdot \textit{damage}[i]$ 加入答案。
 
-具体请看 [视频讲解](https://www.bilibili.com/video/BV1ajHYeoEG5/) 第四题，欢迎点赞关注~
 
 ## 答疑
 

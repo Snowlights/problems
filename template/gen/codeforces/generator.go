@@ -117,6 +117,7 @@ func genTemplates(rootPath, contestID, problem, problemURL string, isContest boo
 import (
 	"bufio"
 	. "fmt"
+	. "cmp"
 	"io"
 	"os"
 )
@@ -222,6 +223,7 @@ package main
 import (
 	"bufio"
 	. "fmt"
+	. "cmp"
 	"io"
 	"os"
 )

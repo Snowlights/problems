@@ -107,7 +107,6 @@ $$
 
 答案：枚举 $\textit{arr}_1[n-1] = 0,1,2,\cdots,\textit{nums}[n-1]$，累加得 $\sum\limits_{j=0}^{\textit{nums}[n-1]} f[n-1][j]$。
 
-具体请看 [视频讲解](https://www.bilibili.com/video/BV1Cf421v7Ky/)，欢迎点赞关注！
 
 ```
 func countOfPairs(nums []int) (ans int) {

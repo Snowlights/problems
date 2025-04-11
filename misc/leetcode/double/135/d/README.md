@@ -96,7 +96,6 @@
 
 递归入口：$\max\limits_{i=0}^{n} \textit{dfs}(n-2,i,0)$。枚举第 $n-1$ 列有 $i$ 个黑格。注意第 $n-1$ 列的格子会在 $j=n-2$ 中计入。
 
-具体请看 [视频讲解](https://www.bilibili.com/video/BV1JE4m1d7br/) 第四题，欢迎点赞关注！
 
 ```
 func maximumScore(grid [][]int) (ans int64) {

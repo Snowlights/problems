@@ -136,7 +136,6 @@ $$
 
 代码中用到了一些位运算技巧，原理见 [从集合论到位运算，常见位运算技巧分类总结！](https://leetcode.cn/circle/discuss/CaOJ45/)
 
-具体请看 [视频讲解](https://www.bilibili.com/video/BV1z5pieUEkQ/) 第四题，欢迎点赞关注~
 
 ## 记忆化搜索
 

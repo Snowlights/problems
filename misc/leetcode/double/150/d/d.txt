@@ -1,0 +1,11 @@
+"abaacbaecebce"
+"ba*c*ce"
+8
+
+"baccbaadbc"
+"cc*baa*adb"
+-1
+
+"madlogic"
+"*adlogi*"
+6

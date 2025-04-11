@@ -11,7 +11,7 @@ import (
 // https://codeforces.com/gym/102253/problem/C
 // https://codeforces.com/gym/102253/status/C
 func TestGenCodeforcesProblemTemplates(t *testing.T) {
-	problemURL := "https://codeforces.com/problemset/problem/2004/F"
+	problemURL := "https://codeforces.com/problemset/problem/631/E"
 	if err := GenCodeforcesProblemTemplates(problemURL, true); err != nil {
 		t.Fatal(err)
 	}

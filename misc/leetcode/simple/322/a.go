@@ -109,7 +109,7 @@ func magnificentSets(n int, edges [][]int) int {
 	var nodes []int
 	ans := 0
 	var isBipartite func(int, int8) bool
-	isBipartite = func(x int, c int8) bool { // 二分图判定，原理见视频讲解
+	isBipartite = func(x int, c int8) bool { // 二分图判定
 		nodes = append(nodes, x)
 		colors[x] = c
 		for _, y := range g[x] {

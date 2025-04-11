@@ -1,0 +1,11 @@
+"leetcode"
+"ee*e"
+true
+
+"car"
+"c*v"
+false
+
+"luck"
+"u*"
+true

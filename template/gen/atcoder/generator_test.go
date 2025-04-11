@@ -13,7 +13,7 @@ func TestGenAtCoderProblemTemplate(t *testing.T) {
 	//if err != nil {
 	//	t.Fatal(err)
 	//}
-	raw := "https://atcoder.jp/contests/abc357/tasks/abc357_f"
+	raw := "https://atcoder.jp/contests/dp/tasks/dp_z"
 	problemURL := strings.TrimSpace(string(raw))
 	if err := GenAtCoderProblemTemplate(problemURL); err != nil {
 		t.Fatal(err)

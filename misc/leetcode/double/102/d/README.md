@@ -140,7 +140,6 @@ $$
 $$
 d[i][j] =\min(d[[i][j], d[i][k] + d[k][j])
 $$
-> 为什么这样做是对的？视频中讲了正确性。
 > 对于 $\texttt{addEdge}$ 操作，记 $x=\textit{from},y=\textit{to}$ 如果 $\textit{edgeCode} \ge d[x][y]$，则无法更新任何点对的最短路。
 > 否则枚举所有 $d[i][j]$，尝试看看能否更新成更小，即 $i---x-y---j$ 是否更短：
 > 
